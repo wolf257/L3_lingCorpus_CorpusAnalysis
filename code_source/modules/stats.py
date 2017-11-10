@@ -7,13 +7,12 @@ from collections import OrderedDict
 # Fonction : lettersDistribution
 # 	Parcourt la liste, parcourt chaque mot,
 #	creer le vecteur distribution des lettres
+#	en classant par lettre
 # Input : list
 # Return : dict
 ##############################################################
 def dict_lettersDistribution_from_list(list_word):
-    ''' Parcourt un texte, fais un vecteur distribution des mots
-    Retour : dictionnaire
-    Critere de segmentation : espace '''
+    ''' Return dict lettersDistribution from a list '''
 
     lettersDistribution = {}
 
@@ -33,20 +32,19 @@ def dict_lettersDistribution_from_list(list_word):
 
 ##############################################################
 # Fonction : wordsDistribution
-# 	Parcourt la liste, creer le vecteur distribution des mots
+# 	Parcourt la liste,
+#	creer le vecteur distribution des mots
 # Input : list
 # Return : dict
 ##############################################################
-def dict_wordsDistribution_from_list(list_word):
-    ''' Parcourt un texte, fais un vecteur distribution des mots
-    Retour : dictionnaire
-    Critere de segmentation : espace '''
+def dict_wordsDistribution_from_list(list_words_without_point):
+    ''' Return dict wordsDistribution from a list '''
 
     wordsDistribution = {}
 
-    for word in list_word :
+    for word in list_words_without_point :
         if word not in wordsDistribution:
-            wordDistribution[word] = 1
+            wordsDistribution[word] = 1
         else :
             wordsDistribution[word] +=1
 
@@ -86,6 +84,22 @@ def dict_wordsDistribution_from_list(list_word):
 ##############################################################
 # prend comme marqueur le '.'
 # calcul nombre de mot, nombre de '.' et divise
+def nb_average_words_by_sentence(list_words_with_point):
+
+    words, average_words_by_sentence, sentences = 0, 0, 0
+
+    for word in list_words_with_point :
+        if word == '.':
+            sentences += 1
+        else :
+            words += 1
+
+    try:
+        average_words_by_sentence = words / sentences
+    except ZeroDivisionError as error :
+        average_words_by_sentence = words
+
+    return average_words_by_sentence
 
 
 ################################################
