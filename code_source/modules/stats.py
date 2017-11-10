@@ -50,6 +50,32 @@ def dict_wordsDistribution_from_list(list_words_without_point):
 
     return wordsDistribution
 
+##############################################################
+# Fonction : nb_average_words_by_sentence
+# 	- calcule le nombre de mots et le nombre de point
+#	le quotient de leur division donne le nombre de phrase
+# Input : list
+# Return : number
+##############################################################
+# prend comme marqueur le '.'
+# calcul nombre de mot, nombre de '.' et divise
+def nb_average_words_by_sentence(list_words_with_point):
+
+    words, average_words_by_sentence, sentences = 0, 0, 0
+
+    for word in list_words_with_point :
+        if word == '.':
+            sentences += 1
+        else :
+            words += 1
+
+    try:
+        average_words_by_sentence = words / sentences
+    except ZeroDivisionError as error :
+        average_words_by_sentence = words
+
+    return average_words_by_sentence
+
 
 ##############################################################
 # Fonction : wordbyValue
@@ -75,38 +101,3 @@ def dict_wordsDistribution_from_list(list_words_without_point):
 # Input :
 # Return :
 ##############################################################
-
-##############################################################
-# Fonction : word_by_sentence
-# 	- calcul le nombre de mots vs le nombre de formes differentes
-# Input :
-# Return :
-##############################################################
-# prend comme marqueur le '.'
-# calcul nombre de mot, nombre de '.' et divise
-def nb_average_words_by_sentence(list_words_with_point):
-
-    words, average_words_by_sentence, sentences = 0, 0, 0
-
-    for word in list_words_with_point :
-        if word == '.':
-            sentences += 1
-        else :
-            words += 1
-
-    try:
-        average_words_by_sentence = words / sentences
-    except ZeroDivisionError as error :
-        average_words_by_sentence = words
-
-    return average_words_by_sentence
-
-
-################################################
-#vecteur distribution des caracteres
-#creer dico qui prend toutes les lettres
-#verifier celle qui ne font pas partie de l'alphabet, et des nombres
-
-# Un dico qui tranverse le fichier
-# Puis trier le dico par valeur
-# Et print val : dico
