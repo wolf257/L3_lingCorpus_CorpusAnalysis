@@ -3,43 +3,67 @@
 
 
 ##############################################################
-# Fonction : wordCount
-# 	-
-# Input : texte
+# Fonction : lettersDistribution
+# 	Parcourt la liste, parcourt chaque mot,
+#	creer le vecteur distribution des lettres
+# Input : list
 # Return : dict
 ##############################################################
-def wordCount(file):
+def lettersDistribution(list_word):
     ''' Parcourt un texte, fais un vecteur distribution des mots
     Retour : dictionnaire
     Critere de segmentation : espace '''
 
-    pass
+    lettersDistribution = {}
 
+    for word in list_word :
+        for letter in word :
+            if letter not in lettersDistribution:
+                lettersDistribution[letter] = 1
+            else :
+                lettersDistribution[letter] +=1
 
-# def wordCount():
-#     wordCountDict = {}
-#     for word in body:
-#         if word not in wordCountDict:
-#             wordCountDict[word] = body.count(word)
-#     return wordCountDict
+    return lettersDistribution
 
-def wordCountbyValue(nom_dico) :
-    '''Reverse mot -> occurence pour occurence vers mots
+##############################################################
+# Fonction : wordsDistribution
+# 	Parcourt la liste, creer le vecteur distribution des mots
+# Input : list
+# Return : dict
+##############################################################
+def wordsDistribution(list_word):
+    ''' Parcourt un texte, fais un vecteur distribution des mots
     Retour : dictionnaire
-    Classement : par frequence '''
+    Critere de segmentation : espace '''
 
-    pass
+    wordsDistribution = {}
 
-###################################################
-# Comptera le nombre d'occurence de chaque lettre
-##################################################
-# from collections import Counter
-#
-# with open(file) as myfile:
-#     c = Counter()
-#     for caracter in f:
-#         c += Counter(caracter.strip())
+    for word in list_word :
+        if word not in wordsDistribution:
+            wordDistribution[word] = 1
+        else :
+            wordsDistribution[word] +=1
 
+    return wordsDistribution
+
+
+##############################################################
+# Fonction : wordbyValue
+# 	-
+# Input : dict
+# Return : dict
+##############################################################
+# def wordbyValue(nom_dico) :
+    # '''Reverse mot -> occurence pour occurence vers mots
+    # Retour : dictionnaire
+    # Classement : par frequence '''
+    #
+    # wordbyValue = {}
+    # wordbyValue = dict([[value, key] for key, value in nom_dico.items()])
+    #
+    # return wordbyValue
+
+    #PB : la key est uniq donc si plusieurs mots ont la même value, seul le dernier sera retenu.
 
 ##############################################################
 # Fonction : nbres_vs_forme
