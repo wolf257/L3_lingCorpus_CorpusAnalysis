@@ -1,6 +1,7 @@
 #!usr/bin/python3
 #-*- coding : utf8 -*-
 
+from collections import OrderedDict
 
 ##############################################################
 # Fonction : lettersDistribution
@@ -9,7 +10,7 @@
 # Input : list
 # Return : dict
 ##############################################################
-def lettersDistribution(list_word):
+def dict_lettersDistribution_from_list(list_word):
     ''' Parcourt un texte, fais un vecteur distribution des mots
     Retour : dictionnaire
     Critere de segmentation : espace '''
@@ -23,7 +24,12 @@ def lettersDistribution(list_word):
             else :
                 lettersDistribution[letter] +=1
 
-    return lettersDistribution
+    #Retourne le dict sans ordre
+    # return lettersDistribution
+
+    #Retourne un dict classé selon la colonne 0 c-a-d keys
+    return OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[0]))
+
 
 ##############################################################
 # Fonction : wordsDistribution
@@ -31,7 +37,7 @@ def lettersDistribution(list_word):
 # Input : list
 # Return : dict
 ##############################################################
-def wordsDistribution(list_word):
+def dict_wordsDistribution_from_list(list_word):
     ''' Parcourt un texte, fais un vecteur distribution des mots
     Retour : dictionnaire
     Critere de segmentation : espace '''
@@ -87,7 +93,6 @@ def wordsDistribution(list_word):
 #creer dico qui prend toutes les lettres
 #verifier celle qui ne font pas partie de l'alphabet, et des nombres
 
-# Cmt classer alphabetiquement ?
 # Un dico qui tranverse le fichier
 # Puis trier le dico par valeur
 # Et print val : dico
