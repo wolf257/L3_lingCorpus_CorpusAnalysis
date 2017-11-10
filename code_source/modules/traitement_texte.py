@@ -9,7 +9,7 @@ import re
 # Input : text
 # Return : list
 ##############################################################
-def outside_text_as_one_liste(text):
+def outside_text_as_one_list(text):
     ''' Import a text as one list '''
 
     liste_brute = []
