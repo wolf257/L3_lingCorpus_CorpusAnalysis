@@ -24,6 +24,19 @@ def list_from_outside_text_content(text):
     return liste_finale
 
 ##############################################################
+# Fonction : list_maj_to_min
+# 	- Transforme toutes les majuscules en minuscules
+# Input :
+##############################################################
+def list_maj_to_min(liste_in):
+
+    list_out = []
+    list_out = liste_in.lower()
+
+    return list_out
+
+
+##############################################################
 # Fonction : punctuation_out
 # 	- Transforme tous les caracteres de ponctuation en espace
 # Input :
@@ -62,17 +75,6 @@ def convert_utf8():
 ##############################################################
 def space_before_point(text):
     pass
-
-##############################################################
-# Fonction : maj_to_min
-# 	- Transforme toutes les majuscules en minuscules
-# Input :
-##############################################################
-def maj_to_min():
-    pass
-
-# Function qui transfo maj en min
-
 
 ##############################################################
 # Fonction : tokenizeit
