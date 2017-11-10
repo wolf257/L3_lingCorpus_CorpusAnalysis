@@ -4,25 +4,22 @@
 import re
 
 ##############################################################
-# Fonction : import text as one list
-# 	-
+# Fonction : list_from_outside_text_content
 # Input : text
 # Return : list
 ##############################################################
-def outside_text_as_one_list(text):
+def list_from_outside_text_content(text):
     ''' Import a text as one list '''
 
     liste_brute = []
     liste_finale = []
 
-    #Importation du texte as one list.
-    #Pb : les mots contiennent le '\n'.
     with open(text, 'r') as file :
         liste_brute = file.readlines()
+        #list of all lines (from beg to EOL)
 
-    #Solution : a partir de cette liste, creer une nouvelle en enlever '\n'
-    for word in liste_brute :
-        liste_finale.append(word.strip())
+    for string in liste_brute :
+        liste_finale.append(string.strip())
 
     return liste_finale
 
@@ -31,8 +28,12 @@ def outside_text_as_one_list(text):
 # 	- Transforme tous les caracteres de ponctuation en espace
 # Input :
 ##############################################################
-def punctuation_out(text):
-    pass
+# def punctuation_out(list_in):
+# 	list_out = []
+#
+# 	for word in list_in :
+# 		list_out.append(word.)
+#     pass
 
 # If car in liste_car_banni
 # Le transfo en espace
