@@ -3,9 +3,9 @@
 
 from collections import OrderedDict
 
-########
+#########
 #TODO : creer moyen d'acces, surtout aux dicos
-########
+#########
 
 ##############################################################
 # Fonction : lettersDistribution
