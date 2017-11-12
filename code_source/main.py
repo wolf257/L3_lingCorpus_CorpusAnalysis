@@ -1,4 +1,4 @@
-#!usr/bin/python3
+##!usr/bin/env python3
 #-*- coding : utf8 -*-
 
 import os
@@ -7,7 +7,7 @@ import modules.traitement_texte as traitement_texte
 import modules.stats as stats
 
 print("Salut friend")
-
+print("go")
 
 # while 1 :
     # a = input("\nLevel 0 : How do you want me to work ? " + \
