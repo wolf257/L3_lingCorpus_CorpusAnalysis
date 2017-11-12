@@ -1,7 +1,11 @@
-##!usr/bin/env python3
+#!/usr/bin/env python3
 #-*- coding : utf8 -*-
 
 from collections import OrderedDict
+
+########
+#TODO : creer moyen d'acces, surtout aux dicos
+########
 
 ##############################################################
 # Fonction : lettersDistribution
@@ -24,11 +28,21 @@ def dict_lettersDistribution_from_list(list_word):
                 lettersDistribution[letter] +=1
 
     #Retourne le dict sans ordre
-    # return lettersDistribution
-
-    #Retourne un dict classé selon la colonne 0 c-a-d keys
+    #return lettersDistribution
     return OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[0]))
 
+    #Retourne un dict classé selon la colonne 0 c-a-d keys
+    #lettersDistributionOrder = OrderedDict()
+    #lettersDistributionOrder = OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[0]))
+    #return lettersDistributionOrder
+
+# #TEST
+# a = 'je vais jouer au basket.'
+# b = a.split()
+# c = {}
+# c = dict_lettersDistribution_from_list(b)
+# for keys, bal in c.items() :
+#     print("Key : " , keys , " Valeur : ", bal)
 
 ##############################################################
 # Fonction : wordsDistribution
@@ -50,6 +64,14 @@ def dict_wordsDistribution_from_list(list_words_without_point):
 
     return wordsDistribution
 
+# #TEST
+# a = 'je vais jouer au basket.'
+# b = a.split()
+# c = {}
+# c = dict_wordsDistribution_from_list(b)
+# for keys, bal in c.items() :
+#     print("Key : " , keys , " Valeur : ", bal)
+
 ##############################################################
 # Fonction : nb_average_words_by_sentence
 # 	- calcule le nombre de mots et le nombre de point
@@ -66,6 +88,10 @@ def nb_average_words_by_sentence(list_words_with_point):
     for word in list_words_with_point :
         if word == '.':
             sentences += 1
+        #TODO : creer fonction pour separer les points des mots from string
+        # PUIS creer la liste
+        # NB : pour l'instant 'je.' n'augmentera pas le nb de phrase ET tombe dans le else.
+
         else :
             words += 1
 
@@ -76,6 +102,12 @@ def nb_average_words_by_sentence(list_words_with_point):
 
     return average_words_by_sentence
 
+#TEST
+# a = 'je vais jouer au basket. je reviens'
+# b = a.split()
+# c = 0
+# c = nb_average_words_by_sentence(b)
+# print("On a une moyenne de mots/phrase de : " , c)
 
 ##############################################################
 # Fonction : wordbyValue
