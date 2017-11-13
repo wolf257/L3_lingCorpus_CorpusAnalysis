@@ -36,13 +36,7 @@ def dict_lettersDistribution_from_list(list_word):
     #lettersDistributionOrder = OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[0]))
     #return lettersDistributionOrder
 
-# #TEST
-# a = 'je vais jouer au basket.'
-# b = a.split()
-# c = {}
-# c = dict_lettersDistribution_from_list(b)
-# for keys, bal in c.items() :
-#     print("Key : " , keys , " Valeur : ", bal)
+#TEST ecrit
 
 ##############################################################
 # Fonction : wordsDistribution
@@ -64,13 +58,7 @@ def dict_wordsDistribution_from_list(list_words_without_point):
 
     return wordsDistribution
 
-# #TEST
-# a = 'je vais jouer au basket.'
-# b = a.split()
-# c = {}
-# c = dict_wordsDistribution_from_list(b)
-# for keys, bal in c.items() :
-#     print("Key : " , keys , " Valeur : ", bal)
+#TEST ecrit
 
 ##############################################################
 # Fonction : nb_average_words_by_sentence
