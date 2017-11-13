@@ -23,3 +23,6 @@ def import_real_dictionnary(file):
 def import_real_dictionnary(file):
 
     pass
+
+if __name__ == '__main__':
+    pass
