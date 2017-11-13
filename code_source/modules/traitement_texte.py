@@ -87,3 +87,8 @@ def tokenizeit():
 
 # avec split
 # pb du '- '
+
+
+
+if __name__ == '__main__':
+    pass

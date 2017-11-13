@@ -39,3 +39,6 @@ print("go")
 #         print("I dont know what to do. (Restart level 0).")
 #         print("-----------------------------------")
 #
+
+if __name__ == '__main__':
+    pass

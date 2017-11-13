@@ -133,3 +133,10 @@ def nb_average_words_by_sentence(list_words_with_point):
 # Input :
 # Return :
 ##############################################################
+
+
+
+
+
+if __name__ == '__main__':
+    pass
