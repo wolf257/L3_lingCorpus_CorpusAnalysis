@@ -2,6 +2,9 @@
 #-*- coding : utf8 -*-
 
 import re
+import string
+
+#TODO : creer une phrase punctuation (avec ou sans point ?) en tant qu'objet re
 
 ##############################################################
 # Fonction : list_from_outside_text_content
@@ -46,44 +49,73 @@ def list_maj_to_min_from_list(liste_in):
 ##############################################################
 #Test written
 def list_punctuation_sep_from_list(list_in):
-    ''' separate punctuation from word in list '''
+    ''' separate punctuation from word in list
+    >>> a = "j'ai joué... au basket.".split()
+    >>> b = list_punctuation_sep_from_list(b)
+    >>> b = ["j'ai" , 'joué' , '.' , '.' , '.' , 'au' , 'basket' , '.'] '''
 
     list_out = []
+    word = ''
 
     for elt in list_in :
-        mot = re.findall(r"[\w']+|[.,!?;]" , elt)
-        list_out.append(mot)
-        #will give a nested list
+        word = re.findall(r"[\w']+|[.,!?;]" , elt)
 
-    #flat list
+        list_out.append(word) #will give a nested list
+
+    #to make the list flat
     list_out = [item for items in list_out for item in items]
 
     return list_out
+
+##############################################################
+# Fonction : all_punctuation_out
+# 	- Transforme tous les caracteres de ponctuation en espace
+# Input :
+##############################################################
+#Test written
+def list_all_punctuation_out_from_list(list_in) :
+    ''' erase all punctuation from word in list
+    >>> a = "j'ai joué... au basket 2 fois.".split()
+    >>> b = list_punctuation_sep_from_list(b)
+    >>> b = ["j'ai" , 'joué' , 'au' , 'basket' , '2' , 'fois' ] '''
+
+    list_out = []
+    word = ''
+
+    for elt in list_in :
+        word = re.findall(r"[\w']+" , elt)
+
+        list_out.append(word) #will give a nested list
+
+    #to make the list flat
+    list_out = [item for items in list_out for item in items]
+
+    return list_out
+
 ##############################################################
 # Fonction : punctuation_out
 # 	- Transforme tous les caracteres de ponctuation en espace
 # Input :
 ##############################################################
-# def list_punctuation_out_from_list(list_in):
-#     list_out = []
-#
-#     for elt in list_in :
-#         mot = re.findall(r"[\w']+|[.,!?;]" , elt)
-#         list_out.append(mot)
-#         #will give a nested list
-#
-#     #flaten the list
-#     list_out = [item for items in list_out for item in items]
-#
-# 	return list_out
-# If car in liste_car_banni
-# Le transfo en espace
+#Test written
+def list_all_but_point_and_word_from_list(list_in) :
+    ''' erase all punctuation except the points from word in list
+    >>> a = "j'ai joué au basket 2 fois.".split()
+    >>> b = list_punctuation_sep_from_list(b)
+    >>> b = ["j'ai" , 'joué' , 'au' , 'basket' , '2' , 'fois', '.' ] '''
 
-# txt = open(f)
-# txt = txt.read()
-# txt = re.sub(r'[^\w\s]','',txt)
-# body = txt.lower().split()
+    list_out = []
+    word = ''
 
+    for elt in list_in :
+        word = re.findall(r"[\w']+|[.]" , elt)
+
+        list_out.append(word) #will give a nested list
+
+    #to make the list flat
+    list_out = [item for items in list_out for item in items]
+
+    return list_out
 
 ##############################################################
 # Fonction : convert_utf8
