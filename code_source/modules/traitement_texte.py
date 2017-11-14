@@ -28,13 +28,16 @@ def list_from_outside_text_content(text):
 # 	- Transforme toutes les majuscules en minuscules
 # Input :
 ##############################################################
+#TEST written
 def list_maj_to_min(liste_in):
+    ''' Reecrit tous les elts de la liste en minuscules '''
 
     list_out = []
-    list_out = liste_in.lower()
+
+    for elt in liste_in :
+        list_out.append(elt.lower())
 
     return list_out
-
 
 ##############################################################
 # Fonction : punctuation_out
