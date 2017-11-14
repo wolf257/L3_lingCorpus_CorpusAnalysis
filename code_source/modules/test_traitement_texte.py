@@ -7,13 +7,22 @@ from traitement_texte import *
 
 class TestStats(unittest.TestCase):
 
-    def test_list_maj_to_min(self):
+    def test_list_maj_to_min_from_list(self):
         a = ['Je' , 'suIS', 'LÀ']
 
         #result_expected
         aa = ['je' , 'suis', 'là']
 
-        self.assertEqual(list_maj_to_min(a), aa)
+        self.assertEqual(list_maj_to_min_from_list(a), aa)
+
+    def test_list_punctuation_sep_from_list(self):
+        a = 'je suis, ou je vais, au basket.'.split()
+
+        #result_expected
+        aa = ['je' , 'suis' , ',' , 'ou' , 'je' , 'vais' , ',' , 'au' , 'basket' , '.']
+
+        self.assertEqual(list_punctuation_sep_from_list(a), aa)
+
 
 
 if __name__ == '__main__':

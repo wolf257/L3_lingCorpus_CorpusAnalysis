@@ -29,7 +29,7 @@ def list_from_outside_text_content(text):
 # Input :
 ##############################################################
 #TEST written
-def list_maj_to_min(liste_in):
+def list_maj_to_min_from_list(liste_in):
     ''' Reecrit tous les elts de la liste en minuscules '''
 
     list_out = []
@@ -40,17 +40,42 @@ def list_maj_to_min(liste_in):
     return list_out
 
 ##############################################################
+# Fonction : punctuation_sep
+# 	- Separer les signe de ponctuation s'ils sont colles au mot
+# Input :
+##############################################################
+#Test written
+def list_punctuation_sep_from_list(list_in):
+    ''' separate punctuation from word in list '''
+
+    list_out = []
+
+    for elt in list_in :
+        mot = re.findall(r"[\w']+|[.,!?;]" , elt)
+        list_out.append(mot)
+        #will give a nested list
+
+    #flat list
+    list_out = [item for items in list_out for item in items]
+
+    return list_out
+##############################################################
 # Fonction : punctuation_out
 # 	- Transforme tous les caracteres de ponctuation en espace
 # Input :
 ##############################################################
-# def punctuation_out(list_in):
-# 	list_out = []
+# def list_punctuation_out_from_list(list_in):
+#     list_out = []
 #
-# 	for word in list_in :
-# 		list_out.append(word.)
-#     pass
-
+#     for elt in list_in :
+#         mot = re.findall(r"[\w']+|[.,!?;]" , elt)
+#         list_out.append(mot)
+#         #will give a nested list
+#
+#     #flaten the list
+#     list_out = [item for items in list_out for item in items]
+#
+# 	return list_out
 # If car in liste_car_banni
 # Le transfo en espace
 
