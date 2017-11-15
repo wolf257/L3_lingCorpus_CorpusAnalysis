@@ -32,7 +32,7 @@ def list_from_outside_text_content(text):
 # Input :
 ##############################################################
 #TEST written
-def list_maj_to_min_from_list(liste_in):
+def maj_to_min_list_from_list(liste_in):
     ''' Reecrit tous les elts de la liste en minuscules '''
 
     list_out = []
@@ -48,10 +48,10 @@ def list_maj_to_min_from_list(liste_in):
 # Input :
 ##############################################################
 #Test written
-def list_punctuation_sep_from_list(list_in):
+def punctuation_sep_word_list_from_list(list_in):
     ''' separate punctuation from word in list
     >>> a = "j'ai joué... au basket.".split()
-    >>> b = list_punctuation_sep_from_list(b)
+    >>> b = punctuation_sep_word_list_from_list(b)
     >>> b = ["j'ai" , 'joué' , '.' , '.' , '.' , 'au' , 'basket' , '.'] '''
 
     list_out = []
@@ -73,10 +73,10 @@ def list_punctuation_sep_from_list(list_in):
 # Input :
 ##############################################################
 #Test written
-def list_all_punctuation_out_from_list(list_in) :
+def all_punctuation_out_list_from_list(list_in) :
     ''' erase all punctuation from word in list
     >>> a = "j'ai joué... au basket 2 fois.".split()
-    >>> b = list_punctuation_sep_from_list(b)
+    >>> b = punctuation_sep_word_list_from_list(b)
     >>> b = ["j'ai" , 'joué' , 'au' , 'basket' , '2' , 'fois' ] '''
 
     list_out = []
@@ -98,10 +98,10 @@ def list_all_punctuation_out_from_list(list_in) :
 # Input :
 ##############################################################
 #Test written
-def list_all_but_point_and_word_from_list(list_in) :
+def all_but_point_and_word_list_from_list(list_in) :
     ''' erase all punctuation except the points from word in list
     >>> a = "j'ai joué au basket 2 fois.".split()
-    >>> b = list_punctuation_sep_from_list(b)
+    >>> b = punctuation_sep_word_list_from_list(b)
     >>> b = ["j'ai" , 'joué' , 'au' , 'basket' , '2' , 'fois', '.' ] '''
 
     list_out = []
