@@ -15,7 +15,7 @@ from collections import OrderedDict
 # Input : list
 # Return : dict
 ##############################################################
-def dict_lettersDistribution_from_list(list_word):
+def lettersDistribution_dict_from_list(list_word):
     ''' Return dict lettersDistribution from a list '''
 
     lettersDistribution = {}
@@ -45,7 +45,7 @@ def dict_lettersDistribution_from_list(list_word):
 # Input : list
 # Return : dict
 ##############################################################
-def dict_wordsDistribution_from_list(list_words_without_point):
+def wordsDistribution_dict_from_list(list_words_without_point):
     ''' Return dict wordsDistribution from a list '''
 
     wordsDistribution = {}
@@ -69,7 +69,7 @@ def dict_wordsDistribution_from_list(list_words_without_point):
 ##############################################################
 # prend comme marqueur le '.'
 # calcul nombre de mot, nombre de '.' et divise
-def nb_average_words_by_sentence(list_words_with_point):
+def average_words_by_sentence_nb_from_(list_words_with_point):
 
     words, average_words_by_sentence, sentences = 0, 0, 0
 
