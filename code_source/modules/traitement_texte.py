@@ -2,7 +2,15 @@
 #-*- coding : utf8 -*-
 
 import re
-import string
+
+########################################################
+# LIST FUNCTIONS IN MODULES
+#	+ list_from_outside_text_content
+#	+ maj_to_min_list_from_list
+#	+ punctuation_sep_word_list_from_list
+#	+ all_punctuation_out_list_from_list
+#	+ all_but_point_and_word_list_from_list
+########################################################
 
 #TODO : creer une phrase punctuation (avec ou sans point ?) en tant qu'objet re
 

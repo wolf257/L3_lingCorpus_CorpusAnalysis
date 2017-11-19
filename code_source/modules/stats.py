@@ -3,6 +3,15 @@
 
 from collections import OrderedDict
 
+########################################################
+# LIST FUNCTIONS IN MODULES
+#	+ lettersDistribution_dict_from_list
+#	+ wordsDistribution_dict_from_list
+#	+
+#	+
+#	+
+########################################################
+
 #########
 #TODO : creer moyen d'acces, surtout aux dicos
 #########
@@ -15,6 +24,7 @@ from collections import OrderedDict
 # Input : list
 # Return : dict
 ##############################################################
+#TEST written
 def lettersDistribution_dict_from_list(list_word):
     ''' Return dict lettersDistribution from a list '''
 
@@ -36,8 +46,6 @@ def lettersDistribution_dict_from_list(list_word):
     #lettersDistributionOrder = OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[0]))
     #return lettersDistributionOrder
 
-#TEST ecrit
-
 ##############################################################
 # Fonction : wordsDistribution
 # 	Parcourt la liste,
@@ -45,6 +53,7 @@ def lettersDistribution_dict_from_list(list_word):
 # Input : list
 # Return : dict
 ##############################################################
+#TEST written
 def wordsDistribution_dict_from_list(list_words_without_point):
     ''' Return dict wordsDistribution from a list '''
 
@@ -57,8 +66,6 @@ def wordsDistribution_dict_from_list(list_words_without_point):
             wordsDistribution[word] +=1
 
     return wordsDistribution
-
-#TEST ecrit
 
 ##############################################################
 # Fonction : nb_average_words_by_sentence
