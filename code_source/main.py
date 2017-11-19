@@ -6,8 +6,9 @@ import os
 import modules.traitement_texte as traitement_texte
 import modules.stats as stats
 
-print("Salut friend")
-print("go")
+def main():
+    print("Salut friend")
+    print("go")
 
 # while 1 :
     # a = input("\nLevel 0 : How do you want me to work ? " + \
@@ -41,4 +42,4 @@ print("go")
 #
 
 if __name__ == '__main__':
-    pass
+    main()
