@@ -2,7 +2,7 @@
 for_later
 0_rapport/*
 morphalo/*
-corpus_essai/*
+corpus_*/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
