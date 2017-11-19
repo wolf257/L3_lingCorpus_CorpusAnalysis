@@ -1,0 +1,25 @@
+[x] : Conversion des pdf en txt avec pdftotext
+    voir convert.bash dans corpus/
+
+[x] : Normaliser les fichiers en utf8
+    directement avec pdftotext -enc UTF-8
+
+[] : Output le vecteur distribution de caracteres
+
+[] : Output le vecteur distribution de mots
+
+    selon punctuation :
+
+    selon dico :
+        Voir si tous les mots sont présents dans le dico
+        if yes : fine
+        if no : single it out
+[] :
+[] :
+[] :
+[] :
+[] :
+[] :
+[] :
+[] :
+[] :

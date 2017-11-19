@@ -1,0 +1,36 @@
+
+Devoir 1
+---------
+
+Dates
+-----
+Devoir à rendre au  format électronique pour le vendredi 16 décembre 2016
+(email pap@limsi.fr).
+
+
+Objectif
+---------
+
+Réaliser une étude lexicographique du support des cours 1 à 7 (corpus joint
+au format pdf, text et html) au moyen des commandes
+du shell bash  et des programmes bash que vous aurez écrits si nécessaire.
+
+Étape 0 : Écrire un programme bash qui permet de copier le corpus d'un endroit à un autre
+en itérant répertoire par répertoire et fichier par fichier..
+
+Étape 1 : Effectuer une mise en forme, une normalisation et un balisage XML du corpus allant
+au niveau des mots selon une DTD que vous définirez.
+
+Étape 2 : Calculer le vecteur distribution de caractères du corpus et les vecteurs distribution
+de caractères des différents cours. Avec le tableur libre office produire un graphique montrant
+l'évolution selon les cours des 5 caractères les plus fréquents et des 5 caractères les moins fréquents.
+
+Étape 3 : Même tâche que la précédente mais pour les mots.
+
+Étape 4 : Calculer les 10 termes les plus représentatifs de chaque cours
+au moyen du score tf-idf (terme frequency, inverse document frequency, c'est à dire le nombre
+de fois que le terme apparaît dans un cours particulier divisé par le nombre de cours où il apparaît
+au moins une fois).
+
+Étape 5: Rédiger un petit rapport décrivant votre approche et les résultats que vous avez obtenus (les programmes seronts
+fournis en annexe).
