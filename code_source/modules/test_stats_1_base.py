@@ -3,7 +3,7 @@
 
 import unittest
 
-from stats import *
+from stats_1_base import *
 
 class TestStats(unittest.TestCase):
 
