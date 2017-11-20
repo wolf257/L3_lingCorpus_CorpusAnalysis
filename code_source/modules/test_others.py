@@ -15,7 +15,7 @@ class TestStats(unittest.TestCase):
             #On ne veut que les fichiers textes
             if fichier.endswith('.txt') :
                 # on les importe : on veut que ce soit des listes
-                texte = import_text_as_list_of_words(dossier_corpus+fichier)
+                texte = import_text_as_list_of_words(os.path.join(dossier_corpus, fichier))
                 # on verifie
                 self.assertIsInstance(texte, list)
 

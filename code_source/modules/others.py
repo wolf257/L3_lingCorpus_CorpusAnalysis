@@ -87,7 +87,7 @@ def import_text_as_list_of_words(path_to_text):
 # corpus = CORPUS_TEST_ROOT
 # for elt in os.listdir(corpus) :
 #     if elt.endswith('.txt') :
-#         print(corpus+elt)
+#         print(os.path.join(corpus, elt))
 
 ##############################################################
 # Fonction : import_real_dictionnary

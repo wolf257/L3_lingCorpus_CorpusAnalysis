@@ -1,8 +1,7 @@
 #autre
-for_later
-0_rapport/*
 morphalo/*
-corpus_*/*
+corpus_test/*
+0essai.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
