@@ -3,7 +3,7 @@
 
 import os
 
-import modules.traitement_texte as traitement_texte
+import modules.ponctuation_texte as ponctuation_texte
 import modules.stats_1_base as stats_base
 
 from settings import PROJECT_ROOT
