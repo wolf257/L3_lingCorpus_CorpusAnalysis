@@ -4,7 +4,11 @@
 import os
 
 import modules.traitement_texte as traitement_texte
-import modules.stats as stats
+import modules.stats_1_base as stats_base
+
+from settings import PROJECT_ROOT
+
+print(PROJECT_ROOT)
 
 def main():
     print("Salut friend")
