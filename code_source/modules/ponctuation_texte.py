@@ -5,32 +5,12 @@ import re
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#	+ list_from_outside_text_content #TODO : revoir et SURTOUT tester
 #	+ maj_to_min_list_from_list
 #	+ punctuation_sep_word_list_from_list
 #	+ all_punctuation_out_list_from_list
 #	+ all_but_point_and_word_list_from_list
 ########################################################
 
-##############################################################
-# Fonction : list_from_outside_text_content
-# Input : text
-# Return : list
-##############################################################
-def list_from_outside_text_content(text):
-    ''' Import a text as one list '''
-
-    liste_brute = []
-    liste_finale = []
-
-    with open(text, 'r') as file :
-        liste_brute = file.readlines()
-        #list of all lines (from beg to EOL)
-
-    for string in liste_brute :
-        liste_finale.append(string.strip())
-
-    return liste_finale
 
 ##############################################################
 # Fonction : list_maj_to_min
