@@ -7,6 +7,12 @@ from others import *
 
 class TestStats(unittest.TestCase):
 
+    def test_dot_text_files_from_folder_as_list(self):
+        dossier_corpus = CORPUS_TEST_ROOT
+        liste_fichiers = dot_text_files_from_folder_as_list(dossier_corpus)
+
+        self.assertIsInstance(liste_fichiers, list)
+
     def test_import_text_as_list_of_strings(self):
         dossier_corpus = CORPUS_TEST_ROOT
         texte = None

@@ -12,6 +12,7 @@ from settings import PROJECT_ROOT, CORPUS_TEST_ROOT, MORPHALO_ROOT, RESULT_RAPPO
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
+#	+ dot_text_files_from_folder_as_list
 #	+ import_text_as_list_of_strings
 #	+ import_text_as_list_of_words
 #	+ import_real_dictionnary
@@ -24,27 +25,51 @@ from settings import PROJECT_ROOT, CORPUS_TEST_ROOT, MORPHALO_ROOT, RESULT_RAPPO
 ########################################################
 
 ##############################################################
+# Fonction : dot_text_files_from_folder_as_list
+# Input : text
+# Return : list
+##############################################################
+def dot_text_files_from_folder_as_list(path_to_folder):
+    ''' Import the content of a folder as one list '''
+
+    liste_finale = []
+
+    for fichier in os.listdir(path_to_folder) :
+        if fichier.endswith('.txt') :
+            liste_finale.append(fichier)
+
+    return liste_finale
+
+# dossier_corpus = CORPUS_TEST_ROOT
+# liste_fichiers_texte = dot_text_files_from_folder_as_list(dossier_corpus)
+# print(liste_fichiers_texte)
+
+##############################################################
 # Fonction : import_text_as_list_of_words
 # Input : text
 # Return : list
 ##############################################################
 def import_text_as_list_of_strings(path_to_text):
-    ''' Import a text as one list '''
+    ''' Import a text as one list of strings '''
 
     liste_brute = []
     liste_finale = []
 
-    with open(path_to_text, 'r', encoding='utf8') as file :
+    with open(path_to_text, 'rt', encoding='utf8') as file :
         liste_brute = file.readlines()
         #list of all lines (from beg to EOL)
 
-    #PHRASE PAR PHRASE
     for string in liste_brute :
-            liste_finale.append(string.strip().split())
+            liste_finale.append(string.strip())
+
+    #PHRASE PAR PHRASE
+    # for string in liste_brute :
+    #         liste_finale.append(string.strip().split())
 
     #to make the list flat
-    liste_finale = [item for items in liste_finale for item in items]
+    # liste_finale = [item for items in liste_finale for item in items]
 
+    # return liste_brute
     return liste_finale
 
 ##############################################################
@@ -53,7 +78,7 @@ def import_text_as_list_of_strings(path_to_text):
 # Return : list
 ##############################################################
 def import_text_as_list_of_words(path_to_text):
-    ''' Import a text as one list '''
+    ''' Import a text as one list of words '''
 
     liste_brute = []
     liste_finale = []
