@@ -36,15 +36,16 @@ def maj_to_min_list_from_list(liste_in):
 #Test written
 def punctuation_sep_word_list_from_list(list_in):
     ''' separate punctuation from word in list
+    NOTE : les 3 points '...' sont considéré comme bloc
     >>> a = "j'ai joué... au basket.".split()
     >>> b = punctuation_sep_word_list_from_list(b)
-    >>> b = ["j'ai" , 'joué' , '.' , '.' , '.' , 'au' , 'basket' , '.'] '''
+    >>> b = ["j'ai" , 'joué' , '...' , 'au' , 'basket' , '.'] '''
 
     list_out = []
     word = ''
 
     for elt in list_in :
-        word = re.findall(r"[\w']+|[.,!?;]" , elt)
+        word = re.findall(r"[\w']+|[.]{1,3}|[,!?;]" , elt)
 
         list_out.append(word) #will give a nested list
 

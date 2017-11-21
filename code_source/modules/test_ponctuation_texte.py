@@ -20,8 +20,8 @@ class TestStats(unittest.TestCase):
         b = "j'ai joué... au basket.".split()
 
         #result_expected
-        aa = ['je' , 'suis' , '.' , '.' , '.' , 'ou' , 'je' , 'vais' , ',' , 'au' , 'basket' , '.']
-        bb = ["j'ai" , 'joué' , '.' , '.' , '.' , 'au' , 'basket' , '.']
+        aa = ['je' , 'suis' , '...' , 'ou' , 'je' , 'vais' , ',' , 'au' , 'basket' , '.']
+        bb = ["j'ai" , 'joué' , '...' , 'au' , 'basket' , '.']
 
         self.assertEqual(punctuation_sep_word_list_from_list(a), aa)
         self.assertEqual(punctuation_sep_word_list_from_list(b), bb)
