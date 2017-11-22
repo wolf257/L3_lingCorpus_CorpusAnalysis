@@ -40,13 +40,17 @@ class TestStats(unittest.TestCase):
     def test_all_but_point_and_word_list_from_list(self):
         a = "j'ai joué au basket.".split()
         b = "j'ai vu, entendu, et lu.".split()
+        c = "j'ai vu ... entendu, ... et lu.".split()
+        #TODO : find solution : ne marche que si les 3points sont separes du mot
 
         #result_expected
         aa = ["j'ai" , 'joué' , 'au' , 'basket' , '.' ]
         bb = ["j'ai" , 'vu' , 'entendu' , 'et' , 'lu' , '.' ]
+        cc = ["j'ai" , 'vu' , 'entendu' , 'et' , 'lu' , '.' ]
 
         self.assertEqual(all_but_point_and_word_list_from_list(a), aa)
         self.assertEqual(all_but_point_and_word_list_from_list(b), bb)
+        self.assertEqual(all_but_point_and_word_list_from_list(c), cc)
 
 if __name__ == '__main__':
     unittest.main()

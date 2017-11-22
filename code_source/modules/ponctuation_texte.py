@@ -93,11 +93,14 @@ def all_but_point_and_word_list_from_list(list_in) :
 
     list_out = []
     word = ''
+    #list_in = re.split(r'[\.{3}]| ', list_in)
 
     for elt in list_in :
-        word = re.findall(r"[\w']+|[.]" , elt)
-
-        list_out.append(word) #will give a nested list
+        if elt == '...' :
+            pass
+        else :
+            word = re.findall(r"[\w']+|[.]" , elt)
+            list_out.append(word) #will give a nested list
 
     #to make the list flat
     list_out = [item for items in list_out for item in items]

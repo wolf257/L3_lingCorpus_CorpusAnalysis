@@ -1,9 +1,0 @@
-# affichage mot par mot, puis tri alphabetique
-tr '\040' '\012' < file.txt | sort > output.txt
-
-#python3
-#Retourne un dict classé selon la colonne 1 c-a-d value
-# return OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[1]))
-
-#Retourne un dict classé selon la colonne a PUIS la colonne b
-# return OrderedDict(sorted(lettersDistribution.items(), key=lambda t:(t[a], t[a]) ))

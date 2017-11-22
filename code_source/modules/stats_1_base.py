@@ -3,11 +3,12 @@
 
 from collections import OrderedDict
 
+#from ponctuation_texte import *
+#import ponctuation_texte as PT
+
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#	+ lettersDistribution_dict_from_list
-#	+ wordsDistribution_dict_from_list
-#	+
+#	+ count_sentences_nb_from_list_words_with_point
 #	+
 #	+
 ########################################################
@@ -16,57 +17,29 @@ from collections import OrderedDict
 #TODO : creer moyen d'acces, surtout aux dicos
 #########
 
+
 ##############################################################
-# Fonction : lettersDistribution
-# 	Parcourt la liste, parcourt chaque mot,
-#	creer le vecteur distribution des lettres
-#	en classant par lettre
+# Fonction : nb_sentences_from_list_words_with_point
+# 	- calcule le nombre de mots et le nombre de point
+#	le quotient de leur division donne le nombre de phrase
 # Input : list
-# Return : dict
+# Return : number
 ##############################################################
-#TEST written
-def lettersDistribution_dict_from_list(list_word):
-    ''' Return dict lettersDistribution from a list '''
+# prend comme marqueur le '.'
+# calcul nombre de mot, nombre de '.' et divise
+def count_sentences_nb_from_string_or_list(list_words):
 
-    lettersDistribution = {}
+    liste_a_traiter = []
+    #liste_a_traiter = all_but_point_and_word_list_from_list(list_words)
+    sentences = 0
 
-    for word in list_word :
-        for letter in word :
-            if letter not in lettersDistribution:
-                lettersDistribution[letter] = 1
-            else :
-                lettersDistribution[letter] +=1
+    for word in list_words :
+        if word == '.' :
+            sentences += 1
 
-    #Retourne le dict sans ordre
-    #return lettersDistribution
-    return OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[0]))
+    return sentences
 
-    #Retourne un dict classé selon la colonne 0 c-a-d keys
-    #lettersDistributionOrder = OrderedDict()
-    #lettersDistributionOrder = OrderedDict(sorted(lettersDistribution.items(), key=lambda t:t[0]))
-    #return lettersDistributionOrder
-
-##############################################################
-# Fonction : wordsDistribution
-# 	Parcourt la liste,
-#	creer le vecteur distribution des mots
-# Input : list
-# Return : dict
-##############################################################
-#TEST written
-def wordsDistribution_dict_from_list(list_words_without_point):
-    ''' Return dict wordsDistribution from a list '''
-
-    wordsDistribution = {}
-
-    for word in list_words_without_point :
-        if word not in wordsDistribution:
-            wordsDistribution[word] = 1
-        else :
-            wordsDistribution[word] +=1
-
-    return wordsDistribution
-
+#print(count_sentences_nb_from_string_or_list([2,3,4,5,'.','.']))
 ##############################################################
 # Fonction : nb_average_words_by_sentence
 # 	- calcule le nombre de mots et le nombre de point

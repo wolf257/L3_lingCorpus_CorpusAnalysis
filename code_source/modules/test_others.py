@@ -18,7 +18,7 @@ class TestStats(unittest.TestCase):
         texte = None
 
         liste_fichiers = os.listdir(dossier_corpus)
-        
+
         if len(liste_fichiers) > 2 :
             texte_1 = import_text_as_list_of_strings(os.path.join(dossier_corpus, liste_fichiers[1]))
             self.assertIsInstance(texte_1 , list)

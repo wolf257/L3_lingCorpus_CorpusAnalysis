@@ -7,25 +7,22 @@ from stats_1_base import *
 
 class TestStats(unittest.TestCase):
 
-    def test_lettersDistribution_dict_from_list(self):
-        a = 'abcdee'.split()
-        b = '1234'.split()
+    def test_count_sentences_nb_from_string_or_list(self):
+        a = "j'y vais . je suis là . je pars ."
+        b = "j'y vais. je suis là . je pars ."
+        c = "j'y vais. je suis là. je pars."
+        #d = "j'y vais... je suis là. je pars." #TODO : find solution
 
         #result_expected
-        aa = OrderedDict([('a', 1), ('b', 1), ('c', 1), ('d', 1), ('e', 2)])
-        bb = OrderedDict([('1', 1), ('2', 1), ('3', 1), ('4', 1)])
+        count_sentences_a = 3
+        count_sentences_b = 3
+        count_sentences_c = 3
+        #count_sentences_d = 2
 
-        self.assertEqual(lettersDistribution_dict_from_list(a), aa)
-        self.assertEqual(lettersDistribution_dict_from_list(b), bb)
-
-    def test_wordsDistribution_dict_from_list(self):
-        a = 'je vais jouer au basket'.split()
-
-        #result_expected
-        aa = OrderedDict([('je', 1), ('vais', 1), ('jouer', 1), ('au', 1), ('basket', 1)])
-
-        self.assertEqual(wordsDistribution_dict_from_list(a), aa)
-        #self.assertEqual(lettersDistribution_dict_from_list(b), bb)
+        self.assertEqual(count_sentences_nb_from_string_or_list(a), count_sentences_a)
+        self.assertEqual(count_sentences_nb_from_string_or_list(b), count_sentences_b)
+        self.assertEqual(count_sentences_nb_from_string_or_list(c), count_sentences_c)
+        #self.assertEqual(count_sentences_nb_from_string_or_list(d), count_sentences_d)
 
     # def test_average_words_by_sentence_nb_from_list(self):
     #     a = "j'y vais . je suis là ."
