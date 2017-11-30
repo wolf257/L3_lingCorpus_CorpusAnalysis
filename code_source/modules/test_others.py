@@ -13,18 +13,30 @@ class TestStats(unittest.TestCase):
 
         self.assertIsInstance(liste_fichiers, list)
 
-    def test_import_text_as_list_of_strings(self):
+    def test_import_text_as_one_string(self):
         dossier_corpus = CORPUS_TEST_ROOT
-        texte = None
+        liste_fichiers = dot_text_files_from_folder_as_list(dossier_corpus)
 
-        liste_fichiers = os.listdir(dossier_corpus)
+        for fichier in liste_fichiers :
+            a = os.path.join(dossier_corpus, fichier)
+            b = import_text_as_one_string(a)
 
-        if len(liste_fichiers) > 2 :
-            texte_1 = import_text_as_list_of_strings(os.path.join(dossier_corpus, liste_fichiers[1]))
-            self.assertIsInstance(texte_1 , list)
+            self.assertIsInstance(b, str)
 
-            texte_2 = import_text_as_list_of_strings(os.path.join(dossier_corpus, liste_fichiers[2]))
-            self.assertIsInstance(texte_2 , list)
+
+
+    # def test_import_text_as_list_of_strings(self):
+    #     dossier_corpus = CORPUS_TEST_ROOT
+    #     texte = None
+    #
+    #     liste_fichiers = os.listdir(dossier_corpus)
+    #
+    #     if len(liste_fichiers) > 2 :
+    #         texte_1 = import_text_as_list_of_strings(os.path.join(dossier_corpus, liste_fichiers[1]))
+    #         self.assertIsInstance(texte_1 , list)
+    #
+    #         texte_2 = import_text_as_list_of_strings(os.path.join(dossier_corpus, liste_fichiers[2]))
+    #         self.assertIsInstance(texte_2 , list)
 
         # for fichier in os.listdir(dossier_corpus) :
         #     #On ne veut que les fichiers textes
@@ -35,18 +47,18 @@ class TestStats(unittest.TestCase):
         #         self.assertIsInstance(texte, list)
 
 
-    def test_import_text_as_list_of_words(self):
-        dossier_corpus = CORPUS_TEST_ROOT
-        texte = None
-
-        liste_fichiers = os.listdir(dossier_corpus)
-
-        if len(liste_fichiers) > 2 :
-            texte_1 = import_text_as_list_of_words(os.path.join(dossier_corpus, liste_fichiers[1]))
-            self.assertIsInstance(texte_1 , list)
-
-            texte_2 = import_text_as_list_of_words(os.path.join(dossier_corpus, liste_fichiers[2]))
-            self.assertIsInstance(texte_2 , list)
+    # def test_import_text_as_list_of_words(self):
+    #     dossier_corpus = CORPUS_TEST_ROOT
+    #     texte = None
+    #
+    #     liste_fichiers = os.listdir(dossier_corpus)
+    #
+    #     if len(liste_fichiers) > 2 :
+    #         texte_1 = import_text_as_list_of_words(os.path.join(dossier_corpus, liste_fichiers[1]))
+    #         self.assertIsInstance(texte_1 , list)
+    #
+    #         texte_2 = import_text_as_list_of_words(os.path.join(dossier_corpus, liste_fichiers[2]))
+    #         self.assertIsInstance(texte_2 , list)
 
         # for fichier in os.listdir(dossier_corpus) :
         #     if fichier.endswith('.txt') :

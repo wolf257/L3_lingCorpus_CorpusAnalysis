@@ -11,9 +11,10 @@ from settings import PROJECT_ROOT, CORPUS_TEST_ROOT, MORPHALO_ROOT, RESULT_RAPPO
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#	+ dot_text_files_from_folder_as_list
-#	+ import_text_as_list_of_strings
-#	+ import_text_as_list_of_words
+#	+ dot_text_files_from_folder_as_list + test
+#	+ import_text_as_one_string + test
+#	+ import_text_as_list_of_strings + test (obsolete)
+#	+ import_text_as_list_of_words + test (obsolete)
 #	+ import_real_dictionnary
 #	+
 #	+
@@ -22,68 +23,6 @@ from settings import PROJECT_ROOT, CORPUS_TEST_ROOT, MORPHALO_ROOT, RESULT_RAPPO
 #	+
 #	+
 ########################################################
-
-#NOTE : au lieu d'avoir une liste de strings, puis un de mots
-# Pk ne pas importer sous forme de lignes
-# + unir pour n'avoir qu'une listera
-# + traiter la ponctuation
-# + decouper
-#
-# >>> a
-# ["je vais à l'école", 'je suis de Paris']
-# >>> b = ' '.join(a)
-# >>> b
-# "je vais à l'école je suis de Paris"
-#
-# PB1 : il arrive que la liste de base contienne une liste ce qui fera bugger ' '.join(list)
-# Sol : from stackoverflow
-
-#This works recursively for infinitely nested elements:
-# def iterFlatten(root):
-#     if isinstance(root, (list, tuple)):
-#         for element in root:
-#             for e in iterFlatten(element):
-#                 yield e
-#     else:
-#         yield root
-#
-# >>> c
-# ['je vais à école', ['a', 'b'], 'je suis de Paris']
-# >>> list(iterFlatten(c))
-# ['je vais à école', 'a', 'b', 'je suis de Paris']
-#
-# Donc si liste de liste --> good --> words
-# si liste de line --> good --> words
-# si liste de mots --> good --> words
-
-def iterFlatten(root):
-    if isinstance(root, (list, tuple)):
-        for element in root:
-            for e in iterFlatten(element):
-                yield e
-    else:
-        yield root
-
-##############################################################
-# Fonction : import_text_as_one
-# Input : path_to_text
-# Return : string
-##############################################################
-def import_text_as_one string(path_to_text):
-    ''' Import a text as one string '''
-
-    liste_brute = []
-    string_from_text = ''
-
-    with codecs.open(path_to_text, mode = 'r', encoding='utf8') as file :
-        liste_brute = file.readlines()
-        #list of all lines (not sentences) (from beg to EOL)
-        # [l1 , l2 , l3 , ...]
-
-    string_from_text = ' '.join(liste_brute)
-    # " l1 ' ' l2 ' ' l3 ' ' ... "
-
-    return liste_finale
 
 ##############################################################
 # Fonction : dot_text_files_from_folder_as_list
@@ -104,6 +43,33 @@ def dot_text_files_from_folder_as_list(path_to_folder):
 # dossier_corpus = CORPUS_TEST_ROOT
 # liste_fichiers_texte = dot_text_files_from_folder_as_list(dossier_corpus)
 # print(liste_fichiers_texte)
+
+##############################################################
+# Fonction : import_text_as_one_string
+# Input : path_to_text
+# Return : string
+##############################################################
+def import_text_as_one_string(path_to_text):
+    ''' Import a text as one string '''
+
+    liste_brute = []
+    liste_finale = []
+    string_from_text = ''
+
+    #list of all lines (not sentences) (from beg to EOL)
+    # [l1 , l2 , l3 , ...]
+    with codecs.open(path_to_text, mode = 'r', encoding='utf8') as file :
+        liste_brute = file.readlines()
+
+    #enlevons les \n \r ...
+    for string in liste_brute :
+            liste_finale.append(string.strip())
+
+
+    string_from_text = ' '.join(liste_finale)
+    # " l1 ' ' l2 ' ' l3 ' ' ... "
+
+    return string_from_text
 
 ##############################################################
 # Fonction : import_text_as_list_of_words
