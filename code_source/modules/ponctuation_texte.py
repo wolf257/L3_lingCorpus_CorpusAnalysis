@@ -5,14 +5,14 @@ import re
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#	+ split_str_into_list_of_sentence
+#	+ split_str_into_list_of_sentences
 #	+ maj_to_min_list_from_list
 #	+ punctuation_sep_word_list_from_list
 #	+ all_punctuation_out_list_from_list
 #	+ all_but_point_and_word_list_from_list
 ########################################################
 
-def split_str_into_list_of_sentence(the_string):
+def split_str_into_list_of_sentences(the_string):
     ''' break a paragraph into sentences
         and return a list '''
     # to split by multile characters
@@ -21,7 +21,13 @@ def split_str_into_list_of_sentence(the_string):
     sentenceEnders = re.compile('[.!?]')
     sentenceList = sentenceEnders.split(the_string)
 
-    return sentenceList
+    liste_finale = []
+
+    for phrase in sentenceList :
+        if phrase != '' :
+            liste_finale.append(phrase.strip())
+
+    return liste_finale
 
 
 ##############################################################
