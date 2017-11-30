@@ -11,6 +11,7 @@ CORPUS_ROOT = os.path.join(PROJECT_ROOT, 'corpus/')
 CORPUS_TEST_ROOT = os.path.join(PROJECT_ROOT, 'corpus_litterature/')
 MORPHALO_ROOT = os.path.join(PROJECT_ROOT, 'morphalo/')
 RESULT_RAPPORT_ROOT = os.path.join(PROJECT_ROOT, 'resultats_et_rapport/')
+TREETAGGER_ROOT = os.path.join(PROJECT_ROOT, 'from_outside_treetagger/')
 
 def main():
     print(PROJECT_ROOT) #nous donne la base du dossier
