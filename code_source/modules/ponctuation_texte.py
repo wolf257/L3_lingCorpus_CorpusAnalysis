@@ -18,6 +18,7 @@ import re
 #	+ punctuation_sep_word_list_from_list
 #	+ all_punctuation_out_list_from_list
 #	+ all_but_point_and_word_list_from_list
+#       + all_three_points_become_one_string_from_string
 ########################################################
 
 def split_str_into_list_of_sentences(the_string):
@@ -115,7 +116,8 @@ def all_but_point_and_word_list_from_list(list_in) :
     ''' erase all punctuation except the points from word in list
     >>> a = "j'ai joué au basket 2 fois.".split()
     >>> b = punctuation_sep_word_list_from_list(b)
-    >>> b = ["j'ai" , 'joué' , 'au' , 'basket' , '2' , 'fois', '.' ] '''
+    >>> b = ["j'ai" , 'joué' , 'au' , 'basket' , '2' , 'fois', '.' ]
+    >>> PB si les trois points sont colles '''
 
     list_out = []
     word = ''
@@ -132,6 +134,23 @@ def all_but_point_and_word_list_from_list(list_in) :
     list_out = [item for items in list_out for item in items]
 
     return list_out
+
+def all_three_points_become_one_string_from_string(string) :
+    ''' a = 'abcd ... efgh ... ijk...'
+    >>> e = all_but_one_point_and_word_string_from_string(a)
+    >>> e
+    'abcd . efgh . ijk.' '''
+
+    str_in = string
+    str_out = ''
+
+    for index, char in enumerate(str_in):
+        if char == '.' and str_in[index-1] == '.' :
+            pass
+        else :
+            str_out += char
+
+    return str_out
 
 ##############################################################
 # Fonction : space_before_point
