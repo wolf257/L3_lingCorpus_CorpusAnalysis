@@ -9,13 +9,13 @@ class TestStats(unittest.TestCase):
 
     def test_dot_text_files_from_folder_as_list(self):
         dossier_corpus = CORPUS_TEST_ROOT
-        liste_fichiers = dot_text_files_from_folder_as_list(dossier_corpus)
+        liste_fichiers = list_text_in_folder_as_list(dossier_corpus)
 
         self.assertIsInstance(liste_fichiers, list)
 
     def test_import_text_as_one_string(self):
         dossier_corpus = CORPUS_TEST_ROOT
-        liste_fichiers = dot_text_files_from_folder_as_list(dossier_corpus)
+        liste_fichiers = list_text_in_folder_as_list(dossier_corpus)
 
         for fichier in liste_fichiers :
             a = os.path.join(dossier_corpus, fichier)

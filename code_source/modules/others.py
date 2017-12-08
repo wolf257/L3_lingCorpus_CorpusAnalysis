@@ -1,17 +1,30 @@
 #!/usr/bin/env python3
 #-*- coding : utf8 -*-
 
-import os, re, sys, io, codecs
 
-## Lien vers les dossiers de la racine ############################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#     PRESENTATION DU MODULE :
+#          Ce modules rassemble les functions de
+#
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import os
+import re
+import sys
+import io
+import codecs
+import subprocess
+
+# Lien vers les dossiers de la racine ############################################
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.insert(0, parentdir)
-from settings import PROJECT_ROOT, CORPUS_TEST_ROOT, MORPHALO_ROOT, RESULT_RAPPORT_ROOT
+from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#	+ dot_text_files_from_folder_as_list + test
+#       + conversion_pdf_to_text
+#	+ list_text_in_folder_as_list + test
 #	+ import_text_as_one_string + test
 #	+ import_text_as_list_of_strings + test (obsolete)
 #	+ import_text_as_list_of_words + test (obsolete)
@@ -25,11 +38,20 @@ from settings import PROJECT_ROOT, CORPUS_TEST_ROOT, MORPHALO_ROOT, RESULT_RAPPO
 ########################################################
 
 ##############################################################
-# Fonction : dot_text_files_from_folder_as_list
+# Fonction : conversion_pdf_to_text
+##############################################################
+def conversion_pdf_to_text(path_to_file, name_script_bash='convert.sh'):
+    print('LANCEMENT DU SCRIPT : ' , name_script_bash , ' .' )
+    subprocess.call(path_to_file+name_script_bash, shell=True, cwd=path_to_file)
+    print('FIN DU SCRIPT')
+
+
+##############################################################
+# Fonction : list_text_in_folder_as_list
 # Input : text
 # Return : list
 ##############################################################
-def dot_text_files_from_folder_as_list(path_to_folder):
+def list_text_in_folder_as_list(path_to_folder):
     ''' Import the content of a folder as one list '''
 
     liste_finale = []

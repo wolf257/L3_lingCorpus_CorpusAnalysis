@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 #-*- coding : utf-8 -*-
 
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#     PRESENTATION DU MODULE :
+#          Ce modules rassemble les functions de
+#
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 import os, re, random
 
 import treetaggerwrapper
@@ -8,14 +15,10 @@ import pprint , io
 
 from collections import defaultdict
 
-import others as others
-import ponctuation_texte as ponctuation_texte
-import stats_1_base as stats_1_base
-
-## Lien vers les dossiers de la racine ############################################
+# Lien vers les dossiers de la racine ############################################
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.insert(0, parentdir)
-from settings import PROJECT_ROOT, CORPUS_TEST_ROOT, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
+from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
 
 ########################################################
@@ -41,7 +44,8 @@ def tagger_et_afficher(phrase):
     tags2 = treetaggerwrapper.make_tags(tags)
     pprint.pprint(tags2)
 
-def tagger_et_recuperer_as_dict(phrase_to_tag):
+def tagger_et_recuperer_as_dict_word_to_ref(phrase_to_tag, corpus='professeur',  nom_texte="titre-texte-inconnu", num_phrase='nb-phrase-inconnue', num_mot='nb-mot-inconnu'):
+    
     tags = tagger.TagText(phrase_to_tag)
     tags2 = treetaggerwrapper.make_tags(tags)
 
@@ -58,11 +62,20 @@ def tagger_et_recuperer_as_dict(phrase_to_tag):
         mot_pos = tags2[i][1]
         mot_lemme = tags2[i][2]
 
-        mondico[mot]['ref']['corpus'] = 'prof'
+        mondico[mot]['ref']['corpus'] = corpus
+        mondico[mot]['ref']['texte'] = nom_texte
+        mondico[mot]['ref']['phrase'] = num_phrase
+        mondico[mot]['ref']['mot'] = num_mot
+
         mondico[mot]['morpho']['form'] = mot_forme
         mondico[mot]['morpho']['pos'] = mot_pos
         mondico[mot]['morpho']['lemme'] = mot_lemme
 
+        mondico[mot]['stat']['apparition_text'] = 0
+        mondico[mot]['stat']['apparition_corpus'] = 0
+        mondico[mot]['stat']['frequence_in_text'] = 0
+        mondico[mot]['stat']['frequence_in_corpus'] = 0
+ 
         i+=1
 
     print('Mis sous forme de dictionnaire, cela nous donne : ')

@@ -11,20 +11,21 @@ do
     #echo "Conversion $file réussie" ;
     counter=$((counter+1));
 done
-
-echo "$counter fichiers ont été convertis du format pdf au format text."
+echo "*** $counter fichiers ont été convertis du format pdf au format text."
 
 #####################################
 # Creation de dossier
 ####################################
-mkdir text pdf;
-echo -e "*** Les dossiers pdf et text ont été créés."
+mkdir pdf;
+echo "*** Le dossier pdf a été créé."
 
 ####################################
 # Déplacement des fichiers
 ####################################
 find . -maxdepth 1 -name "*.pdf" -exec mv {} pdf/ \;
-echo -e "\n*** Les fichiers pdf on été déplacé dans le dossier pdf."
+echo "*** Les fichiers pdf on été déplacé dans le dossier pdf."
 
-find . -maxdepth 1 -name "*.txt" -exec mv {} text/ \;
-echo -e "\n*** Les fichiers text on été déplacé dans le dossier text."
+echo "*** Les fichiers text sont à la racine du dossier."
+
+#find . -maxdepth 1 -name "*.txt" -exec mv {} text/ \;
+#echo -e "\n*** Les fichiers text on été déplacé dans le dossier text."
