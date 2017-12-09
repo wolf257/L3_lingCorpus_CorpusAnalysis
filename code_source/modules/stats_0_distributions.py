@@ -68,6 +68,27 @@ def wordsDistribution_dict_from_list(list_words_without_point):
     return wordsDistribution
 
 ##############################################################
+# Fonction : wordsDistributionUpdate
+# 	Parcourt la liste,
+#	creer le vecteur distribution des mots
+# Input : list
+# Return : dict
+##############################################################
+#TEST written
+def wordsDistributionUpdate_dict_from_list(list_words_without_point, dictionary):
+    ''' Update dict from a list '''
+
+    dico = dictionnary
+
+    for word in list_words_without_point :
+        if word not in dictionary:
+            dico[word] = 1
+        else :
+            dico[word] +=1
+
+    return dico
+
+##############################################################
 # Fonction : nb_average_words_by_sentence
 # 	- calcule le nombre de mots et le nombre de point
 #	le quotient de leur division donne le nombre de phrase
