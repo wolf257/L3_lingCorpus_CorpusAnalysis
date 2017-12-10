@@ -16,14 +16,17 @@ import codecs
 import subprocess
 
 # Lien vers les dossiers de la racine ############################################
-parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.sys.path.insert(0, parentdir)
-from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
+#parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#os.sys.path.insert(0, parentdir)
+#from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#       + conversion_pdf_to_text
+#       + conversion_pdf_to_text()
+#       + creation_folder()
+#       +
+#       +
 #	+ list_text_in_folder_as_list + test
 #	+ import_text_as_one_string + test
 #	+ import_text_as_list_of_strings + test (obsolete)
@@ -44,6 +47,19 @@ def conversion_pdf_to_text(path_to_file, name_script_bash='convert.sh'):
     print('LANCEMENT DU SCRIPT : ' , name_script_bash , ' .' )
     subprocess.call(path_to_file+name_script_bash, shell=True, cwd=path_to_file)
     print('FIN DU SCRIPT')
+
+##############################################################
+# Fonction : creation_folder
+##############################################################
+def creation_folder(path_to_parent, name_folder):
+    print('\n+++ Création du dossier : ' , name_folder)
+    try :
+        if not os.path.exists(path_to_parent + name_folder + '/') :
+            os.makedirs(path_to_parent + name_folder + '/')
+    except :
+        print('\tPROBLEME LORS DE LA CREATION DU DOSSIER.')
+    else :
+        print('\tCréation du dossier réussi.')
 
 
 ##############################################################

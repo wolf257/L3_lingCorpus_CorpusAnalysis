@@ -35,17 +35,17 @@ folder_treetagger = TREETAGGER_ROOT
 # Construction et configuration du wrapper
 tagger = treetaggerwrapper.TreeTagger(TAGLANG='fr', TAGINENC='utf-8' , TAGOUTENC='utf-8' , TAGDIR=folder_treetagger)
 
-def tagger_phrase(phrase):
-    tags = tagger.TagText(phrase)
-    tags2 = treetaggerwrapper.make_tags(tags)
+# def tagger_phrase(phrase):
+#     tags = tagger.TagText(phrase)
+#     tags2 = treetaggerwrapper.make_tags(tags)
 
-def tagger_et_afficher(phrase):
-    tags = tagger.TagText(phrase)
-    tags2 = treetaggerwrapper.make_tags(tags)
-    pprint.pprint(tags2)
+# def tagger_et_afficher(phrase):
+#     tags = tagger.TagText(phrase)
+#     tags2 = treetaggerwrapper.make_tags(tags)
+#     pprint.pprint(tags2)
 
 def tagger_et_recuperer_as_dict_word_to_ref(phrase_to_tag, corpus='professeur',  nom_texte="titre-texte-inconnu", num_phrase='nb-phrase-inconnue', num_mot='nb-mot-inconnu'):
-    
+
     tags = tagger.TagText(phrase_to_tag)
     tags2 = treetaggerwrapper.make_tags(tags)
 
@@ -75,7 +75,7 @@ def tagger_et_recuperer_as_dict_word_to_ref(phrase_to_tag, corpus='professeur', 
         mondico[mot]['stat']['apparition_corpus'] = 0
         mondico[mot]['stat']['frequence_in_text'] = 0
         mondico[mot]['stat']['frequence_in_corpus'] = 0
- 
+
         i+=1
 
     print('Mis sous forme de dictionnaire, cela nous donne : ')

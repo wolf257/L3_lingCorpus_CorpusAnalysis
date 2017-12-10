@@ -75,13 +75,13 @@ def wordsDistribution_dict_from_list(list_words_without_point):
 # Return : dict
 ##############################################################
 #TEST written
-def wordsDistributionUpdate_dict_from_list(list_words_without_point, dictionary):
+def wordsDistributionUpdate_dict_from_list(dictionnaire, list_words):
     ''' Update dict from a list '''
 
-    dico = dictionnary
+    dico = dictionnaire
 
-    for word in list_words_without_point :
-        if word not in dictionary:
+    for word in list_words :
+        if word not in dictionnaire:
             dico[word] = 1
         else :
             dico[word] +=1

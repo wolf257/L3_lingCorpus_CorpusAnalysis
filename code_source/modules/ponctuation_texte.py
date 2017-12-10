@@ -11,6 +11,9 @@
 
 import re
 
+import modules.others as others
+import modules.stats_0_distributions as  stats_0_distributions
+
 ########################################################
 # LIST FUNCTIONS IN MODULES
 #	+ split_str_into_list_of_sentences
@@ -19,6 +22,8 @@ import re
 #	+ all_punctuation_out_list_from_list
 #	+ all_but_point_and_word_list_from_list
 #       + all_three_points_become_one_string_from_string
+#       +
+#       + du_texte_a_sa_liste_exploitable_par_word_distribution()
 ########################################################
 
 def split_str_into_list_of_sentences(the_string):
@@ -72,7 +77,10 @@ def punctuation_sep_word_list_from_list(list_in):
     word = ''
 
     for elt in list_in :
-        word = re.findall(r"[\w']+|[.]{1,3}|[,!?;]" , elt)
+        #DANS CE CAS "j'y" serais considéré comme 2 entités
+        word = re.findall(r"[\w]+|[.]{1,3}|[,!?;]" , elt)
+        #DANS CE CAS "j'y" serais considéré comme 1 entités
+        #word = re.findall(r"[\w']+|[.]{1,3}|[,!?;]" , elt)
 
         list_out.append(word) #will give a nested list
 
@@ -152,25 +160,19 @@ def all_three_points_become_one_string_from_string(string) :
 
     return str_out
 
-##############################################################
-# Fonction : space_before_point
-# 	- Transforme tous les lettre+'.' en lettre+'espace'+'point'
-# Input :
-##############################################################
-def space_before_point(text):
-    pass
+def du_texte_a_sa_liste_exploitable_par_word_distribution(path_file):
+        #IMPORTER LE TEXTE EN UNE STR
+        file_as_string = others.import_text_as_one_string(path_file)
+        # ENLEVER LES 3 POINTS : STR
+        string_2 = all_three_points_become_one_string_from_string(file_as_string)
+        # CONVERTIR EN LISTE : LIST
+        liste_1 = string_2.split()
+        # MINUSCULE
+        liste_2 = maj_to_min_list_from_list(liste_1)
+        # SEPARER LA PONCTUATION DES MOTS LIST : LIST
+        liste_3 = punctuation_sep_word_list_from_list(liste_2)
 
-##############################################################
-# Fonction : tokenizeit
-# 	- Nettoie le texte pour ne laisser que des tokens
-# Input : texte
-# Return : liste de mot
-##############################################################
-def tokenizeit():
-    pass
-
-# avec split
-# pb du '- '
+        return liste_3
 
 
 
