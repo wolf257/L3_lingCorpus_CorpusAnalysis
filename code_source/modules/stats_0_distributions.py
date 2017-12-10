@@ -55,7 +55,8 @@ def lettersDistribution_dict_from_list(list_word):
 ##############################################################
 #TEST written
 def wordsDistribution_dict_from_list(list_words_without_point):
-    ''' Return dict wordsDistribution from a list '''
+    ''' Return dict wordsDistribution from a list
+        Classer par ordre alphabétique '''
 
     wordsDistribution = {}
 
@@ -65,7 +66,13 @@ def wordsDistribution_dict_from_list(list_words_without_point):
         else :
             wordsDistribution[word] +=1
 
-    return wordsDistribution
+    #return wordsDistribution
+    #return OrderedDict(sorted(wordsDistribution.items(), key=lambda t:t[1]))
+
+    wordsDistributionOrder = OrderedDict()
+    wordsDistributionOrder = OrderedDict(sorted(wordsDistribution.items(), key=lambda t:t[0]))
+
+    return wordsDistributionOrder
 
 ##############################################################
 # Fonction : wordsDistributionUpdate
@@ -86,7 +93,12 @@ def wordsDistributionUpdate_dict_from_list(dictionnaire, list_words):
         else :
             dico[word] +=1
 
-    return dico
+    #return dico
+
+    DistributionOrder = OrderedDict()
+    DistributionOrder = OrderedDict(sorted(dico.items(), key=lambda t:t[0]))
+
+    return DistributionOrder
 
 ##############################################################
 # Fonction : nb_average_words_by_sentence

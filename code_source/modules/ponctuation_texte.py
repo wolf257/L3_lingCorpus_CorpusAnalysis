@@ -78,7 +78,7 @@ def punctuation_sep_word_list_from_list(list_in):
 
     for elt in list_in :
         #DANS CE CAS "j'y" serais considéré comme 2 entités
-        word = re.findall(r"[\w]+|[.]{1,3}|[,!?;]" , elt)
+        word = re.findall(r"[^\W_]+|[.]{1,3}|[,!?;]" , elt)
         #DANS CE CAS "j'y" serais considéré comme 1 entités
         #word = re.findall(r"[\w']+|[.]{1,3}|[,!?;]" , elt)
 
