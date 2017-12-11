@@ -23,8 +23,8 @@ from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHA
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#	+ tagger_et_recuperer_as_dict + test
-#	+
+#	+ tagger_et_recuperer_as_dict_word_to_ref + test
+#	+ tagger_et_recuperer_as_dict_ref_to_ref
 #	+
 #	+
 #	+

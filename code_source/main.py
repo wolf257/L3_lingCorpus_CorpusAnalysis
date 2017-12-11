@@ -43,7 +43,8 @@ def main():
             #others.conversion_pdf_to_text(dossier_corpus_professeur)
 
             big_process.tour_du_corpus(dossier_corpus_litterature)
-
+            big_process.tour_des_fichiers(dossier_corpus_litterature)
+            #big_process.tagger_et_recuperer_as_dict_word_to_ref
             break
         #==================================
         elif a.strip() == '2' :

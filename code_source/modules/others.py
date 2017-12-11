@@ -33,7 +33,7 @@ import subprocess
 #	+ import_text_as_list_of_words + test (obsolete)
 #	+ import_real_dictionnary
 #	+
-#	+
+#	+ recherche_occurence_mot_in_file_distribution()
 #	+
 #	+
 #	+
@@ -208,3 +208,30 @@ def words_in_dict_or_not(file_as_list, dict_as_list):
 
 if __name__ == '__main__':
     pass
+
+##############################################################
+# Fonction : recherche_occurence_mot_in_file_distribution
+# Input :
+# Return :
+##############################################################
+def recherche_occurence_mot_in_file_distribution(path_to_file, mot_a_chercher) :
+    #
+    try :
+        #OPEN FILE
+        file = codecs.open(path_to_file, mode='r', encoding='utf8')
+    except :
+        print('\tPROBLEME LORS DE L\'OUVERTURE DU FICHIER.')
+    else :
+        print('\tOuverture du fichier réussi.')
+
+        nb = 0
+        nb_occurence  = []
+        mot = re.compile(mot_a_chercher+' : (\d*)')
+        #
+        for line in file :
+            nb = mot.findall(line)
+            #
+            nb_occurence += nb
+            #
+
+    return int(nb_occurence[0])
