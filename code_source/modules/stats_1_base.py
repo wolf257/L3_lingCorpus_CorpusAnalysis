@@ -6,10 +6,16 @@ from collections import OrderedDict
 #from ponctuation_texte import *
 #import ponctuation_texte as PT
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#     PRESENTATION DU MODULE :
+#          Ce modules rassemble les functions de
+#
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#	+ count_sentences_nb_from_list_words_with_point
-#	+
+#	+ count_sentences_nb_from_list_words_with_point()
+#	+ average_words_by_sentence_nb_from_()
 #	+
 ########################################################
 
@@ -19,7 +25,7 @@ from collections import OrderedDict
 
 
 ##############################################################
-# Fonction : nb_sentences_from_list_words_with_point
+# Fonction : count_sentences_nb_from_string_or_list
 # 	- calcule le nombre de mots et le nombre de point
 #	le quotient de leur division donne le nombre de phrase
 # Input : list

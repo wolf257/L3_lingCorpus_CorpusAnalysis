@@ -4,6 +4,20 @@
 import os
 import codecs
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#     PRESENTATION DU MODULE :
+#          Ce modules rassemble les functions de
+#
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+########################################################
+# LIST FUNCTIONS IN MODULES
+#	+ remplissage_stat_corpus()
+#	+ remplissage_stat_texte()
+#	+ ecrire_distribution_mot_corpus()
+#       + ecrire_distribution_mot_texte()
+########################################################
+
 ##############################################################
 # Fonction : remplissage_info_base_corpus
 # - Crée le fichier  0_stats_du_corpus.tx

@@ -3,7 +3,11 @@
 
 from collections import OrderedDict
 
-#import modules.ponctuation_texte as ponctuation_texte
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#     PRESENTATION DU MODULE :
+#          Ce modules rassemble les functions de
+#
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ########################################################
 # LIST FUNCTIONS IN MODULES

@@ -8,6 +8,13 @@
 #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+########################################################
+# LIST FUNCTIONS IN MODULES
+#	+ tagger_phrase_et_ajouter_au_dict_ref_to_word()
+#	+
+#	+
+########################################################
+
 import os, re, random
 
 import treetaggerwrapper
@@ -22,15 +29,6 @@ parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.insert(0, parentdir)
 from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
-
-########################################################
-# LIST FUNCTIONS IN MODULES
-#	+ tagger_et_recuperer_as_dict_word_to_ref + test
-#	+ tagger_et_recuperer_as_dict_ref_to_ref
-#	+
-#	+
-#	+
-########################################################
 
 folder_treetagger = TREETAGGER_ROOT
 

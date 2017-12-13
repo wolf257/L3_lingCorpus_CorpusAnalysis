@@ -8,6 +8,26 @@
 #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+########################################################
+# LIST FUNCTIONS IN MODULES
+#       + conversion_pdf_to_text()
+#       + creation_folder()
+#       +
+#       +
+#	+ list_text_in_folder_as_list() + test
+#	+ import_text_as_one_string() + test
+#	+ import_text_as_list_of_strings() + test (obsolete)
+#	+ import_text_as_list_of_words() + test (obsolete)
+#	+ import_real_dictionnary()
+#	+ import_distribution_as_list()
+#
+#	+ recherche_occurence_mot_in_file_distribution()
+#	+
+#	+
+#	+
+#	+
+########################################################
+
 import os
 import re
 import sys
@@ -20,25 +40,6 @@ import subprocess
 #os.sys.path.insert(0, parentdir)
 #from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
-
-########################################################
-# LIST FUNCTIONS IN MODULES
-#       + conversion_pdf_to_text()
-#       + creation_folder()
-#       +
-#       +
-#	+ list_text_in_folder_as_list + test
-#	+ import_text_as_one_string + test
-#	+ import_text_as_list_of_strings + test (obsolete)
-#	+ import_text_as_list_of_words + test (obsolete)
-#	+ import_real_dictionnary
-#	+
-#	+ recherche_occurence_mot_in_file_distribution()
-#	+
-#	+
-#	+
-#	+
-########################################################
 
 ##############################################################
 # Fonction : conversion_pdf_to_text
@@ -77,10 +78,6 @@ def list_text_in_folder_as_list(path_to_folder):
             liste_finale.append(fichier)
 
     return liste_finale
-
-# dossier_corpus = CORPUS_TEST_ROOT
-# liste_fichiers_texte = dot_text_files_from_folder_as_list(dossier_corpus)
-# print(liste_fichiers_texte)
 
 ##############################################################
 # Fonction : import_text_as_one_string
@@ -127,14 +124,6 @@ def import_text_as_list_of_strings(path_to_text):
     for string in liste_brute :
             liste_finale.append(string.strip())
 
-    #PHRASE PAR PHRASE
-    # for string in liste_brute :
-    #         liste_finale.append(string.strip().split())
-
-    #to make the list flat
-    # liste_finale = [item for items in liste_finale for item in items]
-
-    # return liste_brute
     return liste_finale
 
 ##############################################################
@@ -168,17 +157,6 @@ def import_text_as_list_of_words(path_to_text):
 
     return liste_finale
 
-# a = import_text_as_list_of_words(CORPUS_TEST_ROOT+"/all_montaigne_essais.txt")
-# print("a est de type : " , type(a) , " de taille : " , len(a))
-#
-# for i in range(5):
-#     print("Le mot " , i , " est : " , a[i])
-
-# corpus = CORPUS_TEST_ROOT
-# for elt in os.listdir(corpus) :
-#     if elt.endswith('.txt') :
-#         print(os.path.join(corpus, elt))
-
 ##############################################################
 # Fonction : import_real_dictionnary
 # 	- va transformer le dictionnaire (lang) en liste
@@ -206,11 +184,8 @@ def words_in_dict_or_not(file_as_list, dict_as_list):
 
     pass
 
-if __name__ == '__main__':
-    pass
-
 ##############################################################
-# Fonction : recherche_occurence_mot_in_file_distribution
+# Fonction : import_distribution_as_list
 # Input :
 # Return :
 ##############################################################
@@ -232,6 +207,13 @@ def import_distribution_as_list(path_to_file) :
             f.close()
             return g
 
+
+##############################################################
+# Fonction : recherche_occurence_mot_in_file_distribution
+# Input :
+# Return :
+##############################################################
+
 def recherche_occurence_mot_in_file_distribution(file_or_list, mot_a_chercher) :
     #
     nb = 0
@@ -249,3 +231,6 @@ def recherche_occurence_mot_in_file_distribution(file_or_list, mot_a_chercher) :
     #TEST : print('Le nombre {} et son type {}'.format(nb, type(nb)))
     #
     return nb
+
+if __name__ == '__main__':
+    pass

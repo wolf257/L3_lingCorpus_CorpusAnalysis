@@ -2,15 +2,16 @@
 #-*- coding : utf-8 -*-
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#     PRESENTATION DU MODULES :
+#     PRESENTATION DU MODULE :
 #          Ce modules rassemble les functions de fonctions
 #          Dans le souci de ne pas surcharger le fichier main.py
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
-#     + tour_du_corpus
-#     + tour_des_fichiers
+#     + tour_du_corpus()
+#     + tour_des_fichiers()
+#     + generation_dico_corpus_pr_xml()
 ########################################################
 
 import os
@@ -109,24 +110,10 @@ def tour_des_fichiers(path_to_corpus):
 
     print('\n++++++++++++++++++++++++++++++++++++++++++++++++++')
 
-def blabla(path_to_corpus):
-    # Entrer dans corpus
-    # Recup : Corpus nom et numero (1|2)
-
-    # Entrer dans texte
-    # Recup : Texte nom et numero (1|2|3|...)
-
-    # Pour chaque Phrase
-    # Recup : Numero phrase (1|2|3|...)
-
-    #Tagger phrase
-
-    # Pour chaque mot_a_chercher
-    # Recup : Mot et numero
-
-    #Put info
-
-    pass
+##############################################################
+# Fonction : 
+# Input :
+##############################################################
 
 def generation_dico_corpus_pr_xml(path_to_corpus):
     #VAR

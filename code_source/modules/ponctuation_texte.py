@@ -8,23 +8,23 @@
 #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+########################################################
+# LIST FUNCTIONS IN MODULES
+#	+ split_str_into_list_of_sentences()
+#	+ maj_to_min_list_from_list()
+#	+ punctuation_sep_word_list_from_list()
+#	+ all_punctuation_out_list_from_list()
+#	+ all_but_point_and_word_list_from_list()
+#       + all_three_points_become_one_string_from_string()
+#       +
+#       + du_texte_a_sa_liste_exploitable_par_word_distribution()
+#       + du_texte_a_sa_liste_exploitable_par_tagging()
+########################################################
 
 import re
 
 import modules.others as others
 import modules.stats_0_distributions as  stats_0_distributions
-
-########################################################
-# LIST FUNCTIONS IN MODULES
-#	+ split_str_into_list_of_sentences
-#	+ maj_to_min_list_from_list
-#	+ punctuation_sep_word_list_from_list
-#	+ all_punctuation_out_list_from_list
-#	+ all_but_point_and_word_list_from_list
-#       + all_three_points_become_one_string_from_string
-#       +
-#       + du_texte_a_sa_liste_exploitable_par_word_distribution()
-########################################################
 
 def split_str_into_list_of_sentences(the_string):
     ''' break a paragraph into sentences
