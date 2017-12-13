@@ -246,6 +246,6 @@ def recherche_occurence_mot_in_file_distribution(file_or_list, mot_a_chercher) :
             #print(a_matcher.group(1)) #le nb
             nb += int(a_matcher.group(1))
     #
-    #print('Le nombre {} et son type {}'.format(nb, type(nb)))
+    #TEST : print('Le nombre {} et son type {}'.format(nb, type(nb)))
     #
     return nb
