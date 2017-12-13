@@ -44,8 +44,11 @@ def main():
 
             big_process.tour_du_corpus(dossier_corpus_litterature)
             big_process.tour_des_fichiers(dossier_corpus_litterature)
-            #big_process.tagger_et_recuperer_as_dict_word_to_ref
+            dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature)
+            #pprint.pprint(dico1)
+
             break
+
         #==================================
         elif a.strip() == '2' :
             print("Choix 2.")

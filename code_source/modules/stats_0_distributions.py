@@ -3,12 +3,14 @@
 
 from collections import OrderedDict
 
+#import modules.ponctuation_texte as ponctuation_texte
+
 ########################################################
 # LIST FUNCTIONS IN MODULES
 #	+ lettersDistribution_dict_from_list + test
 #	+ wordsDistribution_dict_from_list + test
-#	+
-#	+
+#	+ wordsDistributionUpdate_dict_from_list()
+#	+ nb_average_words_by_sentence
 #	+
 ########################################################
 
@@ -132,8 +134,10 @@ def average_words_by_sentence_nb_from_(list_words_with_point):
 
     words, average_words_by_sentence, sentences = 0, 0, 0
 
+    list_words_with_point = ponctuation_texte.punctuation_sep_word_list_from_list
+
     for word in list_words_with_point :
-        if word == '.':
+        if word == '.' or word == '?' or word == '!' :
             sentences += 1
         #TODO : creer fonction pour separer les points des mots from string
         # PUIS creer la liste
@@ -148,40 +152,6 @@ def average_words_by_sentence_nb_from_(list_words_with_point):
         average_words_by_sentence = words
 
     return average_words_by_sentence
-
-#TEST
-# a = 'je vais jouer au basket. je reviens'
-# b = a.split()
-# c = 0
-# c = nb_average_words_by_sentence(b)
-# print("On a une moyenne de mots/phrase de : " , c)
-
-##############################################################
-# Fonction : wordbyValue
-# 	-
-# Input : dict
-# Return : dict
-##############################################################
-# def wordbyValue(nom_dico) :
-    # '''Reverse mot -> occurence pour occurence vers mots
-    # Retour : dictionnaire
-    # Classement : par frequence '''
-    #
-    # wordbyValue = {}
-    # wordbyValue = dict([[value, key] for key, value in nom_dico.items()])
-    #
-    # return wordbyValue
-
-    #PB : la key est uniq donc si plusieurs mots ont la même value, seul le dernier sera retenu.
-
-##############################################################
-# Fonction : nbres_vs_forme
-# 	- calcul le nombre de mots vs le nombre de formes differentes
-# Input :
-# Return :
-##############################################################
-
-
 
 
 

@@ -214,24 +214,38 @@ if __name__ == '__main__':
 # Input :
 # Return :
 ##############################################################
-def recherche_occurence_mot_in_file_distribution(path_to_file, mot_a_chercher) :
-    #
+
+def import_distribution_as_list(path_to_file) :
     try :
-        #OPEN FILE
-        file = codecs.open(path_to_file, mode='r', encoding='utf8')
+        f = codecs.open(path_to_file, mode='r', encoding='utf8')
     except :
-        print('\tPROBLEME LORS DE L\'OUVERTURE DU FICHIER.')
+        print('\nProblème lors de l\'ouverture du fichier.')
     else :
-        print('\tOuverture du fichier réussi.')
+        print('\nFichier distribution ouvert.')
 
-        nb = 0
-        nb_occurence  = []
-        mot = re.compile(mot_a_chercher+' : (\d*)')
-        #
-        for line in file :
-            nb = mot.findall(line)
-            #
-            nb_occurence += nb
-            #
+        try :
+            g = f.readlines()
+        except :
+            print('\nProblème lors de l\'importation du fichier.')
+        else :
+            print('\nFichier distribution importé')
+            f.close()
+            return g
 
-    return int(nb_occurence[0])
+def recherche_occurence_mot_in_file_distribution(file_or_list, mot_a_chercher) :
+    #
+    nb = 0
+    #
+    i = re.compile(r'^'+mot_a_chercher+' : (\d+)')
+    for line in file_or_list :
+        a_matcher = re.match(i , line)
+        if a_matcher is None :
+            pass
+        else :
+            #print(a_matcher.group(0)) #le tout
+            #print(a_matcher.group(1)) #le nb
+            nb += int(a_matcher.group(1))
+    #
+    #print('Le nombre {} et son type {}'.format(nb, type(nb)))
+    #
+    return nb

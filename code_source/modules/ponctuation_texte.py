@@ -174,6 +174,22 @@ def du_texte_a_sa_liste_exploitable_par_word_distribution(path_file):
 
         return liste_3
 
+def du_texte_a_sa_liste_exploitable_par_tagging(path_file):
+    #IMPORTER LE TEXTE EN UNE STR
+    file_as_string = others.import_text_as_one_string(path_file)
+    # ENLEVER LES 3 POINTS : STR
+    string_2 = all_three_points_become_one_string_from_string(file_as_string)
+    # CONVERTIR EN LISTE : LIST
+    liste_1 = re.split("[.!?]", string_2) #use of multidelimiters
+    # MINUSCULE
+    liste_2 = maj_to_min_list_from_list(liste_1)
+    # SEPARER LA PONCTUATION DES MOTS LIST : LIST
+    #liste_3 = punctuation_sep_word_list_from_list(liste_2)
+    #
+    #print(liste_3)
+
+    #Retourne un liste de phrase !
+    return liste_2
 
 
 if __name__ == '__main__':
