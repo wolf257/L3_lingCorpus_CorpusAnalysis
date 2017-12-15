@@ -149,13 +149,13 @@ def generation_dico_corpus_pr_xml(path_to_corpus, version='light'):
     print('\n++ Nous allons tagger et recupérer les mots du corpus {}. \n Souhaitez-nous bonne chance'.format(nom_corpus))
 
     #CREATION DOSSIER TAG a la RACINE DU CORPUS
-    others.creation_folder(path_to_corpus, 'tag')
+    #others.creation_folder(path_to_corpus, 'tag')
     #CREATION DOSSIER XML a la RACINE DU CORPUS
     others.creation_folder(path_to_corpus, 'xml')
 
     #VAR
     path_to_corpus_stat_folder = path_to_corpus+'statistiques/'
-    path_to_corpus_donnee_tag_folder = path_to_corpus+'tag/'
+    #path_to_corpus_donnee_tag_folder = path_to_corpus+'tag/'
     path_to_corpus_xml_folder = path_to_corpus+'xml/'
 
     nom_fichier_xml_corpus = path_to_corpus_xml_folder + 'rendu_de_' + nom_corpus + '.xml'

@@ -54,9 +54,10 @@ def main():
             #E1 : conversion des cours en txt
             #others.conversion_pdf_to_text(dossier_corpus_professeur)
             start = time.time()
-            #big_process.tour_du_corpus(dossier_corpus_litterature)
-            #big_process.tour_des_fichiers(dossier_corpus_litterature)
+            big_process.tour_du_corpus(dossier_corpus_litterature)
+            big_process.tour_des_fichiers(dossier_corpus_litterature)
             dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature, 'light')
+
             etape1 = time.time()
             end1 = etape1 - start
             end1 = str(end1)
