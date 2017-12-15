@@ -38,6 +38,7 @@ tagger = treetaggerwrapper.TreeTagger(TAGLANG='fr', TAGINENC='utf-8' , TAGOUTENC
 
 def tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, phrase_to_tag,
                                                 obj_file_distribution_corpus, obj_file_distribution_texte,
+                                                 file_morphalou,
                                                  num_corpus='num_corpus_NR', num_texte='num_texte_NR',
                                                  num_phrase='num_phrase_NR') :
 

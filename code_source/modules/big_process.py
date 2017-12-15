@@ -190,7 +190,7 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
             print('***Ref ligne : {}'.format(reference_line))
             print('***Contenu : {}'.format(line))
 
-            tagging.tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, line, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, num_corpus, num_texte, num_line)
+            tagging.tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, line, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, file_morphalou, num_corpus, num_texte, num_line)
 
             compteur_ligne +=1
 
