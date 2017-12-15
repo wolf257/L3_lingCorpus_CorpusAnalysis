@@ -36,6 +36,8 @@ os.sys.path.insert(0, parentdir)
 from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
 
+dossier_morphalou = MORPHALO_ROOT
+
 ##############################################################
 # Fonction : 
 # Input :
@@ -111,13 +113,14 @@ def tour_des_fichiers(path_to_corpus):
     print('\n++++++++++++++++++++++++++++++++++++++++++++++++++')
 
 ##############################################################
-# Fonction : 
+# Fonction : generation_dico_corpus_pr_xml
 # Input :
 ##############################################################
 
 def generation_dico_corpus_pr_xml(path_to_corpus):
     #VAR
     dico_tag_corpus = defaultdict(lambda: defaultdict(dict))
+    file_morphalou = others.load_morphalou(dossier_morphalou)
 
     nom_corpus = os.path.basename(os.path.normpath(path_to_corpus))
     if nom_corpus == 'corpus_litterature' :
@@ -143,23 +146,6 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
     nom_fichier_distribution_corpus ='1_distribution_de_' + nom_corpus + '.txt'
     path_fichier_distribution_corpus = os.path.join(path_to_corpus_stat_folder, nom_fichier_distribution_corpus )
     liste_fichier_distribution_corpus = others.import_distribution_as_list(path_fichier_distribution_corpus)
-    # try :
-    #     obj_file_distribution_corpus = codecs.open(path_fichier_distribution_corpus, mode='r', encoding='utf8')
-    # except :
-    #     print('\nProblème lors de l\'ouverture de : {}'.format(nom_fichier_distribution_corpus))
-    # else :
-    #     print('\nOuverture du fichier \'{}\' réussie'.format(nom_fichier_distribution_corpus))
-
-    #     try :
-    #         list_distribution_corpus = []
-    #         for line in obj_file_distribution_corpus :
-    #             list_distribution_corpus += line
-    #     except :
-    #         print('\nProblème lors de la création de la liste \'list_distribution_corpus\'')
-    #     else :
-    #         print('\nListe \'list_distribution_corpus\' créée')
-    #dico_distribution_mots_corpus = {}
-    #ts_text_in_one_string = []
 
     #######
     # Niveau des textes
@@ -177,23 +163,6 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
         nom_fichier_distribution_texte = file[:-4] + '_2_distributions.txt'
         path_fichier_distribution_texte = os.path.join(path_to_corpus_stat_folder, nom_fichier_distribution_texte)
         liste_fichier_distribution_texte = others.import_distribution_as_list(path_fichier_distribution_texte)
-
-        # try :
-        #     obj_file_distribution_texte = codecs.open(path_fichier_distribution_texte, mode='r', encoding='utf8')
-        # except :
-        #     print('\nProblème lors de l\'ouverture de : {}'.format(nom_fichier_distribution_texte))
-        # else :
-        #     print('\nOuverture du fichier \'{}\' réussie'.format(nom_fichier_distribution_texte))
-        #     print(obj_file_distribution_texte)
-        #     try :
-        #         list_distribution_texte = []
-        #         for line in obj_file_distribution_texte :
-        #             list_distribution_texte += line
-        #     except :
-        #         print('\nProblème lors de la création de la liste \'list_distribution_texte\'')
-        #     else :
-        #         print('\nListe \'list_distribution_texte\' créée')
-        #         #print(list_distribution_texte)
 
         num_texte = int(files_in_corpus.index(file)) + 1
         reference_texte = 'c'+str(num_corpus)+'t'+str(num_texte)
@@ -224,10 +193,5 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
             tagging.tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, line, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, num_corpus, num_texte, num_line)
 
             compteur_ligne +=1
-
-    #     if obj_file_distribution_texte :
-    #         obj_file_distribution_texte.close()
-    # if obj_file_distribution_corpus :
-    #     obj_file_distribution_corpus.close()
 
     return dico_tag_corpus

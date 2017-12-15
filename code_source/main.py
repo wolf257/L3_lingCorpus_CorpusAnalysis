@@ -26,6 +26,7 @@ from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHA
 
 dossier_corpus_litterature = CORPUS_LITTERATURE
 dossier_corpus_professeur = CORPUS_PROFESSEUR
+#dossier_morphalou = MORPHALO_ROOT
 
 def main():
     while 1 :
@@ -39,12 +40,24 @@ def main():
         #==================================
         if a.strip() == '1' :
             print("Choix 1.")
+
+            #TODO
+            #Calcul du temps
+            # MEss 'Vous pouvez croiser les doigts pour moi et aller boire un café.'
+
             #E1 : conversion des cours en txt
             #others.conversion_pdf_to_text(dossier_corpus_professeur)
 
             big_process.tour_du_corpus(dossier_corpus_litterature)
             big_process.tour_des_fichiers(dossier_corpus_litterature)
             dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature)
+
+            #TODO
+            #big_process.write_xml_dico_in_file(dico1 , file_xml)
+            #d'abord texte_distri.xml (1)
+            # puis le gros où l'on copie tous les petits
+
+
             #pprint.pprint(dico1)
 
             break

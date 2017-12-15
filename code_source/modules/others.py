@@ -12,7 +12,7 @@
 # LIST FUNCTIONS IN MODULES
 #       + conversion_pdf_to_text()
 #       + creation_folder()
-#       +
+#       + ouvrir_morphalou()
 #       +
 #	+ list_text_in_folder_as_list() + test
 #	+ import_text_as_one_string() + test
@@ -34,12 +34,17 @@ import sys
 import io
 import codecs
 import subprocess
+import time
+
+from lxml import etree
 
 # Lien vers les dossiers de la racine ############################################
-#parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#os.sys.path.insert(0, parentdir)
-#from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
+parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.sys.path.insert(0, parentdir)
+from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
+
+#dossier_morphalou = MORPHALO_ROOT
 
 ##############################################################
 # Fonction : conversion_pdf_to_text
@@ -62,7 +67,36 @@ def creation_folder(path_to_parent, name_folder):
     else :
         print('\tCréation du dossier réussi.')
 
+##############################################################
+# Fonction : ouvrir_morphalou
+##############################################################
+def load_morphalou(dossier_morphalou):
+    print('++ Je suis en train d\'ouvrir morphalou. Cela peut me prendre quelques secondes.')
+    start = time.time()
+    path_to_morphalou = os.path.join(dossier_morphalou, 'morphalou-2.0.xml')
 
+    #doc = ''
+
+    try :
+        doc = etree.parse(path_to_morphalou)
+    except:
+        print('\tJe n\'ai pas pu ouvrir morphalou. Veuillez voir ma definition dans : \n\t\tmodules/others ouvrir_morphalou()')
+        end = time.time()
+    else :
+        print('\tOuverture et chargement réussis.')
+        end = time.time()
+
+    tps_ecoule = end - start
+    tps_ecoule = str(tps_ecoule)
+
+    print('\tCela a pris {} secondes'.format(tps_ecoule[:4]))
+
+    return doc
+
+    #print(os.listdir(dossier_morphalou))
+    #print(os.path.join(dossier_morphalou, 'morphalou-2.0.xml'))
+
+    #return doc
 ##############################################################
 # Fonction : list_text_in_folder_as_list
 # Input : text
