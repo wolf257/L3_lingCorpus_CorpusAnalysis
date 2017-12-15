@@ -1,43 +1,4 @@
-The Project Gutenberg EBook of Essais de Montaigne (self-edition), by 
-Michel de Montaigne
-
-This eBook is for the use of anyone anywhere in the United States and most
-other parts of the world at no cost and with almost no restrictions
-whatsoever.  You may copy it, give it away or re-use it under the terms of
-the Project Gutenberg License included with this eBook or online at
-www.gutenberg.org.  If you are not located in the United States, you'll have
-to check the laws of the country where you are located before using this ebook.
-
-
-
-Title: Essais de Montaigne (self-edition)
-
-Author: Michel de Montaigne
-
-Translator: Michaud
-
-Release Date: March 19, 2015 [EBook #48529]
-Last Updated: August 16, 2015
-
-Language: French
-
-Character set encoding: UTF-8
-
-*** START OF THIS PROJECT GUTENBERG EBOOK ESSAIS DE MONTAIGNE (SELF-EDITION) ***
-
-
-
-
-Produced by Claudine Corbasson and the Online Distributed
-
-
-
-
-
-
-
-
-  Au lecteur
+  Au lecteur,
 
   Cette version électronique reproduit dans son intégralité
   la version originale. La partie écrite en «vieux français» est suivie
@@ -52,27 +13,6 @@ Produced by Claudine Corbasson and the Online Distributed
   mineures.
 
   Les mots en gras dans l'original sont entourés par des =.
-
-
-
-
-  ESSAIS DE MONTAIGNE
-
-
-
-
-  [Illustration: QVE SCAY-IE?]
-
-
-  [Illustration: PLANCHE I
-
-  MICHEL DE MONTAIGNE
-
-  (se prononçait Montagne)
-
-  (1533-1592)]
-
-
 
 
   ESSAIS DE MONTAIGNE
@@ -31219,49 +31159,6 @@ FIN DU PREMIER VOLUME.
               bourreaux)
   Page 686: «lacun» par «lacune» (Une lacune de notre administration)
 
-
-
-
-
-End of the Project Gutenberg EBook of Essais de Montaigne (self-edition), by 
-Michel de Montaigne
-
-*** END OF THIS PROJECT GUTENBERG EBOOK ESSAIS DE MONTAIGNE (SELF-EDITION) ***
-
-
-*** START OF THIS PROJECT GUTENBERG EBOOK ESSAIS DE MONTAIGNE ***
-
-
-
-
-Produced by Claudine Corbasson and the Online Distributed
-Proofreading Team at http://www.pgdp.net (This file was
-produced from images generously made available by The
-Internet Archive/American Libraries.)
-
-
-
-
-
-
-
-
-
-  Au lecteur
-
-  Cette version électronique reproduit dans son intégralité
-  la version originale. La partie écrite en «vieux français» est suivie
-  par la «traduction» en français moderne.
-
-  L'orthographe a été conservée. Seuls quelques mots ont été modifiés.
-  La liste des modifications se trouve à la fin du texte.
-
-  Les corrections indiquées par les ERRATA ont été prises en compte.
-
-  La ponctuation n'a pas été modifiée hormis quelques corrections
-  mineures.
-
-  Les mots en gras dans l'original sont entourés par des =.
 
 
 

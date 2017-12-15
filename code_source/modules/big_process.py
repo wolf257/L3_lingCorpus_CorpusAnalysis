@@ -66,6 +66,9 @@ def tour_du_corpus(path_to_corpus):
     dico_distribution_mots_corpus = {}
     ts_text_in_one_string = []
 
+    nb_mots_corpus = 0
+    nb_phrases = 0
+
     for file in files_in_corpus :
         #VAR
         path_file = os.path.join(path_to_corpus, file)
@@ -75,11 +78,17 @@ def tour_du_corpus(path_to_corpus):
         liste_exploitable_txt = ponctuation_texte.du_texte_a_sa_liste_exploitable_par_word_distribution(path_file)
         ###################################
 
+        nb_mots_corpus += len(liste_exploitable_txt)
+
+        for word in liste_exploitable_txt :
+            if word == '.' or word == '?' or word == '!' :
+                nb_phrases += 1
+
         ts_text_in_one_string += liste_exploitable_txt
 
     distribution_mots_corpus = stats_0_distributions.wordsDistributionUpdate_dict_from_list(dico_distribution_mots_corpus, ts_text_in_one_string)
 
-    writing_in_files.remplissage_stat_corpus(nom_fichier_stats_corpus, nom_corpus, files_in_corpus)
+    writing_in_files.remplissage_stat_corpus(nom_fichier_stats_corpus, nom_corpus, files_in_corpus, nb_mots_corpus, nb_phrases)
 
     writing_in_files.ecrire_distribution_mot_corpus(nom_fichier_distribution_corpus, path_to_corpus, distribution_mots_corpus)
 
@@ -104,9 +113,16 @@ def tour_des_fichiers(path_to_corpus):
         liste_exploitable_txt = ponctuation_texte.du_texte_a_sa_liste_exploitable_par_word_distribution(path_file)
         ###################################
 
+        nb_mots_texte = len(liste_exploitable_txt)
+
+        nb_phrases = 0
+        for word in liste_exploitable_txt :
+            if word == '.' or word == '?' or word == '!' :
+                nb_phrases += 1
+
         distribution_mots_txt = stats_0_distributions.wordsDistribution_dict_from_list(liste_exploitable_txt)
 
-        writing_in_files.remplissage_stat_texte(file, path_to_corpus, path_to_corpus_stat_folder)
+        writing_in_files.remplissage_stat_texte(file, path_to_corpus, path_to_corpus_stat_folder, nb_mots_texte, nb_phrases)
 
         writing_in_files.ecrire_distribution_mot_texte(file, path_to_corpus, path_to_corpus_stat_folder, distribution_mots_txt)
 
@@ -117,7 +133,7 @@ def tour_des_fichiers(path_to_corpus):
 # Input :
 ##############################################################
 
-def generation_dico_corpus_pr_xml(path_to_corpus):
+def generation_dico_corpus_pr_xml(path_to_corpus, version='light'):
     #VAR
     dico_tag_corpus = defaultdict(lambda: defaultdict(dict))
     file_morphalou = others.load_morphalou(dossier_morphalou)
@@ -134,10 +150,15 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
 
     #CREATION DOSSIER TAG a la RACINE DU CORPUS
     others.creation_folder(path_to_corpus, 'tag')
+    #CREATION DOSSIER XML a la RACINE DU CORPUS
+    others.creation_folder(path_to_corpus, 'xml')
 
     #VAR
     path_to_corpus_stat_folder = path_to_corpus+'statistiques/'
     path_to_corpus_donnee_tag_folder = path_to_corpus+'tag/'
+    path_to_corpus_xml_folder = path_to_corpus+'xml/'
+
+    nom_fichier_xml_corpus = path_to_corpus_xml_folder + 'rendu_de_' + nom_corpus + '.xml'
 
     files_in_corpus = None
     files_in_corpus = others.list_text_in_folder_as_list(path_to_corpus)
@@ -146,6 +167,9 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
     nom_fichier_distribution_corpus ='1_distribution_de_' + nom_corpus + '.txt'
     path_fichier_distribution_corpus = os.path.join(path_to_corpus_stat_folder, nom_fichier_distribution_corpus )
     liste_fichier_distribution_corpus = others.import_distribution_as_list(path_fichier_distribution_corpus)
+
+    nom_fichier_stats_corpus = path_to_corpus_stat_folder + '0_stats_de_' + nom_corpus + '.txt'
+    nb_mots_corpus, nb_phrases_corpus, nb_moyen_mots_par_phrase_corpus = others.recherche_stats_base_texte(nom_fichier_stats_corpus)
 
     #######
     # Niveau des textes
@@ -164,6 +188,10 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
         path_fichier_distribution_texte = os.path.join(path_to_corpus_stat_folder, nom_fichier_distribution_texte)
         liste_fichier_distribution_texte = others.import_distribution_as_list(path_fichier_distribution_texte)
 
+        nom_fichier_stats_texte = path_to_corpus_stat_folder+file[:-4]+'_1_stats.txt'
+        nb_mots_texte, nb_phrases_texte, nb_moyen_mots_par_phrase_texte = others.recherche_stats_base_texte(nom_fichier_stats_texte)
+        print('{}, {}, {}'.format(nb_mots_texte, nb_phrases_texte, nb_moyen_mots_par_phrase_texte))
+
         num_texte = int(files_in_corpus.index(file)) + 1
         reference_texte = 'c'+str(num_corpus)+'t'+str(num_texte)
 
@@ -177,10 +205,14 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
         compteur_ligne = 0
         nb_lignes_in_texte = len(text_for_tagg)
         #print('Le text {} a {} lignes à traiter'.format(reference_texte, nb_lignes_in_texte))
+        nb_lignes_a_traiter = 0
 
-        while compteur_ligne < nb_lignes_in_texte :
-            #num_line = int(text_for_tagg.index(compteur_ligne)) + 1
+        if version == 'complet' :
+            nb_lignes_a_traiter = nb_lignes_in_texte
+        else :
+            nb_lignes_a_traiter = 10
 
+        while compteur_ligne < nb_lignes_a_traiter :
             num_line = compteur_ligne
             line = text_for_tagg[compteur_ligne]
 
@@ -190,7 +222,10 @@ def generation_dico_corpus_pr_xml(path_to_corpus):
             print('***Ref ligne : {}'.format(reference_line))
             print('***Contenu : {}'.format(line))
 
-            tagging.tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, line, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, file_morphalou, num_corpus, num_texte, num_line)
+            #ON tagge ln/ln et on ajoute le resultat à notre dico
+            # tagging.tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, line, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, file_morphalou, num_corpus, num_texte, num_line)
+
+            tagging.tagger_phrase_et_ajouter_au_texte_ref_to_word(line, nom_fichier_xml_corpus, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, file_morphalou, num_corpus, num_texte, num_line, nb_mots_corpus, nb_mots_texte)
 
             compteur_ligne +=1
 

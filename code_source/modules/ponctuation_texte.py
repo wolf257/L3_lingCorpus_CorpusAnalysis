@@ -26,6 +26,10 @@ import re
 import modules.others as others
 import modules.stats_0_distributions as  stats_0_distributions
 
+##############################################################
+# Fonction : split_str_into_list_of_sentences
+# Input :
+##############################################################
 def split_str_into_list_of_sentences(the_string):
     ''' break a paragraph into sentences
         and return a list '''
@@ -99,13 +103,13 @@ def all_punctuation_out_list_from_list(list_in) :
     ''' erase all punctuation from word in list
     >>> a = "j'ai joué... au basket 2 fois.".split()
     >>> b = punctuation_sep_word_list_from_list(b)
-    >>> b = ["j'ai" , 'joué' , 'au' , 'basket' , '2' , 'fois' ] '''
+    >>> b = ["j", "ai" , 'joué' , 'au' , 'basket' , '2' , 'fois' ] '''
 
     list_out = []
     word = ''
 
     for elt in list_in :
-        word = re.findall(r"[\w']+" , elt)
+        word = re.findall(r"[\w]+" , elt)
 
         list_out.append(word) #will give a nested list
 

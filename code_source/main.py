@@ -8,6 +8,7 @@ import treetaggerwrapper
 import pprint
 import io
 import codecs
+import time
 
 from settings import PROJECT_ROOT
 from collections import defaultdict
@@ -32,14 +33,19 @@ def main():
     while 1 :
         a = input("\n===Level 0 : Bonjour, et bienvenue." + \
             "\n Que voulez-vous faire :" +\
-            "\n 1 : Suivre la procédure 'normale' " + \
-            "\n 2 : Choice 2" + \
+            "\n 1 : Suivre la procédure 'light' " + \
+            "\n 2 : Suivre la procédure 'compléte' " + \
             "\n (enter) - Exit" + \
-            "\nYour choice : ")
+
+            "\n\nNOTE EXPLICATIVE : " +\
+            "\n\t- La version light suit la procédure normale, sauf que le processus n'est appliqué qu'aux 10 premières phrases de chaque texte. Durée estimée : moins d'une heure." +\
+            "\n\t- La version compléte applique le processus à tout le corpus. Le temps d\'exécution risque de prendre plus de 24 heures." +\
+
+            "\n\nVotre choix : ")
 
         #==================================
         if a.strip() == '1' :
-            print("Choix 1.")
+            print("\n\nVous avez choisi la version 'light'. Bon choix.")
 
             #TODO
             #Calcul du temps
@@ -47,12 +53,28 @@ def main():
 
             #E1 : conversion des cours en txt
             #others.conversion_pdf_to_text(dossier_corpus_professeur)
+            start = time.time()
+            #big_process.tour_du_corpus(dossier_corpus_litterature)
+            #big_process.tour_des_fichiers(dossier_corpus_litterature)
+            dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature, 'light')
+            etape1 = time.time()
+            end1 = etape1 - start
+            end1 = str(end1)
+            try :
+                print('\tCela a pris {} secondes'.format(end1[:4]))
+            except :
+                print('Probleme de tps')
 
-            big_process.tour_du_corpus(dossier_corpus_litterature)
-            big_process.tour_des_fichiers(dossier_corpus_litterature)
-            dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature)
+            with open(CORPUS_LITTERATURE+'tag/resultat.txt', mode ='a') as file_tag :
+                file_tag.write('\n\n\n{}'.format(dico1))
+            etape2 = time.time()
 
-            #TODO
+            tps_ecoule = etape2 - start
+            tps_ecoule = str(tps_ecoule)
+
+            print('\tCela a pris en tout {} secondes'.format(tps_ecoule[:4]))
+                #TODO
+
             #big_process.write_xml_dico_in_file(dico1 , file_xml)
             #d'abord texte_distri.xml (1)
             # puis le gros où l'on copie tous les petits
@@ -64,8 +86,49 @@ def main():
 
         #==================================
         elif a.strip() == '2' :
-            print("Choix 2.")
-            break #continue pour revenir
+            print("\n\nVous avez choisi la version 'compléte'. Bonne chance.")
+
+            #TODO
+            #Calcul du temps
+            # MEss 'Vous pouvez croiser les doigts pour moi et aller boire un café.'
+
+            #E1 : conversion des cours en txt
+            #others.conversion_pdf_to_text(dossier_corpus_professeur)
+            start = time.time()
+
+            #big_process.tour_du_corpus(dossier_corpus_litterature)
+            #big_process.tour_des_fichiers(dossier_corpus_litterature)
+
+            dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature, complet)
+
+
+            etape1 = time.time()
+            end1 = etape1 - start
+            end1 = str(end1)
+            try :
+                print('\tCela a pris {} secondes'.format(end1[:4]))
+            except :
+                print('Probleme de tps')
+
+            with open(CORPUS_LITTERATURE+'tag/resultat.txt', mode ='a') as file_tag :
+                file_tag.write('\n\n\n{}'.format(dico1))
+            etape2 = time.time()
+
+            tps_ecoule = etape2 - start
+            tps_ecoule = str(tps_ecoule)
+
+            print('\tCela a pris en tout {} secondes'.format(tps_ecoule[:4]))
+                #TODO
+
+            #big_process.write_xml_dico_in_file(dico1 , file_xml)
+            #d'abord texte_distri.xml (1)
+            # puis le gros où l'on copie tous les petits
+
+
+            #pprint.pprint(dico1)
+
+            break
+
 
         #==================================
         elif a.strip() == '' :

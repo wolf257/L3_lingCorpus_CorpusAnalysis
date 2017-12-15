@@ -4,6 +4,8 @@
 import os
 import codecs
 
+import modules.others as others
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #     PRESENTATION DU MODULE :
 #          Ce modules rassemble les functions de
@@ -24,7 +26,7 @@ import codecs
 # - Inscrit le nombre de fichier
 # - Ecrit une liste des fichiers
 ##############################################################
-def remplissage_stat_corpus(nom_fichier_stats_corpus, nom_corpus, files_in_corpus):
+def remplissage_stat_corpus(nom_fichier_stats_corpus, nom_corpus, files_in_corpus, nb_mots_corpus, nb_phrases):
     print('\n++++ Création du fichier : 0_stats_du_corpus.txt')
     try :
         #OPEN FILE
@@ -34,16 +36,25 @@ def remplissage_stat_corpus(nom_fichier_stats_corpus, nom_corpus, files_in_corpu
     else :
         print('\tCréation du fichier réussi.')
 
+        nb_mots_par_phrase = str(nb_mots_corpus / nb_phrases)[:5]
+
         try :
             # REMPLISSAGE FILE
             file_stat_corpus.write('\n\n{}\n{} FICHIER CONTENANT STATISTIQUES DE CORPUS {}\n{}'.format('='*60 , '='*10 , '='*10 , '='*60))
 
             file_stat_corpus.write('\n\n{}\n{} PRESENTATION {}\n{}'.format('='*30 , '='*7 , '='*7 , '='*30))
 
-            file_stat_corpus.write('\n\nLe corpus {} contient {} fichiers txt : '.format(nom_corpus , len(files_in_corpus)))
+            file_stat_corpus.write('\n\nLe corpus {} contient {} fichiers txt  : '.format(nom_corpus , len(files_in_corpus)))
 
             for file in files_in_corpus :
                 file_stat_corpus.write('\n - {}'.format(file))
+
+            file_stat_corpus.write('\n\nNotre Corpus contient : ')
+            file_stat_corpus.write('\n{} : {} : {}'.format(nb_mots_corpus, nb_phrases, nb_mots_par_phrase))
+
+            file_stat_corpus.write('\n\n\n NOTICE (le numéro est celui du champ en cas de split(\':\') : ')
+            file_stat_corpus.write('\n[0] {} : [1] {} : [2] {}'.format( 'Nombre de mots' , 'Nombre de phrases' , 'Nombre moyen de mots par phrase'))
+
         except :
             print('\t\tProblème lors du remplissage')
         else :
@@ -86,7 +97,13 @@ def ecrire_distribution_mot_corpus(nom_fichier_distribution_corpus, path_to_corp
 ##############################################################
 # Fonction : remplissage_info_base_text
 ##############################################################
-def remplissage_stat_texte(file, path_to_corpus, path_to_corpus_stat_folder):
+def remplissage_stat_texte(file, path_to_corpus, path_to_corpus_stat_folder, nb_mots_texte, nb_phrases):
+
+
+        nb_mots_texte = nb_mots_texte
+        nb_phrases = nb_phrases
+        nb_mots_par_phrase = str(nb_mots_texte / nb_phrases)[:5]
+
         print('\n++++ Création du fichier : ' , file[:-4]+'_1_stats.txt')
         try :
             path_file = os.path.join(path_to_corpus, file)
@@ -102,10 +119,10 @@ def remplissage_stat_texte(file, path_to_corpus, path_to_corpus_stat_folder):
                 file_stat_file.write('\n\n{}\n{} FICHIER CONTENANT STATISTIQUES DU TEXTE : \n\t\t {} {}\n{}'.format('='*80 , '='*10 , file , '='*10 , '='*80))
 
                 file_stat_file.write('\n\nNotre fichier contient : ')
-                file_stat_file.write('\n{} : {} : {} : {} '.format(2,3,4,5))
+                file_stat_file.write('\n{} : {} : {}'.format(nb_mots_texte, nb_phrases, nb_mots_par_phrase))
 
                 file_stat_file.write('\n\n\n NOTICE (le numéro est celui du champ en cas de split(\':\') : ')
-                file_stat_file.write('\n[0] {} : [1] {} : [2] {} : [3] {} : [4] {}'.format( 'a' , 'b' , 'c' , 'd' , 'e'))
+                file_stat_file.write('\n[0] {} : [1] {} : [2] {}'.format( 'Nombre de mots' , 'Nombre de phrases' , 'Nombre moyen de mots par phrase'))
 
             except :
                 print('\tPROBLEME LORS DU REMPLISSAGE DU FICHIER.')
@@ -144,6 +161,50 @@ def ecrire_distribution_mot_texte(file, path_to_corpus, path_to_corpus_stat_fold
                 file_distro_file.close()
                 print('\tFichier fermé')
 
+##############################################################
+# Fonction : ecrire_xml_balise_ouvrante()
+##############################################################
+def ecrire_xml_balise_ouvrante(path_to_file_xml, tag, niveau=0, att1='', val1='', att2='', val2='', att3='', val3=''):
+    with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
+        if att1 != '' and att2 != '' and att3 != '':
+            file.write('\n{}<{} {}=\'{}\' {}=\'{}\' {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1, att2, val2, att3, val3))
+        elif att1 != '' and att2 != '' and att3 == '':
+            file.write('\n{}<{} {}=\'{}\' {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1, att2, val2))
+        elif att1 != '' and att2 == '' and att3 == '':
+            file.write('\n{}<{} {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1))
+        elif att1 == '' and att2 == '' and att3 == '':
+            file.write('\n{}<{}>'.format(' '*int(niveau)*3, tag))
+
+
+##############################################################
+# Fonction : ecrire_xml_balise_fermante()
+##############################################################
+def ecrire_xml_balise_fermante(path_to_file_xml, tag, niveau=0) :
+    with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
+        file.write('\n{}</{}>'.format(' '*int(niveau)*3, tag))
+
+##############################################################
+# Fonction : ecrire_xml_contenu_()
+##############################################################
+def ecrire_xml_contenu(path_to_file_xml, contenu, niveau=0) :
+    with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
+        file.write('\n{}<![CDATA[ {} ]]>'.format(' '*int(niveau)*3, contenu))
+
+##############################################################
+# Fonction : TEST
+##############################################################
+def print_xml_balise_fermante(tag, niveau) :
+    print('{}</{}>'.format(' '*int(niveau)*4, tag))
+
+def print_xml_balise_ouvrante(tag, niveau=0, att1='', val1='', att2='', val2='', att3='', val3=''):
+    if att1 != '' and att2 != '' and att3 != '':
+        print('{}<{} {}=\'{}\' {}=\'{}\' {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1, att2, val2, att3, val3))
+    elif att1 != '' and att2 != '' and att3 == '':
+        print('{}<{} {}=\'{}\' {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1, att2, val2))
+    elif att1 != '' and att2 == '' and att3 == '':
+        print('{}<{} {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1))
+    elif att1 == '' and att2 == '' and att3 == '':
+        print('{}<{}>'.format(' '*int(niveau)*3, tag))
 
 if __name__ == '__main__':
     pass

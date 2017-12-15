@@ -22,7 +22,7 @@
 #	+ import_distribution_as_list()
 #
 #	+ recherche_occurence_mot_in_file_distribution()
-#	+
+#	+ recherche_stats_base_texte()
 #	+
 #	+
 #	+
@@ -35,6 +35,7 @@ import io
 import codecs
 import subprocess
 import time
+import codecs
 
 from lxml import etree
 
@@ -68,7 +69,7 @@ def creation_folder(path_to_parent, name_folder):
         print('\tCréation du dossier réussi.')
 
 ##############################################################
-# Fonction : ouvrir_morphalou
+# Fonction : load_morphalou
 ##############################################################
 def load_morphalou(dossier_morphalou):
     print('++ Je suis en train d\'ouvrir morphalou. Cela peut me prendre quelques secondes.')
@@ -91,7 +92,9 @@ def load_morphalou(dossier_morphalou):
 
     print('\tCela a pris {} secondes'.format(tps_ecoule[:4]))
 
-    return doc
+    liste_formSet = doc.xpath('lexicalEntry/formSet')
+
+    return liste_formSet
 
     #print(os.listdir(dossier_morphalou))
     #print(os.path.join(dossier_morphalou, 'morphalou-2.0.xml'))
@@ -265,6 +268,74 @@ def recherche_occurence_mot_in_file_distribution(file_or_list, mot_a_chercher) :
     #TEST : print('Le nombre {} et son type {}'.format(nb, type(nb)))
     #
     return nb
+
+###############################################################
+# Fonction : recherche_stats_base_texte()
+# Input :
+# Return :
+##############################################################
+
+def recherche_stats_base_texte(path_file) :
+
+    # file = codecs.open(path_file, mode='r', encoding='utf8')
+
+    # nb_mots_file, nb_phrases_file, nb_moyen_mots_par_phrase = 0, 0, 0
+    # resultats = []
+    #     #
+
+    # i = re.compile(r'^(\d+) : (\d+) : (\d+\.\d+)')
+
+    # for line in file :
+    #     a_matcher = re.match(i , line)
+    #     if a_matcher is None :
+    #         pass
+    #     else :
+    #         #print(a_matcher.group(0)) #le tout
+    #         #print(a_matcher.group(1)) #le nb
+    #         nb_mots_file += int(a_matcher.group(1))
+    #         resultats.append(nb_mots_file)
+
+    #         nb_phrases_file += int(a_matcher.group(2))
+    #         resultats.append(nb_phrases_file)
+
+    #         nb_moyen_mots_par_phrase += float(a_matcher.group(3))
+    #         resultats.append(nb_moyen_mots_par_phrase)
+
+    # file.close()
+
+    try :
+        file = codecs.open(path_file, mode='r', encoding='utf8')
+    except :
+        print('\tProblème ouverture.')
+    else :
+        #
+        nb_mots_file, nb_phrases_file, nb_moyen_mots_par_phrase = 0, 0, 0
+        resultats = []
+        #
+
+        i = re.compile(r'^(\d+) : (\d+) : (\d+\.\d+)')
+
+        for line in file :
+            a_matcher = re.match(i , line)
+            if a_matcher is None :
+                pass
+            else :
+                #print(a_matcher.group(0)) #le tout
+                #print(a_matcher.group(1)) #le nb
+                nb_mots_file += int(a_matcher.group(1))
+                resultats.append(nb_mots_file)
+
+                nb_phrases_file += int(a_matcher.group(2))
+                resultats.append(nb_phrases_file)
+
+                nb_moyen_mots_par_phrase += float(a_matcher.group(3))
+                resultats.append(nb_moyen_mots_par_phrase)
+                break
+
+        print('Cela nous donne {}'.format(resultats))
+    #             file.close()
+
+        return resultats
 
 if __name__ == '__main__':
     pass
