@@ -25,6 +25,7 @@ os.sys.path.insert(0, parentdir)
 from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
 
+dossier_base_projet = PROJECT_ROOT
 dossier_corpus_litterature = CORPUS_LITTERATURE
 dossier_corpus_professeur = CORPUS_PROFESSEUR
 #dossier_morphalou = MORPHALO_ROOT
@@ -58,20 +59,24 @@ def main():
             #others.conversion_pdf_to_text(dossier_corpus_professeur)
 
             #start = time.time()
-            #for corpus in liste_corpus :
+
+            ####
+            # for corpus in liste_corpus :
             #    big_process.tour_du_corpus(corpus)
             #    big_process.tour_des_fichiers(corpus)
 
-            if a.strip() == '1' :
-                for corpus in liste_corpus:
-                    big_process.generation_corpus_xml(corpus, 'light')
-            elif a.strip() == '2' :
-                for corpus in liste_corpus:
-                    big_process.generation_corpus_xml(corpus, 'complet')
+            # if a.strip() == '1' :
+            #     for corpus in liste_corpus:
+            #         big_process.generation_corpus_xml(corpus, 'light')
+            # elif a.strip() == '2' :
+            #     for corpus in liste_corpus:
+            #         big_process.generation_corpus_xml(corpus, 'complet')
 
                 #big_process.generation_corpus_xml(dossier_corpus_litterature, 'complet')
 
-            #big_process.synthese_xml(dossier_corpus_professeur, dossier_corpus_litterature)
+            #big_process.creer_et_remplir_fichier_synthese_xml(dossier_base_projet, liste_corpus)
+            big_process.creer_et_remplir_fichier_dtd(dossier_base_projet)
+            big_process.generation_et_execution_script_bash_validation_dtd(dossier_base_projet)
 
             #etape1 = time.time()
             #end1 = etape1 - start

@@ -18,6 +18,7 @@ import os
 import re
 import random
 import codecs
+import subprocess
 
 from collections import defaultdict
 
@@ -240,5 +241,113 @@ def generation_corpus_xml(path_to_corpus, version='light'):
 
     writing_in_files.ecrire_xml_balise_fermante(nom_fichier_xml_corpus, 'corpus', 1)
 
-def synthese_xml(path_to_corpus1, path_to_corpus2) :
-    pass
+##############################################################
+# Fonction : creer_et_remplir_fichier_synthese_xml()
+##############################################################
+def creer_et_remplir_fichier_synthese_xml(root_project, liste_corpus) :
+    others.creation_folder(root_project+'/', 'resultats_xml')
+    path_to_project_synthese_xml_folder = root_project+'/resultats_xml/'
+    nom_fichier_xml_synthese = path_to_project_synthese_xml_folder + 'synthese_xml_total.xml'
+
+    print('\t\tRemplissage du fichier synthese_xml_total.')
+
+    with codecs.open(nom_fichier_xml_synthese, mode='a', encoding='utf8') as file :
+        file.write('<?xml version="1.0" encoding="UTF-8" standalone="no" ?>')
+        file.write('\n<!DOCTYPE banque_donnees SYSTEM "synthese_xml_total.dtd">')
+
+    writing_in_files.ecrire_xml_balise_ouvrante(nom_fichier_xml_synthese, 'banque_donnees', 0)
+
+    for corpus in liste_corpus :
+        nom_corpus = os.path.basename(os.path.normpath(corpus))
+        path_to_corpus_xml_folder = corpus+'xml/'
+        nom_fichier_xml_corpus = path_to_corpus_xml_folder + 'rendu_de_' + nom_corpus + '.xml'
+
+        with codecs.open(nom_fichier_xml_synthese, mode='a', encoding='utf8') as file_out :
+            with codecs.open(nom_fichier_xml_corpus, mode='r', encoding='utf8') as file_in :
+                for line in file_in :
+                    file_out.write('{}'.format(line))
+
+
+    writing_in_files.ecrire_xml_balise_fermante(nom_fichier_xml_synthese, 'banque_donnees', 0)
+
+    print('\t\tFin du remplissage du fichier synthese_xml_total.')
+
+##############################################################
+# Fonction : creer_et_remplir_fichier_synthese_xml()
+##############################################################
+def creer_et_remplir_fichier_dtd(root_project) :
+    path_to_project_synthese_xml_folder = root_project+'/resultats_xml/'
+
+    if not path_to_project_synthese_xml_folder :
+        others.creation_folder(root_project+'/', 'resultats_xml')
+
+    nom_fichier_dtd = path_to_project_synthese_xml_folder + 'synthese_xml_total.dtd'
+
+    print('\t\tCreation de la dtd.')
+    try :
+        with codecs.open(nom_fichier_dtd, mode='w', encoding='utf8') as file :
+            file.write('<!ELEMENT banque_donnees (corpus+)>')
+
+            file.write('\n\n<!ELEMENT corpus (text+)>')
+            file.write('\n<!ATTLIST corpus type_corpus (corpus_professeur|corpus_litterature) #REQUIRED>')
+
+            file.write('\n\n<!ELEMENT text (sentence+)>')
+            file.write('\n<!ATTLIST text text_id ID #REQUIRED>')
+
+            file.write('\n\n<!ELEMENT sentence (word+)>')
+            file.write('\n<!ATTLIST sentence sentence_id ID #REQUIRED>')
+
+            file.write('\n\n<!ELEMENT word (morphology, statistics)+>')
+            file.write('\n<!ATTLIST word word_id ID #REQUIRED>')
+            file.write('\n<!ATTLIST word word_form CDATA #REQUIRED>')
+
+            file.write('\n\n<!ELEMENT morphology (lemme, POS_treetagger, POS_morphalou?, genre?, nombre?)>')
+            file.write('\n<!ELEMENT lemme (#PCDATA)>')
+            file.write('\n<!ELEMENT POS_treetagger (#PCDATA)>')
+            file.write('\n<!ELEMENT POS_morphalou (#PCDATA)>')
+            file.write('\n<!ELEMENT genre (#PCDATA)>')
+            file.write('\n<!ELEMENT nombre (#PCDATA)>')
+
+            file.write('\n\n<!ELEMENT statistics (nb_apparition_text, nb_apparition_corpus, frequence_in_text, frequence_in_corpus)>')
+            file.write('\n<!ELEMENT nb_apparition_text (#PCDATA)>')
+            file.write('\n<!ELEMENT nb_apparition_corpus (#PCDATA)>')
+            file.write('\n<!ELEMENT frequence_in_text (#PCDATA)>')
+            file.write('\n<!ELEMENT frequence_in_corpus (#PCDATA)>')
+    except :
+        print('\t\tLe remplissage a échoué.')
+    else :
+        print('\t\tLa création de la dtd a réussi.')
+
+##############################################################
+# Fonction : generation_et_execution_script_bash_validation_dtd()
+##############################################################
+def generation_et_execution_script_bash_validation_dtd(root_project) :
+    path_to_project_synthese_xml_folder = root_project+'/resultats_xml/'
+
+    if not path_to_project_synthese_xml_folder :
+        others.creation_folder(root_project+'/', 'resultats_xml')
+
+    nom_script = path_to_project_synthese_xml_folder + 'script_validation_dtd.bash'
+
+    try :
+        with codecs.open(nom_script, mode='w', encoding='utf8') as file :
+            file.write('#!/bin/bash')
+            file.write('\n\nxmllint -noout -dtdvalid synthese_xml_total.dtd synthese_xml_total.xml')
+    except :
+        print('\\tCreation du script bash : echec.')
+    else :
+        print('\n\tLa creation du script bash pour validation de la dtd a reussie.')
+        try :
+            os.system("chmod +x script_validation_dtd.bash")
+        except:
+            print('\t\tProbleme pour rendre le script executable.')
+        else :
+            print('\t\tElle est executable grace à chmod +x.')
+
+            print('\t\tLancement du script : synthese_xml_total.dtd .' )
+            result = str(subprocess.call(nom_script, shell=True, cwd='.'))
+
+            if result == '' or result == '0' :
+                print('\t\t\tLa validation est concluante.')
+            else :
+                print('\t\t\tProbleme de validation.')

@@ -200,9 +200,9 @@ def ecrire_xml_contenu(path_to_file_xml, contenu, niveau=0) :
 #creer la dtd
 #comparer avec script bash
 
-def ecrire_synthese_des_corpus_en_xml() :
-    with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
-        file.write('\n{}<![CDATA[ {} ]]>'.format(' '*int(niveau)*3, contenu))
+# def ecrire_synthese_des_corpus_en_xml() :
+#     with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
+#         file.write('\n{}<![CDATA[ {} ]]>'.format(' '*int(niveau)*3, contenu))
 
 
 if __name__ == '__main__':
