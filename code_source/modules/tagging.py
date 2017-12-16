@@ -130,7 +130,8 @@ def tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, phrase_to_tag,
                     POS_morphalou = item[0][1].text
                     #print('POS : {}'.format(POS))
                 except :
-                    mot_POS_morphalou.append('POS_NR_morphalou')
+                    pass
+                    #mot_POS_morphalou.append('POS_NR_morphalou')
                 else :
                     mot_POS_morphalou.append(str(POS_morphalou))
 
@@ -138,7 +139,8 @@ def tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, phrase_to_tag,
                 try :
                     genre_morphalou = item[0][2].text
                 except :
-                    mot_genre_morphalou.append('Genre_NR_morphalou')
+                    pass
+                    #mot_genre_morphalou.append('Genre_NR_morphalou')
                 else :
                     mot_genre_morphalou.append(str(genre_morphalou))
                     #print('Genre : {}'.format(genre))
@@ -147,12 +149,13 @@ def tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, phrase_to_tag,
                 try :
                     nombre_morphalou = item[1][1].text
                 except :
-                    mot_nombre_morphalou.append('Nombre_NR_morphalou')
+                    pass
+                    #mot_nombre_morphalou.append('Nombre_NR_morphalou')
                 else :
                     mot_nombre_morphalou.append(str(nombre_morphalou))
                     #print('Nombre : {}\n\n'.format(nombre_morphalou))
 
-        print('Notre recherche morphalou donne : POS \'{}\', genre \'{}\' et nombre \'{}\'.'.format(mot_POS_morphalou, mot_genre_morphalou, mot_nombre_morphalou))
+        #print('Notre recherche morphalou donne : POS \'{}\', genre \'{}\' et nombre \'{}\'.'.format(mot_POS_morphalou, mot_genre_morphalou, mot_nombre_morphalou))
 
         #dico_tag_corpus[reference_mot]['reference']['corpus'] = corpus
         #dico_tag_corpus[reference_mot]['reference']['texte'] = nom_texte
@@ -213,6 +216,10 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
             mot_forme = tags2[num_mot][0]
         except :
             mot_forme = 'forme_NR'
+
+        if mot_forme.endswith("'") :
+            mot_forme = str(mot_forme[:-1])
+
         try :
             mot_pos_treetagger = tags2[num_mot][1]
         except :
@@ -269,7 +276,8 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
                     POS_morphalou = item[0][1].text
                     #print('POS : {}'.format(POS))
                 except :
-                    mot_POS_morphalou.append('POS_NR_morphalou')
+                    pass
+                    #mot_POS_morphalou.append('POS_NR_morphalou')
                 else :
                     mot_POS_morphalou.append(str(POS_morphalou))
 
@@ -277,7 +285,8 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
                 try :
                     genre_morphalou = item[0][2].text
                 except :
-                    mot_genre_morphalou.append('Genre_NR_morphalou')
+                    pass
+                    #mot_genre_morphalou.append('Genre_NR_morphalou')
                 else :
                     mot_genre_morphalou.append(str(genre_morphalou))
                     #print('Genre : {}'.format(genre))
@@ -286,12 +295,13 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
                 try :
                     nombre_morphalou = item[1][1].text
                 except :
-                    mot_nombre_morphalou.append('Nombre_NR_morphalou')
+                    pass
+                    #mot_nombre_morphalou.append('Nombre_NR_morphalou')
                 else :
                     mot_nombre_morphalou.append(str(nombre_morphalou))
                     #print('Nombre : {}\n\n'.format(nombre_morphalou))
 
-        print('Notre recherche morphalou donne : POS \'{}\', genre \'{}\' et nombre \'{}\'.'.format(mot_POS_morphalou, mot_genre_morphalou, mot_nombre_morphalou))
+        #print('Notre recherche morphalou donne : POS \'{}\', genre \'{}\' et nombre \'{}\'.'.format(mot_POS_morphalou, mot_genre_morphalou, mot_nombre_morphalou))
 
         #NIVEAU 4
         writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'word', 4, 'word_id', reference_mot, 'word_form', mot_forme)
@@ -301,25 +311,27 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
 
         #NIVEAU 6
         writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'lemme', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_lemme, 6)
+        writing_in_files.ecrire_xml_contenu(fichier_xml, mot_lemme, 7)
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'lemme', 6)
 
         writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'POS_treetagger', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_pos_treetagger, 6)
+        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_pos_treetagger, 7)
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'POS_treetagger', 6)
 
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'POS_morphalou', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_POS_morphalou, 6)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'POS_morphalou', 6)
+        if len(mot_POS_morphalou) :
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'POS_morphalou', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_POS_morphalou, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'POS_morphalou', 6)
 
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'genre', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_genre_morphalou, 6)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'genre', 6)
+        if len(mot_genre_morphalou) :
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'genre', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_genre_morphalou, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'genre', 6)
 
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nombre', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_nombre_morphalou, 6)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nombre', 6)
-        #NIVEAU 6 : FIN
+        if len(mot_nombre_morphalou) :
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nombre', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_nombre_morphalou, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nombre', 6)
 
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'morphology', 5)
 
@@ -328,23 +340,25 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
 
         #NIVEAU 6
         writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nb_apparition_text', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_texte, 6)
+        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_texte, 7)
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nb_apparition_text', 6)
 
         writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nb_apparition_corpus', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_corpus, 6)
+        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_corpus, 7)
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nb_apparition_corpus', 6)
 
         writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'frequence_in_text', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_texte, 6)
+        writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_texte, 7)
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'frequence_in_text', 6)
 
 
         writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'frequence_in_corpus', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_corpus, 6)
+        writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_corpus, 7)
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'frequence_in_corpus', 6)
 
 
         writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'statistics', 5)
+
+        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'word', 4)
 
         compteur_mot += 1

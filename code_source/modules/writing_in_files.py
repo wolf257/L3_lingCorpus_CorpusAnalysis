@@ -191,20 +191,19 @@ def ecrire_xml_contenu(path_to_file_xml, contenu, niveau=0) :
         file.write('\n{}<![CDATA[ {} ]]>'.format(' '*int(niveau)*3, contenu))
 
 ##############################################################
-# Fonction : TEST
+# Fonction : synthese_xml_contenu()
 ##############################################################
-def print_xml_balise_fermante(tag, niveau) :
-    print('{}</{}>'.format(' '*int(niveau)*4, tag))
+#creer dossier synthese_xml_contenu
+#prendre les deux path
+#ouvrir leur fichier
+#copier
+#creer la dtd
+#comparer avec script bash
 
-def print_xml_balise_ouvrante(tag, niveau=0, att1='', val1='', att2='', val2='', att3='', val3=''):
-    if att1 != '' and att2 != '' and att3 != '':
-        print('{}<{} {}=\'{}\' {}=\'{}\' {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1, att2, val2, att3, val3))
-    elif att1 != '' and att2 != '' and att3 == '':
-        print('{}<{} {}=\'{}\' {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1, att2, val2))
-    elif att1 != '' and att2 == '' and att3 == '':
-        print('{}<{} {}=\'{}\'>'.format(' '*int(niveau)*3, tag, att1, val1))
-    elif att1 == '' and att2 == '' and att3 == '':
-        print('{}<{}>'.format(' '*int(niveau)*3, tag))
+def ecrire_synthese_des_corpus_en_xml() :
+    with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
+        file.write('\n{}<![CDATA[ {} ]]>'.format(' '*int(niveau)*3, contenu))
+
 
 if __name__ == '__main__':
     pass

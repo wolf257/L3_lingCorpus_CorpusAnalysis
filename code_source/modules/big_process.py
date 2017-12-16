@@ -56,7 +56,7 @@ def tour_du_corpus(path_to_corpus):
 
     #VAR
     path_to_corpus_stat_folder = path_to_corpus+'statistiques/'
-
+    #VAR
     nom_fichier_stats_corpus = path_to_corpus_stat_folder + '0_stats_de_' + nom_corpus + '.txt'
     nom_fichier_distribution_corpus = path_to_corpus_stat_folder + '1_distribution_de_' + nom_corpus + '.txt'
 
@@ -114,8 +114,8 @@ def tour_des_fichiers(path_to_corpus):
         ###################################
 
         nb_mots_texte = len(liste_exploitable_txt)
-
         nb_phrases = 0
+
         for word in liste_exploitable_txt :
             if word == '.' or word == '?' or word == '!' :
                 nb_phrases += 1
@@ -129,20 +129,23 @@ def tour_des_fichiers(path_to_corpus):
     print('\n++++++++++++++++++++++++++++++++++++++++++++++++++')
 
 ##############################################################
-# Fonction : generation_dico_corpus_pr_xml
+# Fonction : generation_corpus_xml
 # Input :
 ##############################################################
 
-def generation_dico_corpus_pr_xml(path_to_corpus, version='light'):
+def generation_corpus_xml(path_to_corpus, version='light'):
     #VAR
     dico_tag_corpus = defaultdict(lambda: defaultdict(dict))
     file_morphalou = others.load_morphalou(dossier_morphalou)
 
     nom_corpus = os.path.basename(os.path.normpath(path_to_corpus))
+
     if nom_corpus == 'corpus_litterature' :
         num_corpus = 1
     else :
         num_corpus = 2
+
+    #VAR
     reference_corpus = 'c'+str(num_corpus)
 
     print('++++++++++++++++++++++++++++++++++++++++++++++++++')
@@ -156,9 +159,12 @@ def generation_dico_corpus_pr_xml(path_to_corpus, version='light'):
     #VAR
     path_to_corpus_stat_folder = path_to_corpus+'statistiques/'
     #path_to_corpus_donnee_tag_folder = path_to_corpus+'tag/'
-    path_to_corpus_xml_folder = path_to_corpus+'xml/'
 
+    path_to_corpus_xml_folder = path_to_corpus+'xml/'
     nom_fichier_xml_corpus = path_to_corpus_xml_folder + 'rendu_de_' + nom_corpus + '.xml'
+
+    #XML : balise <corpus type_corpus='valeur'>
+    writing_in_files.ecrire_xml_balise_ouvrante(nom_fichier_xml_corpus, 'corpus', 1, 'type_corpus', nom_corpus)
 
     files_in_corpus = None
     files_in_corpus = others.list_text_in_folder_as_list(path_to_corpus)
@@ -174,12 +180,8 @@ def generation_dico_corpus_pr_xml(path_to_corpus, version='light'):
     #######
     # Niveau des textes
     ######
-    #index_du_texte = 1
-    #nb_fichiers_dans_corpus = len(files_in_corpus)
 
     text_for_tagg = []
-
-    #reference_texte = 'c'+num_corpus+'t'+num_phrase+'s'+num_texte+'w'+index_du_mot
 
     for file in files_in_corpus:
         path_file = os.path.join(path_to_corpus, file)
@@ -192,31 +194,34 @@ def generation_dico_corpus_pr_xml(path_to_corpus, version='light'):
         nb_mots_texte, nb_phrases_texte, nb_moyen_mots_par_phrase_texte = others.recherche_stats_base_texte(nom_fichier_stats_texte)
         print('{}, {}, {}'.format(nb_mots_texte, nb_phrases_texte, nb_moyen_mots_par_phrase_texte))
 
-        num_texte = int(files_in_corpus.index(file)) + 1
+        num_texte = int(files_in_corpus.index(file))
         reference_texte = 'c'+str(num_corpus)+'t'+str(num_texte)
+
+        #XML : balise <text text_id=CxTx>
+        writing_in_files.ecrire_xml_balise_ouvrante(nom_fichier_xml_corpus, 'text', 2, 'text_id', reference_texte)
 
         ###################################
         #CREATION LISTE À EXPLOITER
         text_for_tagg = ponctuation_texte.du_texte_a_sa_liste_exploitable_par_tagging(path_file)
         ###################################
 
-        #print(text_for_tagg)
-
         compteur_ligne = 0
         nb_lignes_in_texte = len(text_for_tagg)
-        #print('Le text {} a {} lignes à traiter'.format(reference_texte, nb_lignes_in_texte))
         nb_lignes_a_traiter = 0
 
         if version == 'complet' :
             nb_lignes_a_traiter = nb_lignes_in_texte
         else :
-            nb_lignes_a_traiter = 10
+            nb_lignes_a_traiter = 1
 
         while compteur_ligne < nb_lignes_a_traiter :
             num_line = compteur_ligne
             line = text_for_tagg[compteur_ligne]
 
             reference_line = 'c'+str(num_corpus)+'t'+str(num_texte)+'s'+str(num_line)
+
+            #XML : balise <sentence sentence_id=CxTxSx>
+            writing_in_files.ecrire_xml_balise_ouvrante(nom_fichier_xml_corpus, 'sentence', 3, 'sentence_id', reference_line)
 
             print('\n\n{}'.format('='*35))
             print('***Ref ligne : {}'.format(reference_line))
@@ -227,6 +232,13 @@ def generation_dico_corpus_pr_xml(path_to_corpus, version='light'):
 
             tagging.tagger_phrase_et_ajouter_au_texte_ref_to_word(line, nom_fichier_xml_corpus, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, file_morphalou, num_corpus, num_texte, num_line, nb_mots_corpus, nb_mots_texte)
 
+            writing_in_files.ecrire_xml_balise_fermante(nom_fichier_xml_corpus, 'sentence', 3)
+
             compteur_ligne +=1
 
-    return dico_tag_corpus
+        writing_in_files.ecrire_xml_balise_fermante(nom_fichier_xml_corpus, 'text', 2)
+
+    writing_in_files.ecrire_xml_balise_fermante(nom_fichier_xml_corpus, 'corpus', 1)
+
+def synthese_xml(path_to_corpus1, path_to_corpus2) :
+    pass

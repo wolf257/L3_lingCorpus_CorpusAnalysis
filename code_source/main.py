@@ -31,50 +31,66 @@ dossier_corpus_professeur = CORPUS_PROFESSEUR
 
 def main():
     while 1 :
-        a = input("\n===Level 0 : Bonjour, et bienvenue." + \
+        a = input("\nBonjour, et bienvenue." + \
             "\n Que voulez-vous faire :" +\
             "\n 1 : Suivre la procédure 'light' " + \
             "\n 2 : Suivre la procédure 'compléte' " + \
             "\n (enter) - Exit" + \
 
             "\n\nNOTE EXPLICATIVE : " +\
-            "\n\t- La version light suit la procédure normale, sauf que le processus n'est appliqué qu'aux 10 premières phrases de chaque texte. Durée estimée : moins d'une heure." +\
-            "\n\t- La version compléte applique le processus à tout le corpus. Le temps d\'exécution risque de prendre plus de 24 heures." +\
+            "\n\t- La version 'light' suit la procédure normale, sauf que le processus n'est appliqué qu'aux 10 premières phrases de chaque texte. Durée estimée : moins d'une heure." +\
+            "\n\t- La version 'compléte' applique le processus à tout le corpus. Le temps d\'exécution risque de prendre plus de 24 heures." +\
 
-            "\n\nVotre choix : ")
+            "\n\nQuel est votre choix : ")
 
         #==================================
-        if a.strip() == '1' :
-            print("\n\nVous avez choisi la version 'light'. Bon choix.")
+        if a.strip() == '1' or a.strip() == '2' :
+            if a.strip() == '1' :
+                print("\n\nVous avez choisi la version 'light'. Bon choix.")
+            elif a.strip() == '2' :
+                print("\n\nVous avez choisi la version 'complete'. Bonne chance.")
 
-            #TODO
-            #Calcul du temps
-            # MEss 'Vous pouvez croiser les doigts pour moi et aller boire un café.'
+            liste_corpus = []
+            #liste_corpus.append(dossier_corpus_professeur)
+            liste_corpus.append(dossier_corpus_litterature)
 
             #E1 : conversion des cours en txt
             #others.conversion_pdf_to_text(dossier_corpus_professeur)
-            start = time.time()
-            big_process.tour_du_corpus(dossier_corpus_litterature)
-            big_process.tour_des_fichiers(dossier_corpus_litterature)
-            dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature, 'light')
 
-            etape1 = time.time()
-            end1 = etape1 - start
-            end1 = str(end1)
-            try :
-                print('\tCela a pris {} secondes'.format(end1[:4]))
-            except :
-                print('Probleme de tps')
+            #start = time.time()
+            #for corpus in liste_corpus :
+            #    big_process.tour_du_corpus(corpus)
+            #    big_process.tour_des_fichiers(corpus)
 
-            with open(CORPUS_LITTERATURE+'tag/resultat.txt', mode ='a') as file_tag :
-                file_tag.write('\n\n\n{}'.format(dico1))
-            etape2 = time.time()
+            if a.strip() == '1' :
+                for corpus in liste_corpus:
+                    big_process.generation_corpus_xml(corpus, 'light')
+            elif a.strip() == '2' :
+                for corpus in liste_corpus:
+                    big_process.generation_corpus_xml(corpus, 'complet')
 
-            tps_ecoule = etape2 - start
-            tps_ecoule = str(tps_ecoule)
+                #big_process.generation_corpus_xml(dossier_corpus_litterature, 'complet')
 
-            print('\tCela a pris en tout {} secondes'.format(tps_ecoule[:4]))
-                #TODO
+            #big_process.synthese_xml(dossier_corpus_professeur, dossier_corpus_litterature)
+
+            #etape1 = time.time()
+            #end1 = etape1 - start
+            #end1 = str(end1)
+            # try :
+            #     print('\tCela a pris {} secondes'.format(end1[:4]))
+            # except :
+            #     print('Probleme de tps')
+
+            #with open(CORPUS_LITTERATURE+'tag/resultat.txt', mode ='a') as file_tag :
+            #    file_tag.write('\n\n\n{}'.format(dico1))
+
+            # etape2 = time.time()
+
+            # tps_ecoule = etape2 - start
+            # tps_ecoule = str(tps_ecoule)
+
+            # print('\tCela a pris en tout {} secondes'.format(tps_ecoule[:4]))
+            #     #TODO
 
             #big_process.write_xml_dico_in_file(dico1 , file_xml)
             #d'abord texte_distri.xml (1)
@@ -84,66 +100,20 @@ def main():
             #pprint.pprint(dico1)
 
             break
-
-        #==================================
-        elif a.strip() == '2' :
-            print("\n\nVous avez choisi la version 'compléte'. Bonne chance.")
-
-            #TODO
-            #Calcul du temps
-            # MEss 'Vous pouvez croiser les doigts pour moi et aller boire un café.'
-
-            #E1 : conversion des cours en txt
-            #others.conversion_pdf_to_text(dossier_corpus_professeur)
-            start = time.time()
-
-            #big_process.tour_du_corpus(dossier_corpus_litterature)
-            #big_process.tour_des_fichiers(dossier_corpus_litterature)
-
-            dico1 = big_process.generation_dico_corpus_pr_xml(dossier_corpus_litterature, complet)
-
-
-            etape1 = time.time()
-            end1 = etape1 - start
-            end1 = str(end1)
-            try :
-                print('\tCela a pris {} secondes'.format(end1[:4]))
-            except :
-                print('Probleme de tps')
-
-            with open(CORPUS_LITTERATURE+'tag/resultat.txt', mode ='a') as file_tag :
-                file_tag.write('\n\n\n{}'.format(dico1))
-            etape2 = time.time()
-
-            tps_ecoule = etape2 - start
-            tps_ecoule = str(tps_ecoule)
-
-            print('\tCela a pris en tout {} secondes'.format(tps_ecoule[:4]))
-                #TODO
-
-            #big_process.write_xml_dico_in_file(dico1 , file_xml)
-            #d'abord texte_distri.xml (1)
-            # puis le gros où l'on copie tous les petits
-
-
-            #pprint.pprint(dico1)
-
-            break
-
 
         #==================================
         elif a.strip() == '' :
             print("\n+++++++++++++++++++++++++++++")
-            print("Thank you ! Bye.")
+            print("Vous nous quittez déjà ! Au revoir.")
             print("+++++++++++++++++++++++++++++\n")
 
             break
 
         #==================================
         else :
-            print("\n-----------------------------------")
+            print("\n---------------------------------------------------------------------")
             print("Désolé, je n'ai pas compris votre instruction. (Retournons au début.)")
-            print("-----------------------------------")
+            print("-----------------------------------------------------------------------")
 
 
 if __name__ == '__main__':
