@@ -51,58 +51,52 @@ def main():
             elif a.strip() == '2' :
                 print("\n\nVous avez choisi la version 'complete'. Bonne chance.")
 
+            start = time.time()
+
+            ##########################
+            # EXECUTION
+            ##########################
+
             liste_corpus = []
-            #liste_corpus.append(dossier_corpus_professeur)
+            liste_corpus.append(dossier_corpus_professeur)
             liste_corpus.append(dossier_corpus_litterature)
 
             #E1 : conversion des cours en txt
-            #others.conversion_pdf_to_text(dossier_corpus_professeur)
+            others.conversion_pdf_to_text(dossier_corpus_professeur)
 
-            #start = time.time()
+            for corpus in liste_corpus :
+               big_process.tour_du_corpus(corpus)
+               big_process.tour_des_fichiers(corpus)
 
-            ####
-            # for corpus in liste_corpus :
-            #    big_process.tour_du_corpus(corpus)
-            #    big_process.tour_des_fichiers(corpus)
+            if a.strip() == '1' :
+                for corpus in liste_corpus:
+                    big_process.generation_corpus_xml(corpus, 'light')
+            elif a.strip() == '2' :
+                for corpus in liste_corpus:
+                    big_process.generation_corpus_xml(corpus, 'complet')
 
-            # if a.strip() == '1' :
-            #     for corpus in liste_corpus:
-            #         big_process.generation_corpus_xml(corpus, 'light')
-            # elif a.strip() == '2' :
-            #     for corpus in liste_corpus:
-            #         big_process.generation_corpus_xml(corpus, 'complet')
-
-                #big_process.generation_corpus_xml(dossier_corpus_litterature, 'complet')
-
-            #big_process.creer_et_remplir_fichier_synthese_xml(dossier_base_projet, liste_corpus)
+            big_process.creer_et_remplir_fichier_synthese_xml(dossier_base_projet, liste_corpus)
             big_process.creer_et_remplir_fichier_dtd(dossier_base_projet)
             big_process.generation_et_execution_script_bash_validation_dtd(dossier_base_projet)
 
-            #etape1 = time.time()
-            #end1 = etape1 - start
-            #end1 = str(end1)
-            # try :
-            #     print('\tCela a pris {} secondes'.format(end1[:4]))
-            # except :
-            #     print('Probleme de tps')
+            ###########################
+            # CALCUL TPS EXECUTION
+            ##########################
+            end = time.time()
 
-            #with open(CORPUS_LITTERATURE+'tag/resultat.txt', mode ='a') as file_tag :
-            #    file_tag.write('\n\n\n{}'.format(dico1))
+            tps_ecoule_sec = end - start
+            tps_ecoule_min = 0
+            tps_ecoule_h = 0
 
-            # etape2 = time.time()
+            if tps_ecoule_sec > 60 :
+                tps_ecoule_min = int(tps_ecoule_sec / 60)
+                tps_ecoule_sec = int(tps_ecoule_sec % 60)
+                if tps_ecoule_min > 60 :
+                    tps_ecoule_h = int(tps_ecoule_min /60)
+                    tps_ecoule_min = int(tps_ecoule_min % 60)
 
-            # tps_ecoule = etape2 - start
-            # tps_ecoule = str(tps_ecoule)
-
-            # print('\tCela a pris en tout {} secondes'.format(tps_ecoule[:4]))
-            #     #TODO
-
-            #big_process.write_xml_dico_in_file(dico1 , file_xml)
-            #d'abord texte_distri.xml (1)
-            # puis le gros où l'on copie tous les petits
-
-
-            #pprint.pprint(dico1)
+            print('\n\n===Toute l\'éxecution a pris : {} h {} min {} sec\n\n'.format(tps_ecoule_h, tps_ecoule_min, tps_ecoule_sec))
+            ##########################
 
             break
 

@@ -251,7 +251,7 @@ def creer_et_remplir_fichier_synthese_xml(root_project, liste_corpus) :
 
     print('\t\tRemplissage du fichier synthese_xml_total.')
 
-    with codecs.open(nom_fichier_xml_synthese, mode='a', encoding='utf8') as file :
+    with codecs.open(nom_fichier_xml_synthese, mode='w', encoding='utf8') as file :
         file.write('<?xml version="1.0" encoding="UTF-8" standalone="no" ?>')
         file.write('\n<!DOCTYPE banque_donnees SYSTEM "synthese_xml_total.dtd">')
 
@@ -270,7 +270,7 @@ def creer_et_remplir_fichier_synthese_xml(root_project, liste_corpus) :
 
     writing_in_files.ecrire_xml_balise_fermante(nom_fichier_xml_synthese, 'banque_donnees', 0)
 
-    print('\t\tFin du remplissage du fichier synthese_xml_total.')
+    print('\t\t\tFin du remplissage du fichier synthese_xml_total.')
 
 ##############################################################
 # Fonction : creer_et_remplir_fichier_synthese_xml()
@@ -314,9 +314,9 @@ def creer_et_remplir_fichier_dtd(root_project) :
             file.write('\n<!ELEMENT frequence_in_text (#PCDATA)>')
             file.write('\n<!ELEMENT frequence_in_corpus (#PCDATA)>')
     except :
-        print('\t\tLe remplissage a échoué.')
+        print('\t\t\tLe remplissage a échoué.')
     else :
-        print('\t\tLa création de la dtd a réussi.')
+        print('\t\t\tLa création de la dtd a réussi.')
 
 ##############################################################
 # Fonction : generation_et_execution_script_bash_validation_dtd()
@@ -334,20 +334,20 @@ def generation_et_execution_script_bash_validation_dtd(root_project) :
             file.write('#!/bin/bash')
             file.write('\n\nxmllint -noout -dtdvalid synthese_xml_total.dtd synthese_xml_total.xml')
     except :
-        print('\\tCreation du script bash : echec.')
+        print('\\t\tCreation du script bash : echec.')
     else :
-        print('\n\tLa creation du script bash pour validation de la dtd a reussie.')
+        print('\n\t\tLa creation du script bash pour validation de la dtd a reussi.')
         try :
-            os.system("chmod +x script_validation_dtd.bash")
+            os.system("chmod +x " + nom_script)
         except:
-            print('\t\tProbleme pour rendre le script executable.')
+            print('\t\t\tProbleme pour rendre le script executable.')
         else :
-            print('\t\tElle est executable grace à chmod +x.')
+            print('\t\t\tLe script est executable grace à chmod +x.')
 
-            print('\t\tLancement du script : synthese_xml_total.dtd .' )
-            result = str(subprocess.call(nom_script, shell=True, cwd='.'))
+            print('\t\t\t\tLancement du script : synthese_xml_total.dtd .' )
+            result = str(subprocess.call(nom_script, shell=True, cwd=path_to_project_synthese_xml_folder))
 
             if result == '' or result == '0' :
-                print('\t\t\tLa validation est concluante.')
+                print('\t\t\t\tLa validation a réussie.')
             else :
-                print('\t\t\tProbleme de validation.')
+                print('\t\t\t\tProbleme de validation.')

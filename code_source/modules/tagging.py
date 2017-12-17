@@ -219,6 +219,16 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
 
         if mot_forme.endswith("'") :
             mot_forme = str(mot_forme[:-1])
+        elif mot_forme == '&' :
+            mot_forme = '&amp;'
+        elif mot_forme == '<' :
+            mot_forme = '&lt;'
+        elif mot_forme == '>' :
+            mot_forme = '&gt;'
+        elif mot_forme == '"' :
+            mot_forme = '&quot;'
+        elif mot_forme == '\'' :
+            mot_forme = '&apos;'
 
         try :
             mot_pos_treetagger = tags2[num_mot][1]
@@ -243,18 +253,18 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
         if isinstance(mot_occurrence_texte, int) and (isinstance(nb_mots_file, int)) and int((nb_mots_file != 0 )) :
             mot_frequence_texte = int(mot_occurrence_texte) / int(nb_mots_file)
         else :
-            mot_frequence_texte = 'Freq non calculable'
+            mot_frequence_texte = 'Frequence non calculable'
 
 
         if isinstance(mot_occurrence_corpus, int) and (isinstance(nb_mots_corpus, int)) and int((nb_mots_corpus != 0 )) :
             mot_frequence_corpus = int(mot_occurrence_corpus) / int(nb_mots_corpus)
         else :
-            mot_frequence_corpus = 'Freq non calculable'
+            mot_frequence_corpus = 'Frequence non calculable'
 
 
         # TEST
-        print('\nTEST : La ref \'{}\' pointe vers le mot \'{}\', lemme \'{}\', Pos \'{}\'.'.format(reference_mot, mot_forme, mot_lemme, mot_pos_treetagger))
-        print('OT : {} et OC : {}'.format(mot_occurrence_texte, mot_occurrence_corpus))
+        #print('\nTEST : La ref \'{}\' pointe vers le mot \'{}\', lemme \'{}\', Pos \'{}\'.'.format(reference_mot, mot_forme, mot_lemme, mot_pos_treetagger))
+        #print('OT : {} et OC : {}'.format(mot_occurrence_texte, mot_occurrence_corpus))
 
         # RECHERCHE IN MORPHALO
         #VAR
@@ -303,62 +313,67 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
 
         #print('Notre recherche morphalou donne : POS \'{}\', genre \'{}\' et nombre \'{}\'.'.format(mot_POS_morphalou, mot_genre_morphalou, mot_nombre_morphalou))
 
-        #NIVEAU 4
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'word', 4, 'word_id', reference_mot, 'word_form', mot_forme)
+        try :
+            #NIVEAU 4
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'word', 4, 'word_id', reference_mot, 'word_form', mot_forme)
 
-        #NIVEAU 5
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'morphology', 5)
+            #NIVEAU 5
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'morphology', 5)
 
-        #NIVEAU 6
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'lemme', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml, mot_lemme, 7)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'lemme', 6)
+            #NIVEAU 6
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'lemme', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml, mot_lemme, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'lemme', 6)
 
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'POS_treetagger', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_pos_treetagger, 7)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'POS_treetagger', 6)
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'POS_treetagger', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_pos_treetagger, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'POS_treetagger', 6)
 
-        if len(mot_POS_morphalou) :
-            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'POS_morphalou', 6)
-            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_POS_morphalou, 7)
-            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'POS_morphalou', 6)
+            if len(mot_POS_morphalou) :
+                writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'POS_morphalou', 6)
+                writing_in_files.ecrire_xml_contenu(fichier_xml , mot_POS_morphalou, 7)
+                writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'POS_morphalou', 6)
 
-        if len(mot_genre_morphalou) :
-            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'genre', 6)
-            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_genre_morphalou, 7)
-            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'genre', 6)
+            if len(mot_genre_morphalou) :
+                writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'genre', 6)
+                writing_in_files.ecrire_xml_contenu(fichier_xml , mot_genre_morphalou, 7)
+                writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'genre', 6)
 
-        if len(mot_nombre_morphalou) :
-            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nombre', 6)
-            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_nombre_morphalou, 7)
-            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nombre', 6)
+            if len(mot_nombre_morphalou) :
+                writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nombre', 6)
+                writing_in_files.ecrire_xml_contenu(fichier_xml , mot_nombre_morphalou, 7)
+                writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nombre', 6)
 
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'morphology', 5)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'morphology', 5)
 
-        #NIVEAU 5
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'statistics', 5)
+            #NIVEAU 5
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'statistics', 5)
 
-        #NIVEAU 6
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nb_apparition_text', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_texte, 7)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nb_apparition_text', 6)
+            #NIVEAU 6
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nb_apparition_text', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_texte, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nb_apparition_text', 6)
 
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nb_apparition_corpus', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_corpus, 7)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nb_apparition_corpus', 6)
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'nb_apparition_corpus', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml , mot_occurrence_corpus, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'nb_apparition_corpus', 6)
 
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'frequence_in_text', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_texte, 7)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'frequence_in_text', 6)
-
-
-        writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'frequence_in_corpus', 6)
-        writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_corpus, 7)
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'frequence_in_corpus', 6)
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'frequence_in_text', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_texte, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'frequence_in_text', 6)
 
 
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'statistics', 5)
+            writing_in_files.ecrire_xml_balise_ouvrante(fichier_xml, 'frequence_in_corpus', 6)
+            writing_in_files.ecrire_xml_contenu(fichier_xml ,mot_frequence_corpus, 7)
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'frequence_in_corpus', 6)
 
-        writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'word', 4)
+
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'statistics', 5)
+
+            writing_in_files.ecrire_xml_balise_fermante(fichier_xml, 'word', 4)
+        except :
+            print('\n\tL\'ajout du mot {} a rencontré un problème.'.format(reference_mot))
+        else :
+            print('\n\tLe mot {} a été ajouté au fichier xml.'.format(reference_mot))
 
         compteur_mot += 1
