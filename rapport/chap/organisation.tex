@@ -1,0 +1,175 @@
+\section{Approche}
+
+%-------------------------------------------------------------
+\newpage
+\section{Organisation des dossiers}
+
+\fbox{
+\begin{minipage}[t]{.4\textwidth}
+\footnotesize{ 
+\begin{center}
+AVANT EXÉCUTION DU PROGRAMME
+\end{center}
+
+\begin{itemize}
+\item \textbf{PROJECT\_ROOT/}
+	\begin{itemize}
+	\item {code\_source/}
+		\begin{itemize}
+		\item {modules/}
+		\end{itemize}
+	\item {corpus\_litterature/}
+	\item {corpus\_professeur/}
+	\item {from\_outside\_treetagger/}
+	\item {morphalo/}
+	\item {rapport/}
+	\end{itemize}
+\end{itemize}
+
+}
+\end{minipage} 
+} \fbox{
+\begin{minipage}[t]{.4\textwidth}
+\footnotesize{ 
+\begin{center}
+APRÈS EXÉCUTION DU PROGRAMME
+\end{center}
+
+\begin{itemize}
+\item \textbf{PROJECT\_ROOT/}
+	\begin{itemize}
+	\item {code\_source/}
+		\begin{itemize}
+			\item {modules/}
+		\end{itemize}
+	\item {corpus\_litterature/}
+		\begin{itemize}
+		\item \textbf{statistiques/}
+		\item \textbf{xml/}
+		\item \textbf{pdf/}
+		\end{itemize}
+	\item {corpus\_professeur/}
+		\begin{itemize}
+		\item \textbf{statistiques/}
+		\item \textbf{xml/}
+		\end{itemize}
+	\item {from\_outside\_treetagger/}
+	\item {morphalo/}
+	\item {rapport/}
+	\item \textbf{resultats\_xml/}
+	\end{itemize}
+\end{itemize}
+}
+\end{minipage}
+} 
+
+~\\
+
+Les noms nous paraissent assez explicites pour ne pas être tous détaillés. Néanmoins, certains dossiers nécessitent  une petite explication.
+
+	\begin{itemize}
+	\item \textbf{from\_outside\_treetagger/} : au début de la programmation, l'accès aux éléments de morphalou était difficile. Pour ne pas perdre de temps, nous avions décidé d'utiliser aussi tree\_tagger.
+	
+	Celui-ci ayant besoin de fichiers particuliers pour fonctionner, nous les avons regroupés sous ce dossier.
+	
+	\item \textbf{corpus$_x$/statistiques/} : Contient les statistiques de base, ainsi que les distributions de mots de chaque fichier pris séparément, puis du corpus en entier.
+	
+	\item \textbf{corpus$_x$/xml/} : Contient l'arbre xml concernant le corpus.
+	
+	\item \textbf{resultats\_xml} : S'appuyant sur les deux dossiers précédemment cités, ce dossier contient toutes les données que nous avons pu recueillir.
+	\end{itemize}
+
+%------------------------------------------------------------
+\newpage
+\section{Présentation des modules}
+
+La partie programmée est regroupée dans le dossier \emph{code\_source}. \\
+
+ \begin{wrapfigure}{l}{.45\textwidth} % { r, l, i } pour la position,
+\fbox{
+\begin{minipage}{.40\textwidth}
+\footnotesize{
+\textbf{code\_source/}
+	\begin{itemize}
+	\item {main.py}
+	\item {settings.py}
+	\item {modules/}
+		\begin{itemize}
+		\item {big\_process.py} \\
+		\item {ponctuation\_texte.py}
+		\item {tagging.py}
+		\item {stats\_0\_distributions.py}
+		\item {stats\_1\_base.py}
+		
+		\item {writing\_in\_files.py}
+		\item {others.py}
+		\end{itemize}
+	\end{itemize}
+}
+\end{minipage}
+} 
+\end{wrapfigure}
+
+Cette fois-ci, chaque fichier mérite que l'on vous explicite ce qu'il contient. \\
+
+De même, nous aimerions préciser la logique de notre mouvement (flow). C'est en la suivant que j'ai pu, de manière systématique naviguer à travers le code\footnote{qui devenait de plus en plus gros.}. Je pars toujours du niveau 0 vers le niveau 2. \\  
+
+\underline{Niveau 0}
+	\begin{itemize}
+	\item \textbf{main.py} : Contient l'interface. C'est le fichier qui englobe le tout.
+	\item \textbf{settings.py} : Pour faciliter la gestion des liens, nous avons regroupé les liens vers nos dossiers dans ce fichier. Il ne contient aucune fonction.
+	\end{itemize}
+
+\underline{Niveau 1}
+	\begin{itemize}
+	\item \textbf{modules/big\_process.py} : Ne contient que des fonctions composées d'autres fonctions des sous-modules. C'est le seul fichier du dossier modules/ qu'appelle le main. On peut dire qu'il sert d'interface entre le main.py et les autres modules.
+	
+	\end{itemize}
+
+\underline{Niveau 2}
+	\begin{itemize}
+	\item \textbf{modules/ponctuation\_texte.py} :
+	
+	\item \textbf{modules/tagging.py} :
+	
+	\item \textbf{modules/stats\_0\_distributions.py} :
+	
+	\item \textbf{modules/stats\_1\_base.py} :
+	
+	\item \textbf{modules/writing\_in\_files.py} :
+
+	\item \textbf{modules/others.py} :
+	\end{itemize}
+
+%-------------------------------------------------------------
+\newpage
+\section{Processus}
+
+\begin{itemize}
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\item \textbf{- [x]} : 
+\end{itemize}
+
+
+
+
+
+
+
+
