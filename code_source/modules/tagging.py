@@ -217,8 +217,13 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
         except :
             mot_forme = 'forme_NR'
 
+        #Differentes transformation pour que le XML ne plante pas.
         if mot_forme.endswith("'") :
             mot_forme = str(mot_forme[:-1])
+        elif mot_forme.endswith('>') :
+            mot_forme = str(mot_forme[:-1]+'&gt;')
+        elif mot_forme.startswith('<') :
+            mot_forme = str('&lt;'+mot_forme[1:])
         elif mot_forme == '&' :
             mot_forme = '&amp;'
         elif mot_forme == '<' :
@@ -229,6 +234,8 @@ def tagger_phrase_et_ajouter_au_texte_ref_to_word(phrase_to_tag, path_to_file_xm
             mot_forme = '&quot;'
         elif mot_forme == '\'' :
             mot_forme = '&apos;'
+        if "'" in mot_forme :
+            mot_forme = str(mot_forme.replace("'", ' '))
 
         try :
             mot_pos_treetagger = tags2[num_mot][1]

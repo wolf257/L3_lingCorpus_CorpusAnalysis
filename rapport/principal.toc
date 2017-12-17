@@ -12,5 +12,6 @@
 \contentsline {section}{\numberline {3.2}...}{7}{section.3.2}
 \contentsline {section}{\numberline {3.3}...}{7}{section.3.3}
 \contentsline {chapter}{\numberline {4}R\'esultats}{8}{chapter.4}
-\contentsline {chapter}{\numberline {5}Ouverture et regrets}{9}{chapter.5}
-\contentsline {chapter}{\numberline {6}}{10}{chapter.6}
+\contentsline {chapter}{\numberline {5}Limites}{9}{chapter.5}
+\contentsline {chapter}{\numberline {6}Ouverture}{10}{chapter.6}
+\contentsline {chapter}{\numberline {7}}{11}{chapter.7}

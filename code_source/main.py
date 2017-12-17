@@ -28,7 +28,6 @@ from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHA
 dossier_base_projet = PROJECT_ROOT
 dossier_corpus_litterature = CORPUS_LITTERATURE
 dossier_corpus_professeur = CORPUS_PROFESSEUR
-#dossier_morphalou = MORPHALO_ROOT
 
 def main():
     while 1 :
@@ -61,7 +60,6 @@ def main():
             liste_corpus.append(dossier_corpus_professeur)
             liste_corpus.append(dossier_corpus_litterature)
 
-            #E1 : conversion des cours en txt
             others.conversion_pdf_to_text(dossier_corpus_professeur)
 
             for corpus in liste_corpus :
@@ -102,9 +100,9 @@ def main():
 
         #==================================
         elif a.strip() == '' :
-            print("\n+++++++++++++++++++++++++++++")
+            print("\n-----------------------------------")
             print("Vous nous quittez déjà ! Au revoir.")
-            print("+++++++++++++++++++++++++++++\n")
+            print("-----------------------------------\n")
 
             break
 

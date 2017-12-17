@@ -12,6 +12,9 @@
 #     + tour_du_corpus()
 #     + tour_des_fichiers()
 #     + generation_dico_corpus_pr_xml()
+#     + creer_et_remplir_fichier_synthese_xml()
+#     + creer_et_remplir_fichier_dtd()
+#     + generation_et_execution_script_bash_validation_dtd()
 ########################################################
 
 import os
@@ -141,7 +144,7 @@ def generation_corpus_xml(path_to_corpus, version='light'):
 
     nom_corpus = os.path.basename(os.path.normpath(path_to_corpus))
 
-    if nom_corpus == 'corpus_litterature' :
+    if nom_corpus == 'corpus_professeur' :
         num_corpus = 1
     else :
         num_corpus = 2
@@ -213,10 +216,15 @@ def generation_corpus_xml(path_to_corpus, version='light'):
         if version == 'complet' :
             nb_lignes_a_traiter = nb_lignes_in_texte
         else :
-            nb_lignes_a_traiter = 1
+            nb_lignes_a_traiter = 2
+
+        ### MODIF
+        if nb_lignes_a_traiter > nb_lignes_in_texte :
+            nb_lignes_a_traiter = nb_lignes_in_texte
 
         while compteur_ligne < nb_lignes_a_traiter :
             num_line = compteur_ligne
+            #MODIF
             line = text_for_tagg[compteur_ligne]
 
             reference_line = 'c'+str(num_corpus)+'t'+str(num_texte)+'s'+str(num_line)
@@ -227,9 +235,6 @@ def generation_corpus_xml(path_to_corpus, version='light'):
             print('\n\n{}'.format('='*35))
             print('***Ref ligne : {}'.format(reference_line))
             print('***Contenu : {}'.format(line))
-
-            #ON tagge ln/ln et on ajoute le resultat à notre dico
-            # tagging.tagger_phrase_et_ajouter_au_dict_ref_to_word(dico_tag_corpus, line, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, file_morphalou, num_corpus, num_texte, num_line)
 
             tagging.tagger_phrase_et_ajouter_au_texte_ref_to_word(line, nom_fichier_xml_corpus, liste_fichier_distribution_corpus, liste_fichier_distribution_texte, file_morphalou, num_corpus, num_texte, num_line, nb_mots_corpus, nb_mots_texte)
 

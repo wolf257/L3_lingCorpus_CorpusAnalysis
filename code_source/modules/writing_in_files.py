@@ -190,20 +190,5 @@ def ecrire_xml_contenu(path_to_file_xml, contenu, niveau=0) :
     with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
         file.write('\n{}<![CDATA[ {} ]]>'.format(' '*int(niveau)*3, contenu))
 
-##############################################################
-# Fonction : synthese_xml_contenu()
-##############################################################
-#creer dossier synthese_xml_contenu
-#prendre les deux path
-#ouvrir leur fichier
-#copier
-#creer la dtd
-#comparer avec script bash
-
-# def ecrire_synthese_des_corpus_en_xml() :
-#     with codecs.open(path_to_file_xml, mode='a', encoding='utf8') as file :
-#         file.write('\n{}<![CDATA[ {} ]]>'.format(' '*int(niveau)*3, contenu))
-
-
 if __name__ == '__main__':
     pass
