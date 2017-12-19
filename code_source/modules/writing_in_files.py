@@ -8,16 +8,24 @@ import modules.others as others
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #     PRESENTATION DU MODULE :
-#          Ce modules rassemble les functions de
+#          Ce modules rassemble les functions nous permettant
+#          d'interagir avec les fichiers.
 #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
+#
 #	+ remplissage_stat_corpus()
 #	+ remplissage_stat_texte()
+#
 #	+ ecrire_distribution_mot_corpus()
 #       + ecrire_distribution_mot_texte()
+#
+#       + ecrire_xml_balise_ouvrante()
+#       + ecrire_xml_balise_fermante()
+#       + ecrire_xml_contenu()
+#
 ########################################################
 
 ##############################################################
@@ -80,9 +88,7 @@ def ecrire_distribution_mot_corpus(nom_fichier_distribution_corpus, path_to_corp
             # REMPLISSAGE FILE
             file_distribution_corpus.write('\n\n{}\n{} FICHIER CONTENANT LA DISTRIBUTION DES MOTS DE CORPUS {}\n{}\n\n'.format('='*60 , '='*10 , '='*10 , '='*60))
 
-            #file_distribution_corpus.write('\n\n{}\n{} PRESENTATION {}\n{}'.format('='*30 , '='*7 , '='*7 , '='*30))
-
-            #ECRITURE DES FREQUENCE
+            #ECRITURE DES FREQUENCES
             for word, number in distribution_mots_corpus.items():
                 file_distribution_corpus.write('{} : {}\n'.format(word, number))
 
@@ -147,8 +153,6 @@ def ecrire_distribution_mot_texte(file, path_to_corpus, path_to_corpus_stat_fold
 
             try :
                 file_distro_file.write('\n\n{}\n{} FICHIER CONTENANT LA DISTRIBUTION DES MOTS DU TEXTE : \n\t\t {} {}\n{}\n\n'.format('='*80 , '='*10 , file , '='*10 , '='*80))
-
-                #file_distro_file.write('\n\n{}\n{} DISTRIBUTION {}\n{}\n\n'.format('='*30 , '='*7 , '='*7 , '='*30))
 
                 #ECRITURE DES FREQUENCE
                 for word, number in dico_distribution.items():

@@ -4,28 +4,30 @@
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #     PRESENTATION DU MODULE :
-#          Ce modules rassemble les functions de
+#          Ce modules contient toutes les autres fonctions,
+#          celle d'importation, les recherches, les créations de dossier,
+#          ainsi que l'exécution de scripts bash.
 #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
+#
 #       + conversion_pdf_to_text()
 #       + creation_folder()
-#       + ouvrir_morphalou()
-#       +
+#       + load_morphalou()
+#
 #	+ list_text_in_folder_as_list() + test
+#
 #	+ import_text_as_one_string() + test
 #	+ import_text_as_list_of_strings() + test (obsolete)
 #	+ import_text_as_list_of_words() + test (obsolete)
-#	+ import_real_dictionnary()
+#
 #	+ import_distribution_as_list()
 #
 #	+ recherche_occurence_mot_in_file_distribution()
 #	+ recherche_stats_base_texte()
-#	+
-#	+
-#	+
+#
 ########################################################
 
 import os
@@ -42,10 +44,10 @@ from lxml import etree
 # Lien vers les dossiers de la racine ############################################
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.insert(0, parentdir)
-from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
+from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALOU_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
 
-#dossier_morphalou = MORPHALO_ROOT
+#dossier_morphalou = MORPHALOU_ROOT
 
 ##############################################################
 # Fonction : conversion_pdf_to_text
@@ -69,14 +71,12 @@ def creation_folder(path_to_parent, name_folder):
         print('\tCréation du dossier réussi.')
 
 ##############################################################
-# Fonction : load_morphalou
+# Fonction : load_morphalou()
 ##############################################################
 def load_morphalou(dossier_morphalou):
     print('++ Je suis en train d\'ouvrir morphalou. Cela peut me prendre quelques secondes.')
     start = time.time()
     path_to_morphalou = os.path.join(dossier_morphalou, 'morphalou-2.0.xml')
-
-    #doc = ''
 
     try :
         doc = etree.parse(path_to_morphalou)
@@ -96,10 +96,6 @@ def load_morphalou(dossier_morphalou):
 
     return liste_formSet
 
-    #print(os.listdir(dossier_morphalou))
-    #print(os.path.join(dossier_morphalou, 'morphalou-2.0.xml'))
-
-    #return doc
 ##############################################################
 # Fonction : list_text_in_folder_as_list
 # Input : text
@@ -187,60 +183,28 @@ def import_text_as_list_of_words(path_to_text):
     #to make the list flat
     liste_finale = [item for items in liste_finale for item in items]
 
-    #LETTRE PAR LETTRE
-    # for string in liste_brute :
-    #     for word in string :
-    #         liste_finale.append(word.strip())
-
     return liste_finale
-
-##############################################################
-# Fonction : import_real_dictionnary
-# 	- va transformer le dictionnaire (lang) en liste
-# Input : file
-# Return : liste
-##############################################################
-def import_real_dictionnary(file):
-
-    pass
-
-##############################################################
-# Fonction : words_in_dict_or_not
-# 	- va regarder si chaque mot du fichier existe dans le dictionnaire
-#	si dans le dico --> list_in_dict + counter
-# 	si non --> list_not_in_dict + counter
-# Input : liste, liste
-# Return :
-##############################################################
-def words_in_dict_or_not(file_as_list, dict_as_list):
-
-    list_in_dict = []
-    count_in = 0
-    list_not_in_dict = []
-    count_out = 0
-
-    pass
 
 ##############################################################
 # Fonction : import_distribution_as_list
 # Input :
 # Return :
 ##############################################################
-
 def import_distribution_as_list(path_to_file) :
     try :
         f = codecs.open(path_to_file, mode='r', encoding='utf8')
     except :
         print('\nProblème lors de l\'ouverture du fichier.')
     else :
-        print('\nFichier distribution ouvert.')
+        #print('\nFichier distribution ouvert.')
+        pass
 
         try :
             g = f.readlines()
         except :
             print('\nProblème lors de l\'importation du fichier.')
         else :
-            print('\nFichier distribution importé')
+            #print('\nFichier distribution importé')
             f.close()
             return g
 
@@ -261,12 +225,8 @@ def recherche_occurence_mot_in_file_distribution(file_or_list, mot_a_chercher) :
         if a_matcher is None :
             pass
         else :
-            #print(a_matcher.group(0)) #le tout
-            #print(a_matcher.group(1)) #le nb
             nb += int(a_matcher.group(1))
-    #
-    #TEST : print('Le nombre {} et son type {}'.format(nb, type(nb)))
-    #
+
     return nb
 
 ###############################################################
@@ -276,33 +236,6 @@ def recherche_occurence_mot_in_file_distribution(file_or_list, mot_a_chercher) :
 ##############################################################
 
 def recherche_stats_base_texte(path_file) :
-
-    # file = codecs.open(path_file, mode='r', encoding='utf8')
-
-    # nb_mots_file, nb_phrases_file, nb_moyen_mots_par_phrase = 0, 0, 0
-    # resultats = []
-    #     #
-
-    # i = re.compile(r'^(\d+) : (\d+) : (\d+\.\d+)')
-
-    # for line in file :
-    #     a_matcher = re.match(i , line)
-    #     if a_matcher is None :
-    #         pass
-    #     else :
-    #         #print(a_matcher.group(0)) #le tout
-    #         #print(a_matcher.group(1)) #le nb
-    #         nb_mots_file += int(a_matcher.group(1))
-    #         resultats.append(nb_mots_file)
-
-    #         nb_phrases_file += int(a_matcher.group(2))
-    #         resultats.append(nb_phrases_file)
-
-    #         nb_moyen_mots_par_phrase += float(a_matcher.group(3))
-    #         resultats.append(nb_moyen_mots_par_phrase)
-
-    # file.close()
-
     try :
         file = codecs.open(path_file, mode='r', encoding='utf8')
     except :
@@ -332,8 +265,7 @@ def recherche_stats_base_texte(path_file) :
                 resultats.append(nb_moyen_mots_par_phrase)
                 break
 
-        print('Cela nous donne {}'.format(resultats))
-    #             file.close()
+        file.close()
 
         return resultats
 

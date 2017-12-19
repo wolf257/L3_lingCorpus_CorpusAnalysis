@@ -4,14 +4,19 @@
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #     PRESENTATION DU MODULE :
-#          Ce modules rassemble les functions de
+#          Ce modules rassemble toutes les fonctions aidant
+#          à la normalisation des textes,
+#          surtout en ce qui concerne la ponctuation.
 #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ########################################################
 # LIST FUNCTIONS IN MODULES
+#
 #	+ split_str_into_list_of_sentences()
+#
 #	+ maj_to_min_list_from_list()
+#
 #	+ punctuation_sep_word_list_from_list()
 #	+ all_punctuation_out_list_from_list()
 #	+ all_but_point_and_word_list_from_list()
@@ -19,12 +24,13 @@
 #       +
 #       + du_texte_a_sa_liste_exploitable_par_word_distribution()
 #       + du_texte_a_sa_liste_exploitable_par_tagging()
+#
 ########################################################
 
 import re
 
 import modules.others as others
-import modules.stats_0_distributions as  stats_0_distributions
+import modules.statistiques as  statistiques
 
 ##############################################################
 # Fonction : split_str_into_list_of_sentences
@@ -34,8 +40,6 @@ import modules.stats_0_distributions as  stats_0_distributions
 def split_str_into_list_of_sentences(the_string):
     ''' break a paragraph into sentences
         and return a list '''
-    # to split by multile characters
-    #   regular expressions are easiest (and fastest)
 
     sentenceEnders = re.compile('[.!?]')
     sentenceList = sentenceEnders.split(the_string)
@@ -50,7 +54,7 @@ def split_str_into_list_of_sentences(the_string):
 
 
 ##############################################################
-# Fonction : list_maj_to_min
+# Fonction : maj_to_min_list_from_list
 # 	- Transforme toutes les majuscules en minuscules
 # Input :
 ##############################################################
@@ -66,7 +70,7 @@ def maj_to_min_list_from_list(liste_in):
     return list_out
 
 ##############################################################
-# Fonction : punctuation_sep
+# Fonction : punctuation_sep_word_list_from_list
 # 	- Separer les signe de ponctuation s'ils sont colles au mot
 # Input :
 ##############################################################
@@ -120,7 +124,7 @@ def all_punctuation_out_list_from_list(list_in) :
     return list_out
 
 ##############################################################
-# Fonction : punctuation_out
+# Fonction : all_but_point_and_word_list_from_list
 # 	- Transforme tous les caracteres de ponctuation en espace
 # Input :
 ##############################################################
@@ -134,7 +138,6 @@ def all_but_point_and_word_list_from_list(list_in) :
 
     list_out = []
     word = ''
-    #list_in = re.split(r'[\.{3}]| ', list_in)
 
     for elt in list_in :
         if elt == '...' :
@@ -148,6 +151,10 @@ def all_but_point_and_word_list_from_list(list_in) :
 
     return list_out
 
+##############################################################
+# Fonction : all_three_points_become_one_string_from_string
+# Input :
+##############################################################
 def all_three_points_become_one_string_from_string(string) :
     ''' a = 'abcd ... efgh ... ijk...'
     >>> e = all_but_one_point_and_word_string_from_string(a)
@@ -165,6 +172,10 @@ def all_three_points_become_one_string_from_string(string) :
 
     return str_out
 
+##############################################################
+# Fonction : du_texte_a_sa_liste_exploitable_par_word_distribution
+# Input :
+##############################################################
 def du_texte_a_sa_liste_exploitable_par_word_distribution(path_file):
         #IMPORTER LE TEXTE EN UNE STR
         file_as_string = others.import_text_as_one_string(path_file)
@@ -179,6 +190,11 @@ def du_texte_a_sa_liste_exploitable_par_word_distribution(path_file):
 
         return liste_3
 
+##############################################################
+# Fonction : du_texte_a_sa_liste_exploitable_par_tagging
+# Input :
+##############################################################
+
 def du_texte_a_sa_liste_exploitable_par_tagging(path_file):
     #IMPORTER LE TEXTE EN UNE STR
     file_as_string = others.import_text_as_one_string(path_file)
@@ -190,8 +206,6 @@ def du_texte_a_sa_liste_exploitable_par_tagging(path_file):
     liste_2 = maj_to_min_list_from_list(liste_1)
     # SEPARER LA PONCTUATION DES MOTS LIST : LIST
     #liste_3 = punctuation_sep_word_list_from_list(liste_2)
-    #
-    #print(liste_3)
 
     #Retourne un liste de phrase !
     return liste_2

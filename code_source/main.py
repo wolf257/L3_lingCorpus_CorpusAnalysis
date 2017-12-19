@@ -14,15 +14,12 @@ from settings import PROJECT_ROOT
 from collections import defaultdict
 
 import modules.others as others
-import modules.ponctuation_texte as ponctuation_texte
-import modules.stats_1_base as stats_1_base
-import modules.tagging as tagging
 import modules.big_process as big_process
 
 # Lien vers les dossiers de la racine ############################################
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.insert(0, parentdir)
-from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALO_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
+from settings import PROJECT_ROOT, CORPUS_PROFESSEUR, CORPUS_LITTERATURE, MORPHALOU_ROOT, RESULT_RAPPORT_ROOT, TREETAGGER_ROOT
 ###################################################################################
 
 dossier_base_projet = PROJECT_ROOT
@@ -38,7 +35,7 @@ def main():
             "\n (enter) - Exit" + \
 
             "\n\nNOTE EXPLICATIVE : " +\
-            "\n\t- La version 'light' suit la procédure normale, sauf que le processus n'est appliqué qu'aux 10 premières phrases de chaque texte. Durée estimée : moins d'une heure." +\
+                  "\n\t- La version 'light' suit la procédure normale, sauf que le processus n'est appliqué qu'aux 10 premières phrases de chaque texte. Durée estimée : environ une demi-heure (1,7ghz, 4gb ram)." +\
             "\n\t- La version 'compléte' applique le processus à tout le corpus. Le temps d\'exécution risque de prendre plus de 24 heures." +\
 
             "\n\nQuel est votre choix : ")
@@ -62,16 +59,16 @@ def main():
 
             others.conversion_pdf_to_text(dossier_corpus_professeur)
 
+            type_de_corpus_xml = ''
+            if a.strip() == '1' :
+                type_de_corpus_xml = 'light'
+            elif a.strip() == '2' :
+                type_de_corpus_xml = 'complet'
+
             for corpus in liste_corpus :
                big_process.tour_du_corpus(corpus)
                big_process.tour_des_fichiers(corpus)
-
-            if a.strip() == '1' :
-                for corpus in liste_corpus:
-                    big_process.generation_corpus_xml(corpus, 'light')
-            elif a.strip() == '2' :
-                for corpus in liste_corpus:
-                    big_process.generation_corpus_xml(corpus, 'complet')
+               big_process.generation_corpus_xml(corpus, type_de_corpus_xml)
 
             big_process.creer_et_remplir_fichier_synthese_xml(dossier_base_projet, liste_corpus)
             big_process.creer_et_remplir_fichier_dtd(dossier_base_projet)

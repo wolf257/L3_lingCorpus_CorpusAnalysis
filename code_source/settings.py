@@ -9,7 +9,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__ + "/../../"))
 CURRENT_ROOT = os.path.abspath(os.path.dirname(__file__))
 CORPUS_PROFESSEUR = os.path.join(PROJECT_ROOT, 'corpus_professeur/')
 CORPUS_LITTERATURE = os.path.join(PROJECT_ROOT, 'corpus_litterature/')
-MORPHALO_ROOT = os.path.join(PROJECT_ROOT, 'morphalo/')
+MORPHALOU_ROOT = os.path.join(PROJECT_ROOT, 'morphalou/')
 RESULT_RAPPORT_ROOT = os.path.join(PROJECT_ROOT, 'resultats_et_rapport/')
 TREETAGGER_ROOT = os.path.join(PROJECT_ROOT, 'from_outside_treetagger/')
 
@@ -18,7 +18,7 @@ def main():
     print(CURRENT_ROOT)
     print(CORPUS_PROFESSEUR)
     print(CORPUS_LITTERATURE)
-    print(MORPHALO_ROOT)
+    print(MORPHALOU_ROOT)
     print(RESULT_RAPPORT_ROOT)
 
 if __name__ == '__main__':

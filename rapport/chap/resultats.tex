@@ -1,2 +1,125 @@
-%xml 1
-%dico
+\section{Fichier xml final}
+
+Le résultat du programme est inscrit dans le fichier xml qui se présente ainsi : \\ 
+
+\fbox{
+\begin{minipage}{.85\textwidth}
+\footnotesize{
+
+\texttt{<?xml version="1.0" encoding="UTF-8" standalone="no" ?>}
+
+\texttt{<!DOCTYPE banque\_donnees SYSTEM "synthese\_xml\_total.dtd">} \\
+
+\texttt{<banque\_donnees> } 
+
+\texttt{\hspace{.5cm}<corpus type\_corpus='corpus\_*'> } 
+
+\texttt{\hspace{1cm}<text text\_id='c.t.'> } 
+
+\texttt{\hspace{1.5cm}<sentence sentence\_id='c.t.s.'> } 
+
+\texttt{\hspace{2cm}<word word\_id='c.t.s.w.' word\_form='xxx'> } 
+
+%----------------------------------------------------------------------------
+\texttt{\hspace{2.5cm}<morphology> } 
+
+\texttt{\hspace{2.8cm}<lemme> } 
+\texttt{\hspace{1cm}<![CDATA[ x ]]>}
+\texttt{\hspace{1cm}</lemme> } 
+
+\texttt{\hspace{2.8cm}<POS\_treetagger> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</POS\_treetagger> } 
+
+\texttt{\hspace{2.8cm}<POS\_morphalou> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</POS\_morphalou> } 
+
+\texttt{\hspace{2.8cm}<genre> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</genre> } 
+
+\texttt{\hspace{2.8cm}<nombre> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</nombre> } 
+
+\texttt{\hspace{2.5cm}</morphology> } 
+
+%----------------------------------------------------------------------------
+\texttt{\hspace{2.5cm}<statistics> } 
+
+\texttt{\hspace{2.8cm}<nb\_apparition\_text> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</nb\_apparition\_text> } 
+
+\texttt{\hspace{2.8cm}<nb\_apparition\_corpus> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</nb\_apparition\_corpus> } 
+
+\texttt{\hspace{2.8cm}<frequence\_in\_text> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</frequence\_in\_text> } 
+
+\texttt{\hspace{2.8cm}<frequence\_in\_corpus> } 
+\texttt{\hspace{0cm}<![CDATA[ x ]]>}
+\texttt{\hspace{0cm}</frequence\_in\_corpus> } 
+
+\texttt{\hspace{2.5cm}</statistics> } 
+%----------------------------------------------------------------------------
+
+\texttt{\hspace{2cm}</word> } 
+
+\texttt{\hspace{1.5cm}</sentence> } 
+
+\texttt{\hspace{1cm}</text> } 
+
+\texttt{\hspace{.5cm}</corpus> } 
+
+\texttt{</banque\_donnees> } 
+
+}
+\end{minipage}
+}
+
+~~\\
+
+Chaque élément xml (du corpus au mot) peut être multiplié autant de fois que nécessaire. \\
+
+\section{Temps d'exécution}
+
+Nous avons testé le programme avec un nombre de phrases à traiter différent\footnote{Si le nombre de phrases à traiter excède le nombre de phrases contenues dans le fichier, la variable s'ajuste automatiquement au nombre de phrases du fichier}. \\
+
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Nombre de phrases par fichier} & \textbf{Temps d'exécution approximatif} \\ 
+\hline \hline
+1 phrase & 3 minutes \\
+\hline
+10 phrases & 20 minutes \\
+\hline
+15 phrases & 30 minutes \\
+\hline
+50 phrases & 1 heure 30 minutes \\
+\hline
+\end{tabular} 
+~\\
+
+%----------------------------------------------------------------------------
+\section{Réponse à notre hypothèse initiale}
+
+Comme dit au point 1.3, il nous fallait voir si le corpus de Mr Paroubek passait notre premier texte. \\
+
+Contrairement à ce que l'on pensait, au niveau du nombre de mots par phrase\footnote{qui était notre principal outil de séparation}, la différence n'est pas significative : \\
+
+\begin{tabular}{|c|P{3cm}|P{4cm}|P{3cm}|}
+\hline
+\textbf{Corpus} & \textbf{Nombre de mots total} & \textbf{Nombre de mots par phrase} & \textbf{Différence} \\ 
+\hline \hline
+Corpus littérature & 2.570.695 & 22.80 & + 8 \% \\
+\hline
+Corpus Mr Paroubek & 23.163 & 21.07 & - 8 \% \\
+\hline
+\end{tabular} 
+~\\
+
+Ainsi, basé sur ce critère, le corpus de Mr Paroubek passe le premier test. \\
