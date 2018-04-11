@@ -1,0 +1,210 @@
+\section{Approche}
+
+Le défi était plutôt conceptuel et organisationnel que purement technique. Non que nous nous considérions comme des programmeurs ou des utilisateurs de python3 confirmés, néanmoins si le professeur estime que des étudiants, trois après leur initiation, sont capable de produire un programme, il est raisonnable de penser que quelques années d'expérience ne font pas de mal. \\
+
+Cela ne diminue en rien la quantité de travail fournie, au contraire. Comme le dit le proverbe «à qui beaucoup fut donné, beaucoup sera demandé. » \\
+
+Dans un premier temps, nous avons programmé un ensemble de petites fonctions, souvent ne faisant qu'une seule chose. Cette phase a duré environ trois semaines. Ce temps fut comme un brainstorming, et nous a aussi servi à réfléchir au processus global.\\
+
+Après cela, nous avons commencé à faire interagir ces fonctions les unes les autres, en les adaptant. Ce fut la phase la plus demandante, car il y a avait toujours un écart entre ce que l'on pensait avoir fait, et ce que nous avions effectivement fait. Nous y reviendrons dans notre chapitre 5. \\
+
+Puis cette dernière semaine fut consacrée au nettoyage du code, sa documentation, ainsi que l'écriture de ce rapport. \\
+
+%-------------------------------------------------------------
+\newpage
+\section{Organisation des dossiers}
+
+\fbox{
+\begin{minipage}[t]{.4\textwidth}
+\footnotesize{ 
+\begin{center}
+AVANT EXÉCUTION DU PROGRAMME
+\end{center}
+
+\begin{itemize}
+\item \textbf{PROJECT\_ROOT/}
+	\begin{itemize}
+	\item {code\_source/}
+		\begin{itemize}
+		\item {modules/}
+		\end{itemize}
+	\item {corpus\_litterature/}
+	\item {corpus\_professeur/}
+	\item {from\_outside\_treetagger/}
+	\item {morphalou/}
+	\item {rapport/}
+	\end{itemize}
+\end{itemize}
+
+}
+\end{minipage} 
+} \fbox{
+\begin{minipage}[t]{.4\textwidth}
+\footnotesize{ 
+\begin{center}
+APRÈS EXÉCUTION DU PROGRAMME
+\end{center}
+
+\begin{itemize}
+\item \textbf{PROJECT\_ROOT/}
+	\begin{itemize}
+	\item {code\_source/}
+		\begin{itemize}
+			\item {modules/}
+		\end{itemize}
+	\item {corpus\_litterature/}
+		\begin{itemize}
+		\item \textbf{statistiques/}
+		\item \textbf{xml/}
+		\item \textbf{pdf/}
+		\end{itemize}
+	\item {corpus\_professeur/}
+		\begin{itemize}
+		\item \textbf{statistiques/}
+		\item \textbf{xml/}
+		\end{itemize}
+	\item {from\_outside\_treetagger/}
+	\item {morphalou/}
+	\item {rapport/}
+	\item \textbf{resultats\_xml/}
+	\end{itemize}
+\end{itemize}
+}
+\end{minipage}
+} 
+
+~\\
+
+Les noms nous paraissent assez explicites pour ne pas être tous détaillés. Néanmoins, certains dossiers nécessitent  une petite explication.
+
+	\begin{itemize}
+	\item \textbf{from\_outside\_treetagger/} : au début de la programmation, l'accès aux éléments de morphalou était difficile. Pour ne pas perdre de temps, nous avions décidé d'utiliser aussi tree\_tagger.
+	
+	Celui-ci ayant besoin de fichiers particuliers pour fonctionner, nous les avons regroupés sous ce dossier.
+	
+	\item \textbf{corpus$_x$/statistiques/} : Contient les statistiques de base, ainsi que les distributions de mots de chaque fichier pris séparément, et du corpus en entier.
+	
+	\item \textbf{corpus$_x$/xml/} : Contient l'arbre xml concernant le corpus.
+	
+	\item \textbf{resultats\_xml} : S'appuyant sur les deux dossiers précédemment cités, ce dossier contient toutes les données que nous avons pu recueillir.
+	\end{itemize}
+
+%------------------------------------------------------------
+\newpage
+\section{Présentation des modules}
+
+La partie programmée est regroupée dans le dossier \emph{code\_source}. \\
+
+ \begin{wrapfigure}{l}{.45\textwidth} % { r, l, i } pour la position,
+\fbox{
+\begin{minipage}{.40\textwidth}
+\footnotesize{
+\textbf{code\_source/}
+	\begin{itemize}
+	\item {main.py}
+	\item {settings.py}
+	\item {modules/}
+		\begin{itemize}
+		\item {big\_process.py} \\
+		\item {ponctuation\_texte.py}
+		\item {tagging.py}
+		\item {statistiques.py}
+		
+		\item {writing\_in\_files.py}
+		\item {others.py}
+		\end{itemize}
+	\end{itemize}
+}
+\end{minipage}
+} 
+\end{wrapfigure}
+
+Cette fois-ci, chaque fichier mérite que l'on vous dise ce qu'il contient. \\
+
+De même, nous aimerions préciser la logique de notre mouvement (flow). C'est en la suivant que j'ai pu, de manière systématique naviguer à travers le code\footnote{qui devenait de plus en plus gros.}. 
+
+En plus des messages souvent clairs de l'interprète de commande, je pars toujours du niveau 0 vers le niveau 2. \\  
+
+Au début de chaque fichier.py du module se trouve la \textbf{liste des fonctions} qu'il contient. \\ \\
+
+\underline{Niveau 0} : Si ce n'est pour contrôler la présentation, le niveau zéro fut très peu sollicité en cas de bug. 
+ 
+	\begin{itemize}
+	\item \textbf{main.py} : Contient l'interface. C'est le fichier qui englobe le tout.
+	\item \textbf{settings.py} : Pour faciliter la \emph{gestion des liens}, nous avons regroupé les liens vers nos dossiers dans ce fichier. Il ne contient aucune fonction, mais juste des variables. \\
+	\end{itemize}
+
+\underline{Niveau 1} : Ce niveau est toujours sollicité, car c'est lui qui coordonne le programme, mais aussi donne les paramètres aux différentes fonctions du niveau 2. C'est le niveau le plus délicat à manipuler.
+
+	\begin{itemize}
+	\item \textbf{modules/big\_process.py} : Ne contient que des \emph{fonctions composées d'autres fonctions} des sous-modules. C'est le seul fichier du dossier modules/ qu'appelle le main. On peut dire qu'il sert d'interface entre le main.py et les autres modules. \\
+	\end{itemize}
+
+\underline{Niveau 2} : contient toutes les fonctions élémentaires. Quand un problème apparait, il y a de fortes chances qu'un des fichiers de ce niveau doive être vérifier après le niveau 1.
+	\begin{itemize}
+	\item \textbf{modules/ponctuation\_texte.py} : contient toutes les fonctions aidant à la \emph{normalisation des textes}, surtout en ce qui concerne la \emph{ponctuation}, notre plus gros problème durant ces deux mois.
+	
+	\item \textbf{modules/statistiques.py} : contient toutes les fonctions permettant de réaliser les \emph{distributions} (lettres ou mots).
+
+	\item \textbf{modules/tagging.py} : contient les fonctions relatives au \emph{tagging}, et aussi l'\emph{interaction avec morphalou}.
+			
+	\item \textbf{modules/writing\_in\_files.py} : contient les fonctions nous permettant d'\emph{interagir avec les fichiers} (.txt ou .xml).
+
+	\item \textbf{modules/others.py} : contient toutes les autres fonctions, celle d'\emph{importation}, les \emph{recherches}, les \emph{créations de dossier}, ainsi que l'\emph{exécution de scripts bash}. \\
+	 
+	\end{itemize}
+
+%-------------------------------------------------------------
+\newpage
+\section{Processus}
+
+\emph{Ce que nous dirons pour un élément (corpus, texte, ... , mot) est valable pour tous ses éléments-frères.} 
+
+\begin{itemize}
+%================================================
+\item \textbf{- [x] } : NIVEAU CORPUS
+\begin{enumerate}
+\item \textbf{[x]} : Création dossiers \emph{statistiques} et \emph{xml}.
+\item \textbf{[x]} : Récupération liste des fichiers.
+\item \textbf{[x]} : Agrégation du contenu des fichiers pour en faire une seule string. 
+\item \textbf{[x]} : Traitement de la string.
+\item \textbf{[x]} : Calcul des statistiques de base + distribution des lettres et mots.
+\item \textbf{[x]} : Création des fichiers \emph{distribution} et \emph{statistiques} du corpus.
+\item \textbf{[x]} : Écriture des résultats dans les fichiers créés en  6.
+\end{enumerate}
+%================================================
+\item \textbf{- [x] } : NIVEAU TEXTE
+\begin{enumerate}
+\item \textbf{[x]} : Récupération et traitement du contenu du fichier.
+\item \textbf{[x]} : Calcul des statistiques de base + distribution des lettres et mots.
+\item \textbf{[x]} : Création des fichiers \emph{distribution} et \emph{statistiques} du texte.
+\item \textbf{[x]} : Écriture des résultats.
+\end{enumerate}
+%================================================
+\item \textbf{- [x] } : NIVEAU PHRASE et MOT
+\begin{enumerate}
+\item \textbf{[x]} : Tagging selon treetagger. \\
+Pour chaque mot :
+\item \textbf{[x]} : Récupérer les données (treetagger, fichier statistique et morphalou) pour chaque mot.
+\item \textbf{[x]} : Mise sous forme xml. 
+\item \textbf{[x]} : Création du fichier \emph{rendu\_de\_...}xml. 
+\item \textbf{[x]} :  Écriture des résultats dans fichier 4.
+\end{enumerate}
+%================================================
+\item \textbf{- [x] } : À LA FIN
+\begin{enumerate}
+\item \textbf{[x]} : Création du dossier \emph{xml} à la base du dossier.
+\item \textbf{[x]} : Ouverture et copie des fichiers xml précédemment créés.
+\item \textbf{[x]} : Création fichier \emph{dtd}.
+\item \textbf{[x]} : Tentative de validation.
+\end{enumerate}
+
+\end{itemize}
+
+
+
+
+
+
+
+

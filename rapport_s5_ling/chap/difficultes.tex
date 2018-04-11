@@ -1,0 +1,55 @@
+\section{Liste des problèmes}
+
+Voici la liste des problèmes rencontrés et des solutions que nous avons trouvés. Pensant que de vous donner la date\footnote{que nous avons toujours consignée} ne serait pas utile, on vous les présente néanmoins par ordre chronologique du plus ancien au plus récent. \\
+
+{\small{
+\begin{tabular}{|P{1cm}|m{7cm}|m{7cm}|}
+\hline
+\textbf{Num} & \textbf{Problème ou questionnement} & \textbf{Solution ou réponse} \\
+\hline \hline
+1 & Pendant le processus de normalisation, \emph{doit-on tout mettre en minuscule}, prenant le risque de perdre certaines informations (comme une indication de nom propre) ? 
+& Nous avons d'abord penché pour la création d'un objet "texte" avec plusieurs éléments dont une liste avec les majuscules, et une liste sans. Cependant, dans notre travail-ci, les majuscules n'étaient pas pertinente, elles ont été enlevées. \\
+\hline
+2 & \emph{Les dictionnaires sont non classés}. Vu que nous devions travailler avec eux, c'était particulièrement inconfortable pour nos tests. On voulait pouvoir suivre les mêmes x éléments au courant des modifications. 
+& Dans un premier temps, nous avons pensé à \textbf{utiliser des OrderedDict du module collections}. Néanmoins, plus d'un mois plus tard, on s'est rendu que l'utilisation des dictionnaires rendrait l'exécution du programme trop lourde, nous y reviendrons. Cela n'empêche que nous avons pu les manipuler . \\
+\hline
+3 & Comment choisir les \emph{noms de fonctions} pour qu'ils soient le plus explicites possible ? & On a choisi comme convention d'écrire \texttt{'action'+'format\_sortie'} \texttt{+'format\_entrée'}.  \\
+\hline
+\end{tabular}
+}}
+
+{\small{
+\begin{tabular}{|P{1cm}|m{7cm}|m{7cm}|}
+\hline 
+\textbf{Num} & \textbf{Problème ou questionnement} & \textbf{Solution ou réponse} \\
+\hline \hline
+4 & \emph{Qu'est-ce qu'une phrase} ? 
+& Après réflexion, on a décidé de définir comme \textbf{phrase ce qui se situe entre deux points \texttt{('.')}, points d'interrogation \texttt{('?')} ou points d'exclamation \texttt{('!')}}. Au delà du choix, cela a attiré notre attention sur la difficulté à définir des objets utilisés au quotidien. \\
+\hline
+5 & \emph{Comment importer nos textes} ? 
+& Dans un premier temps, nous avons défini une fonction pour les importer sous forme de liste de ligne, ou de liste de mots. Mais cela devait presque aléatoire. Donc on a décidé d'\textbf{importer nos textes en une longue string} grâce à \texttt{'\_'.join()} puis de partir de là. \\
+\hline
+6 & Plutôt un questionnement  : pourquoi le professeur utilise-t-il \texttt{f = codecs.open(...)} au lieu de \texttt{with codecs.open(...) as f} qui semble plus commode ? 
+& Avec nos \texttt{try ... except ... else}, nous nous sommes rendus compte qu'il y a au moins un avantage : on peut certes mettre un \texttt{with codecs.open(...) as f} dans un bloc \texttt{try}, mais cela devient plus difficile de tester nos différentes sous-étapes. \\
+\hline
+7 & Je ne m'attendais qu'à du français, ou au pire de l'anglais, mais notre distribution de mots a affiché des mots très bizarres et à forte occurence. 
+& Rendu à ce point de notre travail (plus d'un mois), la crainte de devoir tout reprendre n'était pas réjouissante. En réalité, il n'y avait rien de bizarre, c'étaient des mots grecs abondamment utilisés par Montaigne. Mais cet épisode nous a \textbf{convaincu de l'utilité de toujours regarder les distributions} avant d'avancer. \\
+\hline
+8 & Malgré l'utilisation de la classe \texttt{\backslash w} du module \texttt{re}, je me suis retrouvé avec des 'mots' de la forme \texttt{\_abcd\_}. 
+& Cela m'a conduit a \textbf{voir comment est définie cette classe} dans python3. Finalement, pour n'avoir que les caractères alphabétiques, j'ai utilisé \texttt{[$^\wedge$\backslash W\_]}. \\
+\hline
+9 & \emph{Comment lire la documentation} et accéder à Morphalou ?
+& J'ai lu une blague quelque part où l'on demandait à un programmeur pourquoi il recréait tout. Sa réponse fut «parce qu'aucun programmeur n'aime lire la doc, ni écrire une doc. » Sans aller jusque là, je dirai que ce fut très difficile, mais formateur de devoir trouver son chemin dans une dtd aussi longue. \\
+\hline
+\end{tabular}
+}}
+
+{\small{
+\begin{tabular}{|P{1cm}|m{7cm}|m{7cm}|}
+\hline 
+10 & Réflexions quant à \textbf{l'utilisation des dictionnaires}. & Au départ, nous avions écrit le programme de telle sorte que toutes les données soient stockés dans un dictionnaire à écrire plus tard dans un fichier.\\
+&& Cependant, vu la quantité de données, nous avons pensé que cette approche était risquée pour plusieurs raisons : sollicitation excessive de la mémoire, perte de toute nos données en cas de crash. \\
+&& Finalement, nous avons opté pour une solution qui nous semblait plus simple : \textbf{celle d'écrire au fur et à mesure nos données dans leur fichier}. \\
+\hline \hline
+\end{tabular}
+}}
